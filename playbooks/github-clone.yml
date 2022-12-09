@@ -44,12 +44,15 @@
           dest: $HOME
       
       - name: Templating some config files
+        vars:
+          home: 
+            - /home/karl
         template: 
           src: "{{ item.src }}"
           dest: "{{ item.dest }}"
         with_items:
-          - {src: "$HOME/dotfiles/.zshrc",dest: "$HOME/.zshrc"}
-          - {src: "$HOME/dotfiles/.tmux.conf.local",dest: "$HOME/.tmux.conf.local"}
+          - {src: "{{ home }}""/dotfiles/.zshrc",dest: "{{ home }}""/.zshrc"}
+          - {src: "{{ home }}"".tmux.conf.local",dest: "{{ home }}""/.tmux.conf.local"}
 
      
 
