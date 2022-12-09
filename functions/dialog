@@ -1,0 +1,118 @@
+#!/bin/bash
+
+defaultsettings() { \
+        dialog --colors --title "\Z7\ZbCustomize the script" --yes-label "Yes" --no-label "No" --yesno "\Z4Do you want to use Default Settings?" 8 60 && use_default=y 
+    }
+
+installdocker() { \
+        dialog --colors --title "\Z7\ZbCustomize the script" --yes-label "Yes" --no-label "No" --yesno "\Z4Do you want to Install Docker?" 8 60 && install_docker=y 
+    }
+
+installportainer() { \
+        dialog --colors --title "\Z7\ZbCustomize the script" --yes-label "Yes" --no-label "No" --yesno "\Z4Do you want to configure a portainer agent?" 8 60 && install_portainer=y 
+    }
+
+installfonts() { \
+        dialog --colors --title "\Z7\ZbCustomize the script" --yes-label "Yes" --no-label "No" --yesno "\Z4Do you want to Move all my fonts to $HOME/.local/share/fonts?" 8 60 && install_fonts=y 
+    }
+
+installxorg() { \
+        dialog --colors --title "\Z7\ZbCustomize the script" --yes-label "Yes" --no-label "No" --yesno "\Z4Do you want to Install Xorg? (Only if you use arch)" 8 60 && install_xorg=y 
+    }
+
+shell() { \
+
+declare -a shell_number=( 
+        "1 fish"
+        "2 zsh"
+        "3 bash")
+
+
+until [ "$shell" = "1" -o "$shell" = "2" -o "$shell" = "3"  ] ; do
+        
+         shell_list=$(printf '%s\n' "${shell_number[@]}")
+        
+         list=$(printf   '%s\n' "Which shell do you want to use as a main?:"  \
+        "${shell_number[@]} : " | sed -e 's/_/ /g'  ; printf "\nYour Choice : (Seperated by space): "  )
+
+
+   until [ "$words" = "1" ] ; do
+   
+       read -p "$list"  shell
+   
+   
+       words=$(echo $shell | wc -w)
+      
+       clear
+      
+       [ $words = "1" ] || printf '%s\n' "It only accept one value Please try again" ""
+   
+   
+   done      
+   
+   if [ "$shell" = "1" -o "$shell" = "2" -o "$shell" = "3" ] ; then
+          
+       echo "" &> /dev/null 
+
+   else
+      
+       printf '%s\n' "Invalid value please try again:" 
+       printf '\n'
+       words="0"
+   fi
+
+
+done
+
+shell=$(printf '%s\n' "${shell_number[@]}" | grep $shell | sed -e "s/[1-9]*//g" | awk '{print $NF}')
+
+clear
+
+}
+browser() { \
+
+declare -a browser_number=( 
+        "1 qutebrowser"
+        "2 brave"
+        "3 chromium"
+        "4 firefox")
+
+until [ "$browser" = "1" -o "$browser" = "2" -o "$browser" = "3" -o "$browser" = "4" ] ; do
+        
+        browser_list=$(printf '%s\n' "${browser_number[@]}")
+        
+        list=$(printf   '%s\n' "Which browser do you want to use as a main?:"  \
+       "${browser_number[@]} : " | sed -e 's/_/ /g'  ; printf "\nYour Choice : (Seperated by space): "  )
+
+        until [ "$words" = "1" ] ; do
+        
+           read -p "$list"  browser
+        
+           words=$(echo $browser | wc -w)
+           
+           clear
+           
+           [ $words = "1" ] || printf '%s\n' "It only accept one value Please try again" ""
+        
+        done      
+       
+       if [ "$browser" = "1" -o "$browser" = "2" -o "$browser" = "3" -o "$browser" = "4" ] ; then
+           
+           echo "" &> /dev/null 
+       
+       else
+          
+           printf '%s\n' "Invalid value please try again:" 
+           printf '\n'
+           words="0"
+       fi
+
+done
+
+browser=$(printf '%s\n' "${browser_number[@]}" | grep $browser | sed -e "s/[1-9]*//g" | awk '{print $NF}')
+clear
+
+}
+
+
+

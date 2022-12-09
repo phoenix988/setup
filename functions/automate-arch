@@ -3,7 +3,6 @@
 availablebiosdisk=$(sudo fdisk -l | grep ^/dev | awk '{print $1}' | sed 's/[1-9]*$//g' | uniq)
 
 
-
 fs() { \
    fs=$(dialog --colors --title "\Z7\ZbFilesystem" --inputbox "\Z4Choose your filesystem btrfs and ext4 supported?" --output-fd 1 8 60  ) 
  }
@@ -25,8 +24,6 @@ declare -a disks=(
 "$availabledisks"
 
 )
-
-
 
         
  prompt=$(printf   '%s\n' "Which disk do you want to use for the install ?:"  \
@@ -246,4 +243,4 @@ uefi
 }
 
 
-drive_install
+#drive_install

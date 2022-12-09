@@ -7,12 +7,10 @@
           clone: yes
           dest: $HOME/dotfiles
           repo: https://github.com/phoenix988/dotfiles.git  
-      - name: copying my config files      
-        copy:
-          remote_src: true
-          dest: $HOME/.config  
-          src: $HOME/dotfiles/.config  
-       
+      - name: moving all my configs to .config in home      
+        shell:
+          cmd: cp -r $HOME/dotfiles/.config $HOME/.config
+     
      
 
 

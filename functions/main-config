@@ -9,8 +9,28 @@ errormsg() { \
     }
 
 welcome() { \
-
     dialog --colors --title "\Z7\ZbConfigure your Desktop!" --msgbox "\Z4This is a script that will install everythinging I personally use on a daily basis, This script will run using your Normal User account but sometimes it will need root privleges so then its gonna prompt you for a password to make sure to be near your computer. Me personally tho deactivate sudo password prompts but that comes with a security risk hehe. And also if you run this script when you are installing arch linux then it will install everything you need to get started with a base install. But you will need to run this script again when you have installed the base installation of arch \\n\\n-Karl" 16 60
     }
+
+Lastchance() { \
+        dialog --colors --title "\Z7\ZbPoint of no Return" --yes-label "Yes Continue with the install" --no-label "No" --yesno "\Z4Up to this point No changes Have been Made. But now the installation will begin if you click yes there will be no going back. Are you sure you want to do this?" 8 60 && use_default=y 
+    }
+
+command_exist() {
+        type "$1" &> /dev/null;
+}
+
+nano_nuke(){
+
+        if [ -e /usr/bin/nano ] ; then
+
+             if command_exist apt; then
+                 sudo apt purge nano -y
+             elif command_exist pacman; then
+                 sudo pacman -R nano --noconfirm
+             fi    
+
+        fi
+}
 
 
