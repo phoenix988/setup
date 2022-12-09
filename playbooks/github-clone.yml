@@ -10,17 +10,18 @@
 
       - name: moving all my configs to .config in home      
         shell:
-          cmd: cp -r $HOME/dotfiles/.config $HOME/.config
+          cmd: cp -r $HOME/dotfiles/.config/* $HOME/.config
 
       - name: creating folder Documents/lists       
         file:  
           state: directory      
-          dest: Documents/lists
+          dest: $HOME/Documents/lists
 
       - name: gets my alias list and add it to Documents/lists
-        get_url:
-          dest: /home/karl/Documents/lists/
-          url: https://raw.githubusercontent.com/phoenix988/dotfiles/main/Documents/lists/alias.list
+        copy:
+          remote_src: yes
+          src: $HOME/dotfiles/Documents/lists/alias.list
+          dest: /home/karl/Documents/lists/  
 
       - name: copying my script folder      
         shell:
@@ -33,13 +34,13 @@
       - name: getting my tmux config
         copy:
           remote_src: yes
-          src: dotfiles/.tmux.conf.local
+          src: $HOME/dotfiles/.tmux.conf.local
           dest: $HOME
 
       - name: getting my zshrc config
         copy:
           remote_src: yes
-          src: dotfiles/.zshrc 
+          src: $HOME/dotfiles/.zshrc 
           dest: $HOME
 
 
