@@ -42,7 +42,13 @@
           remote_src: yes
           src: $HOME/dotfiles/.zshrc 
           dest: $HOME
-
+      
+      - name: Templating some config files
+        template: 
+          src: "{{ item.src }}"
+          dest: "{{ item.dest }}"
+        with_items:
+          - {src: "$HOME/dotfiles",dest: "$HOME/.zshrc"}
 
      
 
