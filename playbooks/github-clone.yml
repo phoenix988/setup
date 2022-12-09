@@ -7,10 +7,42 @@
           clone: yes
           dest: $HOME/dotfiles
           repo: https://github.com/phoenix988/dotfiles.git  
+
       - name: moving all my configs to .config in home      
         shell:
           cmd: cp -r $HOME/dotfiles/.config $HOME/.config
-     
+
+      - name: creating folder Documents/lists       
+        file:  
+          state: directory      
+          dest: Documents/lists
+
+      - name: gets my alias list and add it to Documents/lists
+        get_url:
+          dest: /home/karl/Documents/lists/
+          url: https://raw.githubusercontent.com/phoenix988/dotfiles/main/Documents/lists/alias.list
+
+      - name: copying my script folder      
+        shell:
+          cmd: cp -r $HOME/dotfiles/.scripts $HOME
+
+      - name: copying my dmenu folder      
+        shell:
+          cmd: cp -r $HOME/dotfiles/.dmenu $HOME
+
+      - name: getting my tmux config
+          copy:
+            remote_src: yes
+            src: dotfiles/.tmux.conf.local
+            dest: $HOME
+
+      - name: getting my zshrc config
+          copy:
+            remote_src: yes
+            src: dotfiles/.zshrc 
+            dest: $HOME
+
+
      
 
 
