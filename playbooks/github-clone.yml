@@ -31,16 +31,16 @@
           cmd: cp -r $HOME/dotfiles/.dmenu $HOME
 
       - name: getting my tmux config
-          copy:
-            remote_src: yes
-            src: dotfiles/.tmux.conf.local
-            dest: $HOME
+        copy:
+          remote_src: yes
+          src: dotfiles/.tmux.conf.local
+          dest: $HOME
 
       - name: getting my zshrc config
-          copy:
-            remote_src: yes
-            src: dotfiles/.zshrc 
-            dest: $HOME
+        copy:
+          remote_src: yes
+          src: dotfiles/.zshrc 
+          dest: $HOME
 
 
      
