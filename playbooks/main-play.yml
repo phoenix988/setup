@@ -1,0 +1,17 @@
+---
+  - name: install packages
+    hosts: desktop
+    tasks: 
+      - include: apt.yml 
+     
+
+
+
+
+
+
+
+
+
+
+...

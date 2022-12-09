@@ -1,0 +1,249 @@
+#!/bin/bash
+
+availablebiosdisk=$(sudo fdisk -l | grep ^/dev | awk '{print $1}' | sed 's/[1-9]*$//g' | uniq)
+
+
+
+fs() { \
+   fs=$(dialog --colors --title "\Z7\ZbFilesystem" --inputbox "\Z4Choose your filesystem btrfs and ext4 supported?" --output-fd 1 8 60  ) 
+ }
+
+user() { \
+   user=$(dialog --colors --title "\Z7\ZbUsername" --inputbox "\Z4What name do you want on your user?" --output-fd 1 8 60  ) 
+ }
+
+host_name() { \
+   host_name=$(dialog --colors --title "\Z7\ZbHostname" --inputbox "\Z4Choose your hostname" --output-fd 1 8 60  ) 
+ }
+
+drive_install() { \
+     
+availabledisks=$(sudo fdisk -l | grep ^/dev | nl | awk '{print $1 " " $2 " " "Size: " $5}')
+
+declare -a disks=( 
+
+"$availabledisks"
+
+)
+
+
+
+        
+ prompt=$(printf   '%s\n' "Which disk do you want to use for the install ?:"  \
+"${availabledisks[@]} : " | sed -e 's/_/ /g'  ; printf "\nYour Choice : (Seperated by space): "  )
+
+
+until [ "$words" = "1" ] ; do
+
+   read -p "$prompt"  drive
+
+for dri in $drive ; do
+
+    check=$(echo $numbers_available | grep  $dri)
+    check_add=$(echo $check_add $check)
+
+   [ -z $check_add ] && printf '%s\n' "Your option is not valid Please try again" ""  
+   [ -z $check_add ] || run="no"
+
+done
+
+   words=$(echo $shell | wc -w)
+   
+   clear
+   
+   [ $words = "1" ] || printf '%s\n' "It only accept one value Please try again" ""
+
+
+done      
+    #  if [ $shell = "1" -o $shell = "2" -o $shell = "3" ] ; then
+    #      
+    #       echo "" &> /dev/null 
+    #  else
+    #  
+    #       errormsg
+    #       words="0"
+    #       clear 
+    #  fi
+
+
+
+
+
+    #   clear
+    #   
+    #   prompt=$(printf '%s\n' "Which drive do you want to use for the install?" "${availabledisks[@]}")
+    #    
+    #   until [ "$words" = "1" ] ; do
+    #    #  while [ -z $drive_for_install ] ; do
+
+    #         read -p "$prompt :?" drive
+    #         clear
+    #         
+    #         drive_for_install=$(printf '%s\n' "${availabledisks[@]}" | grep $drive )
+    #         words=$(echo $drive | wc -w)
+
+
+    #         [ $words = "1" ] || printf "Only one value accepted, Please try again"
+    #        echo $drive_for_install 
+
+  # #       done
+
+    #   done  
+
+ }
+
+uefi_or_bios() { \
+   bios_version=$(dialog --colors --title "\Z7\ZbBios or UEFI" --inputbox "\Z4Do you want UEFI or BIOS Install" --output-fd 1 8 60  ) 
+ }
+
+bios() { \
+   biosdrive=$(dialog --colors --title "\Z7\ZbBIOS or UEFI" --inputbox "\Z4Choose Bios Drive. These disks are available:$availablebiosdisk" --output-fd 1 8 60  ) 
+ }
+
+uefi() { \
+   efidrive=$(dialog --colors --title "\Z7\ZbUEFI" --inputbox "\Z4Choose EFI partition.  These disks are available:$availabledisks" --output-fd 1 8 60  ) 
+ }
+
+partitionerror() { \
+    dialog --colors --title "\Z7\ZbError!" --msgbox "\Z4The partition doesn't exist please write a valid one" 16 60
+    }
+
+
+
+main_arch_install() { \
+
+source functions/main-config
+
+until [ "$fs" = "ext4" -o "$fs" = "btrfs"  ] ;
+
+do
+    fs
+    
+    if [ "$fs" = "ext4" -o "$fs" = "btrfs" ] ; then 
+
+         echo "" > /dev/null 
+
+       else
+
+         errormsg 
+    fi
+
+
+done
+
+clear
+
+while [ -z "$user" ] ; 
+
+do
+    
+   user     
+
+done
+
+clear
+
+while [ -z "$host_name" ] ;
+
+do
+   
+    host_name
+
+done
+
+clear
+
+until [ "$bios_version" = "u" -o "$bios_version" = "U" -o "$bios_version" = "B" -o "$bios_version" = "b" ] ; 
+              
+do
+     uefi_or_bios 
+               
+if [ $bios_version = "u" -o $bios_version = "U" -o $bios_version = "B" -o $bios_version = "b" ] ; then
+               
+     printf "\n"
+
+else
+     errormsg
+fi 
+
+done
+
+clear
+
+#while [ -z "$check_drive" ] ; do 
+#
+#      drive_install
+#      check_drive=$(lsblk $drive 2> /dev/null)
+#      check_drive=$(echo "$drive" | grep "[1-9]" )
+#      
+#      if [ -z "$check_drive" ] ; then
+#      
+#         partitionerror 
+#      
+#      else
+#       
+#         check_fstype=$(lsblk -f $drive | head -n2 | tail -n1 | awk '{print $2}' ) 
+#         
+#      
+#      fi
+#
+#done
+drive_install
+#
+#if [ "$bios_version" = "u" -o "$bios_version" = "U" ] ; then
+#   
+#          while [ -z "$check_efidrive" ] ; do 
+#       
+uefi
+#              
+#              check_efidrive=$(lsblk $efidrive 2> /dev/null)
+#              check_efidrive=$(echo "$efidrive" | grep "[1-9]")
+#             
+#          if [ -z "$check_efidrive" ] ; then
+#       
+#              partitionerror
+#          
+#          else
+#           
+#              echo "" &> /dev/null
+#       
+#          fi
+#       
+#          done
+#else
+#          while [ -z "$check_biosdrive" ] ; do 
+#       
+#              bios 
+#              
+#              check_biosdrive=$(lsblk $biosdrive 2> /dev/null | grep nvme)
+#              
+#              if [ -z "$check_biosdrive" ] ; then
+#                 
+#                 echo "" 
+#
+#              else
+#              
+#                 check_biosdrive=$(lsblk /dev/nvme0n1p1 | grep -iv name | awk '{print $1}' | sed 's/p[0-9]*$//g')
+#                 biosdrive=$(lsblk /dev/nvme0n1p1 | grep -iv name | awk '{print $1}' | sed 's/p[0-9]*$//g') 
+#
+#              fi
+#
+#
+#          
+#          if [ -z "$check_biosdrive" ] ; then
+#       
+#              partitionerror
+#       
+#          else
+#           
+#              echo "" &> /dev/null
+#       
+#          fi
+#       
+#          done
+#fi
+
+}
+
+
+drive_install

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+
+
+#Install ansible and dialog if its needed
+echo "########################################################"
+echo "## Installing 'ansible' and 'dialog' if not installed ##"
+echo "########################################################"
+sleep 2;clear
+[ -d /etc/apt ] && sudo apt install -y ansible
+[ -e /etc/pacman.conf ] && sudo pacman -S --needed --noconfirm ansible
+sleep 1;clear
+
+
+#Source Variables
+source variables/env
+
+
+
+
+hostname=$(cat /etc/hostname)
+

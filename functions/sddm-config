@@ -1,0 +1,35 @@
+#!/bin/bash
+
+sddminstall() { \
+
+choosentheme="sugar-candy"
+url="https://framagit.org/MarianArlt/sddm-sugar-candy/-/archive/master/sddm-sugar-candy-master.tar.gz" 
+theme_name=$(echo $url | awk -F "/" '{print $NF}' | sed -e 's/.tar//g' -e 's/.gz//g')
+
+text=$(printf "[Theme]\nCurrent=$choosentheme")
+
+[ -e /etc/sddm.conf ] || sudo touch /etc/sddm.conf
+
+check=$(cat /etc/sddm.conf)
+[ -z "$check" ] && printf '%s\n' "${text[@]}" | sudo tee /etc/sddm.conf
+
+theme=$(grep "Current" /etc/sddm.conf | grep -v "^#" | awk -F = '{print $2}')
+
+[ -z $theme ] && sudo sed -i 's/#Current/Current/g' /etc/sddm.conf && theme=$(grep "Current" /etc/sddm.conf | grep -v "^#" | awk -F = '{print $2}')
+
+sudo sed -i "s|$theme|$choosentheme|g" /etc/sddm.conf
+
+displaymanager=$(ls -la /etc/systemd/system/display-manager.service | awk '{print $NF}' | awk -F / '{print $NF}')
+
+sudo systemctl disable $displaymanager
+sudo systemctl enable sddm
+
+
+wget $url
+tar -zxf $theme_name.tar.gz
+sudo cp -r $theme_name /usr/share/sddm/themes/$choosentheme
+rm -rf $theme_name.tar.gz
+rm -rf $theme_name
+
+
+}

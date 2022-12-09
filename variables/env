@@ -1,0 +1,52 @@
+#!/bin/bash
+
+
+config="$HOME/dotfiles"
+files="$HOME/dotfiles/setup-files"
+
+#some variables yhat will be used later on in the script
+fstab="$files/fstab"
+pacman_conf="$files/pacman.conf"
+pacman="$files/pacman"
+paru="$files/paru"
+dnf="$files/dnf"
+apt="$files/apt"
+
+
+#add the configs file you want to copy over here
+declare -a config_config=(
+
+"$config/.config/fish"
+"$config/.config/kitty"
+"$config/.config/nvim"
+"$config/.config/oh-my-zsh/"
+"$config/.config/qtile"
+"$config/.config/qutebrowser"
+"$config/.config/bash"
+"$config/.config/alacritty"
+"$config/.config/rofi"
+"$config/.config/vifm"
+"$config/.config/conky"
+"$config/.config/dunst"
+"$config/.config/sxiv"
+"$config/.config/starship.toml"
+
+)
+
+declare -a config_home=(
+
+"$config/.tmux.conf.local"
+"$config/.xmonad"
+"$config/.zshrc"
+"$config/.bashrc"
+"$config/.spectrwm.conf"
+"$config/.Xresources"
+
+
+)
+declare -a config_sudo=(
+
+"$config/etc/lightdm"
+
+)
+ 

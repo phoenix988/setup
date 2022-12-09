@@ -1,0 +1,56 @@
+---
+  - name: installing pacman packages       
+    vars:
+      pacman_packages:
+        - vifm
+        - base-devel
+        - lxappearance     
+        - git
+        - nfs-utils
+        - openssh
+        - tmux
+        - kitty
+        - zsh
+        - curl
+        - wget
+        - fish
+        - neovim
+        - sddm
+        - lsd
+        - rsync
+        - paru
+        - xorg
+        - htop
+        - ttf-nerd-fonts-symbols
+        - neomutt
+        - cronie
+        - docker.io
+        - qtile
+        - bat
+        - net-tools
+        - rofi
+        - lxsession
+        - conky
+        - feh
+        - network-manager-applet
+        - volumeicon
+        - python-psutil
+        - ttf-iosevka-nerd
+        - psmisc
+        - pulseaudio
+        - neofetch
+        - btop
+        - yad
+        - unzip
+        - zip
+        - pcmanfm
+        - qt5ct
+        - sxiv
+        - qt5
+        - qt5-quickcontrols2
+    become: true
+    pacman:
+      name: "{{ pacman_packages }}"
+      state: latest
+      update_cache: true  
+.
