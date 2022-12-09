@@ -11,6 +11,15 @@
       - name: moving all my configs to .config in home      
         shell:
           cmd: cp -r $HOME/dotfiles/.config/* $HOME/.config
+      
+      - name: creating .local/share/applications if it doesn't exist      
+        file:
+          state: directory 
+          dest: $HOME/.local/share/applications
+
+      - name: moving some of my desktop files to .local/share/applications
+        shell:
+          cmd: cp -r $HOME/dotfiles/.local/share/applications/* $HOME/.local/share/applications
 
       - name: creating folder Documents/lists       
         file:  
@@ -33,6 +42,7 @@
           - {src: "home/dotfiles/.zshrc",dest: "home/.zshrc"}
           - {src: "home/dotfiles/.tmux.conf.local",dest: "home/.tmux.conf.local"}
           - {src: "home/dotfiles/Documents/lists/alias.list",dest: "home/Documents/lists/alias.list"}
+          - {src: "home/dotfiles/.NERDTreeBookmarks",dest: "home/.NERDTreeBookmarks"}
 
      
 
