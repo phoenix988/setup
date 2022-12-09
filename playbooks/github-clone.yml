@@ -5,10 +5,8 @@
       - name: clones my dotfiles repository  
         git:
           clone: yes
-          dest: "{{ items.dest }}"
-          repo: "{{ items.repo }}"  
-        with_items:    
-          - { dest: "home/dotfiles",repo "https://github.com/phoenix988/dotfiles.git"  }
+          dest: $HOME/dotfiles
+          repo: https://github.com/phoenix988/dotfiles.git  
 
       - name: moving all my configs to .config in home      
         shell:
