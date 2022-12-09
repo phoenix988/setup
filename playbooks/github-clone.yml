@@ -21,7 +21,7 @@
         copy:
           remote_src: yes
           src: $HOME/dotfiles/Documents/lists/alias.list
-          dest: /home/karl/Documents/lists/  
+          dest: $HOME/Documents/lists/  
 
       - name: copying my script folder      
         shell:
