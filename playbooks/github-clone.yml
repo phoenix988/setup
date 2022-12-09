@@ -5,8 +5,10 @@
       - name: clones my dotfiles repository  
         git:
           clone: yes
-          dest: $HOME/dotfiles
-          repo: https://github.com/phoenix988/dotfiles.git  
+          dest: "{{ items.dest }}"
+          repo: "{{ items.repo }}"  
+        with_items:    
+          - { dest: "home/dotfiles",repo "https://github.com/phoenix988/dotfiles.git"  }
 
       - name: moving all my configs to .config in home      
         shell:
@@ -17,12 +19,6 @@
           state: directory      
           dest: $HOME/Documents/lists
 
-      - name: gets my alias list and add it to Documents/lists
-        copy:
-          remote_src: yes
-          src: $HOME/dotfiles/Documents/lists/alias.list
-          dest: $HOME/Documents/lists/  
-
       - name: copying my script folder      
         shell:
           cmd: cp -r $HOME/dotfiles/.scripts $HOME
@@ -31,28 +27,14 @@
         shell:
           cmd: cp -r $HOME/dotfiles/.dmenu $HOME
 
-      - name: getting my tmux config
-        copy:
-          remote_src: yes
-          src: $HOME/dotfiles/.tmux.conf.local
-          dest: $HOME
-
-      - name: getting my zshrc config
-        copy:
-          remote_src: yes
-          src: $HOME/dotfiles/.zshrc 
-          dest: $HOME
-      
       - name: Templating some config files
-        vars:
-          home: 
-            - /home/karl
         template: 
           src: "{{ item.src }}"
           dest: "{{ item.dest }}"
         with_items:
-          - {src: "{{ home }}""/dotfiles/.zshrc",dest: "{{ home }}""/.zshrc"}
-          - {src: "{{ home }}"".tmux.conf.local",dest: "{{ home }}""/.tmux.conf.local"}
+          - {src: "home/dotfiles/.zshrc",dest: "home/.zshrc"}
+          - {src: "home/dotfiles/.tmux.conf.local",dest: "home/.tmux.conf.local"}
+          - {src: "home/dotfiles/Documents/lists/alias.list",dest: "home/Documents/lists/alias.list"}
 
      
 
