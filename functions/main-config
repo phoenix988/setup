@@ -13,7 +13,7 @@ welcome() { \
     }
 
 Lastchance() { \
-        dialog --colors --title "\Z7\ZbPoint of no Return" --yes-label "Yes Continue with the install" --no-label "No" --yesno "\Z4Up to this point No changes Have been Made. But now the installation will begin if you click yes there will be no going back. Are you sure you want to do this?" 8 60 && use_default=y 
+        dialog --colors --title "\Z7\ZbPoint of no Return" --yes-label "Yes Continue with the install" --no-label "No" --yesno "\Z4Up to this point No changes Have been Made. But now the installation will begin if you click yes there will be no going back. Are you sure you want to do this?" 8 60 || error "user choose to exist" 
     }
 
 command_exist() {

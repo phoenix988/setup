@@ -1,5 +1,5 @@
 ---
-  - name: clones my repositorys
+  - name: clones my repositories
     hosts: desktop
     tasks: 
       - name: clones my dotfiles repository  
@@ -17,7 +17,7 @@
           state: directory 
           dest: $HOME/.local/share/applications
 
-      - name: moving some of my desktop files to .local/share/applications
+      - name: moving some of my desktop files to home
         shell:
           cmd: cp -r $HOME/dotfiles/.local/share/applications/* $HOME/.local/share/applications
 
@@ -39,10 +39,11 @@
           src: "{{ item.src }}"
           dest: "{{ item.dest }}"
         with_items:
-          - {src: "home/dotfiles/.zshrc",dest: "home/.zshrc"}
-          - {src: "home/dotfiles/.tmux.conf.local",dest: "home/.tmux.conf.local"}
-          - {src: "home/dotfiles/Documents/lists/alias.list",dest: "home/Documents/lists/alias.list"}
-          - {src: "home/dotfiles/.NERDTreeBookmarks",dest: "home/.NERDTreeBookmarks"}
+          - {src: "Home/dotfiles/.zshrc",dest: "Home/.zshrc"}
+          - {src: "Home/dotfiles/.tmux.conf.local",dest: "Home/.tmux.conf.local"}
+          - {src: "Home/dotfiles/Documents/lists/alias.list",dest: "Home/Documents/lists/alias.list"}
+          - {src: "Home/dotfiles/.NERDTreeBookmarks",dest: "Home/.NERDTreeBookmarks"}
+          - {src: "Home/dotfiles/.gtkrc-2.0",dest: "Home/.gtkrc-2.0"}
 
      
 

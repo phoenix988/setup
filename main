@@ -6,19 +6,10 @@
 #|_|   |_| |_|\___/ \___|_| |_|_/_/\_\
 #                                     
 # -*- coding: utf-8 -*-
-#Install ansible and dialog if its needed
-echo "########################################################"
-echo "## Installing 'ansible' and 'dialog' if not installed ##"
-echo "########################################################"
-sleep 2;clear
-[ -d /etc/apt ] && sudo apt install -y ansible
-[ -e /etc/pacman.conf ] && sudo pacman -S --needed --noconfirm ansible
-sleep 1;clear
-
-
+#gets the hostname of the machine
 hostname=$(cat /etc/hostname)
 
-#Source Variables
+#Source Variables and all functions
 for source in $(ls functions | xargs -n1) ; do
       source functions/$source
 done
@@ -27,23 +18,139 @@ for source in $(ls variables | xargs -n1) ; do
       source variables/$source
 done
 
+#Install ansible and dialog if its needed
+echo "########################################################"
+echo "## Installing 'ansible' and 'dialog' if not installed ##"
+echo "########################################################"
+sleep 2;clear
+[ -d /etc/apt ] && sudo apt install -y ansible || error "failed to install ansible"
+#[ -e /etc/pacman.conf ] && sudo pacman -Syyu --needed --noconfirm ansible || error "failed to install ansible"
+sleep 1;clear
+
+#If you run tthis on the archiso it will go ahead and install arch for you
+#just answer some questions and it will install arch for you OBS( YOU NEED TO PARTITION DRIVES FIRST )
+[ "$hostname" = "archiso" ] && main-arch-install
+
+welcome ; clear
+default-settings ; clear
 
 
+#If you choose to only use default settings 
+#These will be the defaults you can change them if you like
+#install_fonts accepts y for yes and n for no
+#shells that you can use is zsh, bash or fish
+#browser you can choose is firefox, brave, chromium or qutebrowser
+if [ $use_default=y ] ; then
+
+     install_fonts=y
+     shell="zsh"
+     browser="brave"
+
+else
+
+     install-fonts ; clear
+     
+     shell 
+     
+     browser
+     
+
+fi
+
+Lastchance ; clear
 
 
+echo "##############################################"
+echo "## Making common user folders using ansible ##"
+echo "##############################################" 
+sed -i "s|Home|$HOME|g" playbooks/home-folder.yml
 
+ansible-playbook playbooks/home-folder.yml
+
+clear
+
+install-oh-my-zsh || error "failed to install oh my zsh"
+
+install-oh-my-tmux || error "failed to install oh my tmux"
+
+install-starship-prompt || error "failed to install starship"
+
+echo "###############################################"
+echo "## Getting all my config files using ansible ##"
+echo "###############################################" 
+sed -i "s|Home|$HOME|g" playbooks/github-clone.yml
+
+ansible-playbook playbooks/dotfiles.yml || error "Failed to get all my config files"
+
+clear
 
 
 if command_exist apt; then
 
-    echo "apt exists"
+    sed -i "s|Home|$HOME|g" playbooks/debian-base-run.yml
+    ansible-playbook playbooks/debian-base-run.yml -K || error "failed to install all packages"
+    clear
 
 elif command_exist pacman; then      
 
-    echo "pacman exist" 
+    sed -i "s|Home|$HOME|g" playbooks/arch-base-run.yml
+    ansible-playbook playbooks/arch-base-run.yml -K || error "failed to install all packages"
+    clear
 
 fi    
-    
-  
+
+
+
+echo "#################################"
+echo "## installing btop from source ##"
+echo "#################################" 
+btop-from-source | error "failed to install btop" ; clear
+
+echo "###############################################"
+echo "## installing graphical interface for neovim ##"
+echo "###############################################" 
+neovim-graphical-install || error "failed to install goneovim" ;  clear
+
+echo "###########################################"
+echo "## installing the browser of your choice ##"
+echo "###########################################" 
+install-choosen-browser || error "failed to install the browser" ; clear
+
+echo "#############################"
+echo "## setting default browser ##"
+echo "#############################" 
+default-browser || error "failed to configure default browser" ; clear
+
+
+echo "######################"
+echo "## installing qtile ##"
+echo "######################" 
+install-qtile || error "failed to install qtile" ; clear
+
+
+echo "###########################"
+echo "## setting default shell ##"
+echo "###########################" 
+sudo usermod -s /bin/zsh $USER || error "failed to set default shell" ; clear
+
+
+echo "##################################"
+echo "## installing slock from source ##"
+echo "##################################" 
+slock-install || error "failed to install slock" ; clear
+
+
+if [ $install_fonts = "y" ] ; then
+
+    echo "###########################################"
+    echo "## moving my fonts to .local/share/fonts ##"
+    echo "###########################################" 
+    get-my-fonts 
+
+
+fi
+
+
+
 
 

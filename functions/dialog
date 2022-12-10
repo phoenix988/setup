@@ -1,22 +1,22 @@
 #!/bin/bash
 
-defaultsettings() { \
+default-settings() { \
         dialog --colors --title "\Z7\ZbCustomize the script" --yes-label "Yes" --no-label "No" --yesno "\Z4Do you want to use Default Settings?" 8 60 && use_default=y 
     }
 
-installdocker() { \
+install_docker() { \
         dialog --colors --title "\Z7\ZbCustomize the script" --yes-label "Yes" --no-label "No" --yesno "\Z4Do you want to Install Docker?" 8 60 && install_docker=y 
     }
 
-installportainer() { \
-        dialog --colors --title "\Z7\ZbCustomize the script" --yes-label "Yes" --no-label "No" --yesno "\Z4Do you want to configure a portainer agent?" 8 60 && install_portainer=y 
+install_portainer() { \
+        dialog --colors --title "\Z7\ZbCustomize the script" --yes-label "Yes" --no-label "No" --yesno "\Z4Do you want to configure portainer agent?" 8 60 && install_portainer=y 
     }
 
-installfonts() { \
+install-fonts() { \
         dialog --colors --title "\Z7\ZbCustomize the script" --yes-label "Yes" --no-label "No" --yesno "\Z4Do you want to Move all my fonts to $HOME/.local/share/fonts?" 8 60 && install_fonts=y 
     }
 
-installxorg() { \
+install-xorg() { \
         dialog --colors --title "\Z7\ZbCustomize the script" --yes-label "Yes" --no-label "No" --yesno "\Z4Do you want to Install Xorg? (Only if you use arch)" 8 60 && install_xorg=y 
     }
 
@@ -69,6 +69,7 @@ shell=$(printf '%s\n' "${shell_number[@]}" | grep $shell | sed -e "s/[1-9]*//g" 
 clear
 
 }
+
 browser() { \
 
 declare -a browser_number=( 

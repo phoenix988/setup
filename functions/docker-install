@@ -1,6 +1,6 @@
 #!/bin/bash
 
-install_docker_portainer() {
+install-docker-portainer() {
 
 docker -v &> /dev/null 
 

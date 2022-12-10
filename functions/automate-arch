@@ -107,7 +107,7 @@ partitionerror() { \
 
 
 
-main_arch_install() { \
+main-arch-install() { \
 
 source functions/main-config
 

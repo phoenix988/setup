@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #This script contains functions to install some of my commonly used programs
-install_choosen_browser(){ \
+install-choosen-browser(){ \
   
    if [ -d /etc/dnf ] ; then
    
@@ -37,7 +37,7 @@ install_choosen_browser(){ \
 
 }
 
-install_qtile() { \
+install-qtile() { \
        
 [ -d /etc/apt ] && sudo apt install -y python3-pip python3-cairocffi
          
@@ -57,7 +57,7 @@ install_qtile() { \
          sudo ln -s $HOME/.local/bin/qtile /usr/bin/qtile
 }
 
-uwufetch_from_source() { \
+uwufetch-from-source() { \
 
          git clone https://github.com/TheDarkBug/uwufetch.git $HOME/uwufetch
 
@@ -71,7 +71,7 @@ uwufetch_from_source() { \
 
 }
 
-neovim_graphical_install() { \
+neovim-graphical-install() { \
 
         wget https://github.com/akiyosi/goneovim/releases/download/v0.6.2/goneovim-v0.6.2linux.tar.bz2
         
@@ -98,11 +98,11 @@ neovim_graphical_install() { \
 
 }
 
-btopfromsource() { \
+btop-from-source() { \
 
         git clone https://github.com/aristocratos/btop.git $HOME/btop
 
-        cd $HOMEbtop
+        cd $HOME/btop
 
         make && sudo make install
 
@@ -125,7 +125,7 @@ muttwizard_from_source() {\
 
 }
 
-slock_install() { \
+slock-install() { \
 
        git clone https://github.com/phoenix988/slock.git $HOME/slock
 
@@ -145,7 +145,7 @@ slock_install() { \
 }
 
 
-install_oh_my_zsh() {  \
+install-oh-my-zsh() {  \
 
 #Checks if oh my zsh is installed already
 #Otherwise we will install it
@@ -192,7 +192,7 @@ fi
 #Installs the starship prompt if its not installed   
 #This will print the version of starship Installed 
 #But if it's not installed this script will go ahead and install it
-install_starship_prompt() { \  
+install-starship-prompt() { \  
 if [ -e /usr/local/bin/starship ] ; then
      
      sleep 2
@@ -215,7 +215,7 @@ fi
 }
 
 
-install_oh_my_tmux() { \
+install-oh-my-tmux() { \
   
      #Clones oh my tmux
      echo "#########################"
@@ -241,11 +241,24 @@ install_oh_my_tmux() { \
 }
 
 
-default_browser() {
+default-browser() {
      
      check_browser=$(grep "^browser" $HOME/dotfiles/.dmenu/dm-openweb-fullscreen  | awk -F "=" '{print $2}' | sed -e 's/"//g')
      sed -i -e "s|$check_browser|$browser|g" $HOME/.dmenu/dm-openweb-fullscreen
      
      check_browser=$(grep -i "^#BROWSER" $HOME/.config/qtile/config.py | awk '{print $3}')
      sed -i -e "s|$check_browser|$browser|g" $HOME/.config/qtile/config.py
+}
+
+
+get-my-fonts() {
+
+    git clone https://github.com/phoenix988/fonts.git $HOME/fonts 
+    
+    [ -d $HOME/.local/share/fonts ] || mkdir -p $HOME/.local/share/fonts
+    sudo cp -r $HOME/fonts/fonts/* $HOME/.local/share/fonts
+    rm -rf $HOME/fonts &> /dev/null
+    sleep 1
+
+
 }

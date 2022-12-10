@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sddm_theme() { \
+sddm-theme() { \
 
 choosentheme="sugar-candy"
 url="https://framagit.org/MarianArlt/sddm-sugar-candy/-/archive/master/sddm-sugar-candy-master.tar.gz" 
@@ -33,3 +33,5 @@ rm -rf $theme_name
 
 
 }
+
+
