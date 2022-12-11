@@ -80,7 +80,7 @@ echo "## Getting all my config files using ansible ##"
 echo "###############################################" 
 sed -i "s|Home|$HOME|g" playbooks/dotfiles.yml
 
-ansible-playbook playbooks/dotfiles.yml || error "Failed to get all my config files"
+ansible-playbook playbooks/dotfiles.yml -i playbooks/hosts || error "Failed to get all my config files"
 
 clear
 
@@ -88,13 +88,13 @@ clear
 if command_exist apt; then
 
     sed -i "s|Home|$HOME|g" playbooks/debian-base-run.yml
-    ansible-playbook playbooks/debian-base-run.yml -K || error "failed to install all packages"
+    ansible-playbook playbooks/debian-base-run.yml -i playbooks/hosts -K || error "failed to install all packages"
     clear
 
 elif command_exist pacman; then      
 
     sed -i "s|Home|$HOME|g" playbooks/arch-base-run.yml
-    ansible-playbook playbooks/arch-base-run.yml -K || error "failed to install all packages"
+    ansible-playbook playbooks/arch-base-run.yml -i playbooks/hosts -K || error "failed to install all packages"
     clear
 
 fi    
