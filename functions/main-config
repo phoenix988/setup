@@ -20,7 +20,7 @@ command_exist() {
         type "$1" &> /dev/null;
 }
 
-nano_nuke(){
+nano-nuke(){
 
         if [ -e /usr/bin/nano ] ; then
 
@@ -33,4 +33,16 @@ nano_nuke(){
         fi
 }
 
+no-root() { \
 
+         #This will deactivate logins for root
+         echo "#####################################################################"
+         echo "##  Deactivating root account for security reasons , if its needed ##" 
+         echo "#####################################################################"
+         check_root_if_activated=$(grep "root" /etc/passwd | awk -F : '{print $NF}' | awk -F / '{print $NF}')
+         [ "$check_root_if_activated" != "nologin" ] && usermod_root=$(sudo usermod -s /usr/sbin/nologin root | awk '{print $3}')       
+
+
+}
+ 
+nano-nuke

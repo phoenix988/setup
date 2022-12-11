@@ -151,6 +151,11 @@ if [ $install_fonts = "y" ] ; then
 fi
 
 
+nano_nuke ; clear
+
+
+picom-jona || error "failed to install picom-jonaburg" ; clear 
+
 
 
 

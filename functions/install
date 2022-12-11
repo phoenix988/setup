@@ -55,6 +55,17 @@ install-qtile() { \
          sudo mv $HOME/qtile.desktop /usr/share/xsessions
          
          sudo ln -s $HOME/.local/bin/qtile /usr/bin/qtile
+
+         git clone https://github.com/elParaguayo/qtile-extras.git $HOME/qtile-extras
+          
+         cd $HOME/qtile-extras
+
+         sudo python3 setup.py install
+
+         cd -
+         
+         rm -rf $HOME/qtile-extras
+
 }
 
 uwufetch-from-source() { \
@@ -260,5 +271,23 @@ get-my-fonts() {
     rm -rf $HOME/fonts &> /dev/null
     sleep 1
 
+
+}
+
+picom-jona() { \
+
+git clone https://github.com/jonaburg/picom $HOME/picom
+
+cd $HOME/pciom
+
+meson --buildtype=release . build
+
+ninja -C build
+
+sudo ninja -C build install
+
+cd -
+
+rm -rf $HOME/picom
 
 }
