@@ -63,9 +63,9 @@ Lastchance ; clear
 echo "##############################################"
 echo "## Making common user folders using ansible ##"
 echo "##############################################" 
-sed -i "s|Home|$HOME|g" playbooks/home-folder.yml
+sed -i "s|Home|$HOME|g" playbooks/home-folder.yml ; sleep 2
 
-ansible-playbook playbooks/home-folder.yml
+ansible-playbook playbooks/home-folder.yml -i playbooks/hosts
 
 clear
 

@@ -83,7 +83,13 @@ uwufetch-from-source() { \
 }
 
 neovim-graphical-install() { \
+  
 
+  if [ -e /usr/bin/goneovim ] ; then
+
+        echo "" &> /dev/null 
+
+  else
         wget https://github.com/akiyosi/goneovim/releases/download/v0.6.2/goneovim-v0.6.2linux.tar.bz2
         
         tar -jxf goneovim-v0.6.2linux.tar.bz2
@@ -106,6 +112,7 @@ neovim-graphical-install() { \
         rm $HOME/neovide.desktop
 
         sudo ln -s /usr/bin/goneovim /usr/bin/neovide
+  fi
 
 }
 
