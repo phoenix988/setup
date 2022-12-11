@@ -40,7 +40,7 @@ default-settings ; clear
 #install_fonts accepts y for yes and n for no
 #shells that you can use is zsh, bash or fish
 #browser you can choose is firefox, brave, chromium or qutebrowser
-if [ $use_default=y ] ; then
+if [ "$use_default" = "y" ] ; then
 
      install_fonts=y
      shell="zsh"
@@ -78,7 +78,7 @@ install-starship-prompt || error "failed to install starship"
 echo "###############################################"
 echo "## Getting all my config files using ansible ##"
 echo "###############################################" 
-sed -i "s|Home|$HOME|g" playbooks/github-clone.yml
+sed -i "s|Home|$HOME|g" playbooks/dotfiles.yml
 
 ansible-playbook playbooks/dotfiles.yml || error "Failed to get all my config files"
 

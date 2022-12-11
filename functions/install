@@ -175,7 +175,7 @@ else
      
      [ -d $HOME/.config/oh-my-zsh/ ] && sudo rm -rf $HOME/.config/oh-my-zsh/
      
-     sh -c "$(curl -fsSL https://raw.githubusercontent.com/phoenix988/setup/main/ohmyzsh.sh)" "" --unattended 
+     sh -c "$(curl -fsSL https://raw.githubusercontent.com/phoenix988/setup/main/scripts/ohmyzsh.sh)" "" --unattended 
      
      sudo chown karl:karl -R $HOME/.config/oh-my-zsh
      

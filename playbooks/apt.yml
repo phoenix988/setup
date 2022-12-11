@@ -26,7 +26,6 @@
         - vifm
         - feh
         - rofi
-        - btop
         - apt-transport-https 
         - curl
         - lxappearance     
@@ -64,7 +63,6 @@
         - libgtk-3-dev
         - libxml2-utils
         - libxml2
-        - libxmlcatalog-java
         - xinit
         - sxiv
         - pcmanfm
