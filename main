@@ -100,7 +100,6 @@ elif command_exist pacman; then
 fi    
 
 
-
 echo "#################################"
 echo "## installing btop from source ##"
 echo "#################################" 
