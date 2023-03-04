@@ -515,3 +515,10 @@ EOF
 }
 
 main "$@"
+
+
+[ -d $HOME/.config/oh-my-zsh ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.config/oh-my-zsh/
+[ -d $HOME/.config/oh-my-zsh ] && git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.config/oh-my-zsh/
+[ -d $HOME/.config/oh-my-zsh ] && git clone https://github.com/softmoth/zsh-vim-mode.git $HOME/.config/oh-my-zsh/
+
+
