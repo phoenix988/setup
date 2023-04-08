@@ -1,0 +1,86 @@
+#!/bin/bash
+
+# Script to quickly configure a new system with my configs
+DOTFILES_REPO_PATH="$HOME/dotfiles"
+
+# imports the function to clone my wallpaper repo
+source ../functions/wallpaper
+source ../functions/main-config
+
+
+        
+# Will exit the script if git command doesn't exist
+if command_exist git ; then
+
+    printf ""
+    clear
+
+else 
+   
+    printf '%s\n' "git is not installed"
+    printf '%s\n' "Aborting....Please install git"
+    exit
+
+fi
+
+[ -d $DOTFILES_REPO_PATH ] || git clone https://github.com/phoenix988/dotfiles.git
+
+wallpaper
+
+declare -A CONFIGS_MV
+
+CONFIGS_MV[$HOME/.config/qtile]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/nvim]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/kitty]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/bash]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/ncspot]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/fish]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/dunst]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/rofi]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/hypr]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/waybar]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/wofi]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/wlogout]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/vifm]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/starship.toml]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/picom]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/conky]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/qutebrowser]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/sxiv]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/urxvt]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/alacritty]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/gtk-3.0]="$DOTFILES_REPO_PATH/.config"
+CONFIGS_MV[$HOME/.config/oh-my-zsh/themes]="$DOTFILES_REPO_PATH/.config/oh-my-zsh"
+CONFIGS_MV[$HOME/.config/oh-my-zsh/aliases.sh]="$DOTFILES_REPO_PATH/.config/oh-my-zsh"
+CONFIGS_MV[$HOME/.zshrc]="$DOTFILES_REPO_PATH"
+CONFIGS_MV[$HOME/.bashrc]="$DOTFILES_REPO_PATH"
+CONFIGS_MV[$HOME/.fehbg]="$DOTFILES_REPO_PATH"
+CONFIGS_MV[$HOME/.NERDTreeBookmarks]="$DOTFILES_REPO_PATH"
+CONFIGS_MV[$HOME/.gtkrc-2.0]="$DOTFILES_REPO_PATH"
+CONFIGS_MV[$HOME/.xmonad]="$DOTFILES_REPO_PATH"
+CONFIGS_MV[$HOME/.spectrwm.conf]="$DOTFILES_REPO_PATH"
+CONFIGS_MV[$HOME/.Xresources]="$DOTFILES_REPO_PATH"
+CONFIGS_MV[$HOME/.tmux.conf.local]="$DOTFILES_REPO_PATH"
+CONFIGS_MV[$HOME/.scripts]="$DOTFILES_REPO_PATH"
+CONFIGS_MV[$HOME/.dmenu]="$DOTFILES_REPO_PATH"
+CONFIGS_MV[$HOME/Documents/lists]="$DOTFILES_REPO_PATH/Documents"
+CONFIGS_MV[$HOME/.local/share/applications]="$DOTFILES_REPO_PATH/.local/share"
+
+
+bash ./ohmyzsh.sh
+
+bash ./zsh-plugins
+
+clear
+
+# Moves all my configs from my dotfile repo to my HOME directory
+for MV in $(printf '%s\n' "${!CONFIGS_MV[@]}") ; do
+
+       CONFIG=$(printf $MV | awk -F "/" '{print $NF}')  
+
+       CONFIG_DOTFILE=$(printf '%s\n' "${CONFIGS_MV["${MV}"]}" | sed "s|$DOTFILES_REPO_PATH|$HOME|g" | awk -v conf=$CONFIG '{print $0 "/"}')
+
+       PATH_TO_COPY_FROM=$(printf '%s\n' "${CONFIGS_MV["${MV}"]}" | awk -v conf=$CONFIG '{print $0  "/" conf}' )
+       
+       rsync -avh --delete $PATH_TO_COPY_FROM $CONFIG_DOTFILE
+done
