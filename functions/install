@@ -298,3 +298,17 @@ cd -
 rm -rf $HOME/picom
 
 }
+
+PFETCH_INSTALL() { \
+
+git clone https://github.com/dylanaraps/pfetch.git $HOME/pfetch
+
+cd $HOME/pfetch
+
+sudo make install
+
+cd -
+
+rm -rf $HOME/pfetch
+
+}
