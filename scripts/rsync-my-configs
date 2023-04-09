@@ -35,11 +35,17 @@ fi
 # Clones my dotfiles repo
 [ -d $DOTFILES_REPO_PATH ] || git clone https://github.com/phoenix988/dotfiles.git $DOTFILES_REPO_PATH
 
+clear
+
 # Clones my dmscripts repo
 [ -d $DMSCRIPTS_REPO_PATH ] || git clone https://github.com/phoenix988/dmscripts.git $DMSCRIPTS_REPO_PATH
 
+clear
+
 # Clone my wallpapers
 wallpaper
+
+clear
 
 # Declare the array with all my dotfiles
 declare -A CONFIGS_MV
@@ -90,15 +96,24 @@ if command_exist apt ; then
 command_exist zsh || printf '%s\n' "ZSH Not Installed: Installing"
 command_exist zsh || sudo apt install -y zsh &> /dev/null
 
+command_exist rsync || printf '%s\n' "RSYNC Not Installed: Installing"
+command_exist rsync || sudo apt install -y rsync &> /dev/null
+
 elif command_exist pacman ; then
 
 command_exist zsh || printf '%s\n' "ZSH Not Installed: Installing"
 command_exist zsh || sudo pacman -S --noconfirm zsh &> /dev/null
 
+command_exist rsync || printf '%s\n' "RSYNC Not Installed: Installing"
+command_exist rsync || sudo pacman -S --noconfirm rsync &> /dev/null
+
 elif command_exist dnf ; then
 
 command_exist zsh || printf '%s\n' "ZSH Not Installed: Installing"
 command_exist zsh || sudo dnf install -y zsh &> /dev/null
+
+command_exist rsync || printf '%s\n' "RSYNC Not Installed: Installing"
+command_exist rsync || sudo dnf install -y rsync &> /dev/null
 
 fi
 
