@@ -6,10 +6,10 @@
 #|_|   |_| |_|\___/ \___|_| |_|_/_/\_\
 #                                     
 # -*- coding: utf-8 -*-
-#gets the hostname of the machine
+# Gets the hostname of the machine
 hostname=$(cat /etc/hostname)
 
-#Source Variables and all functions
+# Source Variables and all functions
 for source in $(ls functions | xargs -n1) ; do
       source functions/$source
 done
@@ -18,28 +18,30 @@ for source in $(ls variables | xargs -n1) ; do
       source variables/$source
 done
 
-#Install ansible and dialog if its needed
+# Install ansible and dialog if its needed
 echo "########################################################"
 echo "## Installing 'ansible' and 'dialog' if not installed ##"
 echo "########################################################"
+
 sleep 2;clear
-[ -d /etc/apt ] && sudo apt install -y ansible || error "failed to install ansible"
-#[ -e /etc/pacman.conf ] && sudo pacman -Syyu --needed --noconfirm ansible || error "failed to install ansible"
+
+command_exist apt && sudo apt install -y ansible || error "failed to install ansible"
+command_exist pacman && sudo pacman -Syyu --needed --noconfirm ansible || error "failed to install ansible"
 sleep 1;clear
 
-#If you run tthis on the archiso it will go ahead and install arch for you
-#just answer some questions and it will install arch for you OBS( YOU NEED TO PARTITION DRIVES FIRST )
+# If you run this on the archiso it will go ahead and install arch for you
+# just answer some questions and it will install arch for you OBS( YOU NEED TO PARTITION DRIVES FIRST )
 [ "$hostname" = "archiso" ] && main-arch-install
 
 welcome ; clear
 default-settings ; clear
 
 
-#If you choose to only use default settings 
-#These will be the defaults you can change them if you like
-#install_fonts accepts y for yes and n for no
-#shells that you can use is zsh, bash or fish
-#browser you can choose is firefox, brave, chromium or qutebrowser
+# If you choose to only use default settings 
+# These will be the defaults you can change them if you like
+# install_fonts accepts y for yes and n for no
+# shells that you can use is zsh, bash or fish
+# browser you can choose is firefox, brave, chromium or qutebrowser
 if [ "$use_default" = "y" ] ; then
 
      install_fonts=y
@@ -75,12 +77,11 @@ install-oh-my-tmux || error "failed to install oh my tmux"
 
 install-starship-prompt || error "failed to install starship"
 
-echo "###############################################"
-echo "## Getting all my config files using ansible ##"
-echo "###############################################" 
-sed -i "s|Home|$HOME|g" playbooks/dotfiles.yml
+echo "#########################################################"
+echo "## Getting all my config files and moving them to home ##"
+echo "#########################################################"
 
-ansible-playbook playbooks/dotfiles.yml -i playbooks/hosts || error "Failed to get all my config files"
+./scripts/rsync-my-configs
 
 clear
 
@@ -130,7 +131,7 @@ install-qtile || error "failed to install qtile" ; clear
 echo "###########################"
 echo "## setting default shell ##"
 echo "###########################" 
-sudo usermod -s /bin/zsh $USER || error "failed to set default shell" ; clear
+sudo usermod -s /bin/$shell $USER || error "failed to set default shell" ; clear
 
 
 echo "##################################"

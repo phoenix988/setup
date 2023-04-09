@@ -104,7 +104,7 @@ fi
 
 # If it failed to install zsh script will exit here
 # Because otherwise oh my zsh will not be able to be installed 
-command_exist zsh || error
+command_exist zsh || error "ZSH: Failed to Install"
 
 # Installs oh-my-zsh framework
 bash ./ohmyzsh.sh
