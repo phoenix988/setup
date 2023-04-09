@@ -32,20 +32,21 @@ else
     exit
 
 fi
-## Clones my dotfiles repo
-#[ -d $DOTFILES_REPO_PATH ] || git clone https://github.com/phoenix988/dotfiles.git $DOTFILES_REPO_PATH
-#
-#clear
-#
-## Clones my dmscripts repo
-#[ -d $DMSCRIPTS_REPO_PATH ] || git clone https://github.com/phoenix988/dmscripts.git $DMSCRIPTS_REPO_PATH
-#
-#clear
-#
-## Clone my wallpapers
-#wallpaper
-#
-#clear
+
+# Clones my dotfiles repo
+[ -d $DOTFILES_REPO_PATH ] || git clone https://github.com/phoenix988/dotfiles.git $DOTFILES_REPO_PATH
+
+clear
+
+# Clones my dmscripts repo
+[ -d $DMSCRIPTS_REPO_PATH ] || git clone https://github.com/phoenix988/dmscripts.git $DMSCRIPTS_REPO_PATH
+
+clear
+
+# Clone my wallpapers
+wallpaper
+
+clear
 
 # Declare the array with all my dotfiles
 declare -A files
