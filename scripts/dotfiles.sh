@@ -7,8 +7,6 @@
 #
 # -*- coding: utf-8 -*-
 # Script to quickly configure a new system with my configs
-
-
 # Configure variables that I use in this script
 DOTFILES_REPO_PATH="$HOME/dotfiles"
 DMSCRIPTS_REPO_PATH="$HOME/dmscripts"
@@ -17,8 +15,6 @@ DMSCRIPTS_REPO_PATH="$HOME/dmscripts"
 source ../functions/wallpaper
 source ../functions/main-config
 source ../functions/install
-
-
 
 # Will exit the script if git command doesn't exist
 if command_exist git ; then
@@ -74,7 +70,7 @@ files[$HOME/.config/sxiv]="$DOTFILES_REPO_PATH/.config/sxiv"
 files[$HOME/.config/urxvt]="$DOTFILES_REPO_PATH/.config/urxvt"
 files[$HOME/.config/alacritty]="$DOTFILES_REPO_PATH/.config/alacritty"
 files[$HOME/.config/gtk-3.0]="$DOTFILES_REPO_PATH/.config/gtk-3.0"
-files[$HOME/.config/oh-my-zsh/themes]="$DOTFILES_REPO_PATH/.config/oh-my-zsh/nord.zsh-theme"
+files[$HOME/.config/oh-my-zsh/themes/nord.zsh-theme]="$DOTFILES_REPO_PATH/.config/oh-my-zsh/themes"
 files[$HOME/.config/oh-my-zsh/aliases.sh]="$DOTFILES_REPO_PATH/.config/oh-my-zsh/aliases.sh"
 files[$HOME/.zshrc]="$DOTFILES_REPO_PATH/.zshrc"
 files[$HOME/.bashrc]="$DOTFILES_REPO_PATH/.bashrc"
@@ -88,9 +84,8 @@ files[$HOME/.tmux.conf.local]="$DOTFILES_REPO_PATH/.tmux.conf.local"
 files[$HOME/.scripts]="$DOTFILES_REPO_PATH/.scripts"
 files[$HOME/.dmenu]="$DMSCRIPTS_REPO_PATH/.dmenu"
 files[$HOME/.config/dm-scripts.conf]="$DMSCRIPTS_REPO_PATH/.config/dm-script.conf"
-files[$HOME/Documents/lists]="$DOTFILES_REPO_PATH/Documents/lists"
+files[$HOME/.config/alias-zsh-bash]="$DOTFILES_REPO_PATH/alias-zsh-bash"
 files[$HOME/.local/share/applications]="$DOTFILES_REPO_PATH/.local/share/applications"
-
 
 
 # Installs zsh if its needed
@@ -126,6 +121,10 @@ bash ./zsh-plugins
 
 clear
 
+# Install starship prompt
+bash ./starship.sh
+
+clear
 
 for FILES in $(printf '%s\n' "${!files[@]}") ; do
 
@@ -136,7 +135,7 @@ if [ -d $SOURCE_FILE ] ; then
 
 [ -d $FILES ] || mkdir $FILES
 
-cp -r $SOURCE_FILE/* $FILES 2> /dev/null
+cp -r $SOURCE_FILE $FILES 2> /dev/null
 printf '%s\n' "Moving: $SOURCE_FILE to $FILES"
 
 elif [ -f $SOURCE_FILE ] ; then
@@ -146,8 +145,5 @@ cp -r $SOURCE_FILE $FILES 2> /dev/null
 fi
 
 
-
 done
 
-# Install pfetch
-#PFETCH_INSTALL

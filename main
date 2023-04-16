@@ -27,6 +27,7 @@ sleep 2;clear
 
 command_exist apt && sudo apt install -y ansible || error "failed to install ansible"
 command_exist pacman && sudo pacman -Syyu --needed --noconfirm ansible || error "failed to install ansible"
+
 sleep 1;clear
 
 # If you run this on the archiso it will go ahead and install arch for you
@@ -34,6 +35,7 @@ sleep 1;clear
 [ "$hostname" = "archiso" ] && main-arch-install
 
 welcome ; clear
+
 default-settings ; clear
 
 
