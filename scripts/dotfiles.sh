@@ -117,7 +117,7 @@ command_exist zsh || error "ZSH: Failed to Install"
 bash ./ohmyzsh.sh
 
 # Installs the plugins I use
-bash ./zsh-plugins
+bash ./zsh-plugins.sh
 
 clear
 
