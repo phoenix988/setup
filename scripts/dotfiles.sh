@@ -135,7 +135,7 @@ if [ -d $SOURCE_FILE ] ; then
 
 [ -d $FILES ] || mkdir $FILES
 
-cp -r $SOURCE_FILE $FILES 2> /dev/null
+cp -r $SOURCE_FILE/* $FILES 2> /dev/null
 printf '%s\n' "Moving: $SOURCE_FILE to $FILES"
 
 elif [ -f $SOURCE_FILE ] ; then
