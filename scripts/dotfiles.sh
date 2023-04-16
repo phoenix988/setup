@@ -122,7 +122,7 @@ bash ./zsh-plugins
 clear
 
 # Install starship prompt
-bash ./starship.sh
+sh ./starship.sh
 
 clear
 
