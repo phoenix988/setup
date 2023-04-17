@@ -8,7 +8,7 @@
 # -*- coding: utf-8 -*-
 # Can directly make a choice -c for basic install
 # and -f for full install
-while getopts ":cf" opt; do
+while getopts ":cfs:" opt; do
   case $opt in
      c)
       INSTALL_TYPE=basic 
@@ -16,10 +16,16 @@ while getopts ":cf" opt; do
      f)
       INSTALL_TYPE=full
       ;;
+     s)
+       SHELL_CHOICE="$OPTARG"  
+      ;;   
     \?)
       echo "Invalid option: -$OPTARG" >&2
       exit 1
       ;;
+     :) 
+       echo "-$OPTARG: Requires an argument"  
+         
   esac
 done
 
@@ -86,6 +92,16 @@ command_exist pacman && sudo pacman -S --needed --noconfirm base-devel
 
 install_pfetch 
 
+if [ "$INSTALL_TYPE" = "basic" ] ; then
+
+   command_exist pacman && install_pacman_base
+   
+   
+        clear
+   
+   fi
+
+
 echo "#########################################################"
 echo "## Getting all my config files and moving them to home ##"
 echo "#########################################################"
@@ -101,19 +117,8 @@ do_shell
 clear
 
 
-if [ "$INSTALL_TYPE" = "basic" ] ; then
-
-   command_exist pacman && install_pacman_base
-   
-   
-        clear
-   
-   fi
-
-
-
 # If you did choose basic install then the script will exit herre
-[ "$INSTALL_TYPE" = "basic" ] && exit
+[ "$INSTALL_TYPE" = "full" ] && exit
 
 
 # Installs packages 
