@@ -64,9 +64,6 @@ echo $INSTALL_TYPE
 
 Lastchance ; clear
 
-exit
-     
-
     
 echo "################################"
 echo "## Making common user folders ##"
