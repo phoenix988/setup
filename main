@@ -103,15 +103,13 @@ clear
 
 if [ "$INSTALL_TYPE" = "basic" ] ; then
 
-   if command_exist pacman; then      
+   command_exist pacman && install_pacman_base
    
-        install_pacman_base
    
         clear
    
    fi
 
-fi
 
 
 # If you did choose basic install then the script will exit herre

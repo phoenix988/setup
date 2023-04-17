@@ -123,9 +123,15 @@ bash ./zsh-plugins.sh
 clear
 
 # Install starship prompt
-sh ./starship.sh
+
+command_exist starship || sh ./starship.sh
 
 clear
+
+# Installs packer for neovim cause I can't get bootstarp to work
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim &> /dev/null
+
 
 for FILES in $(printf '%s\n' "${!files[@]}") ; do
 
