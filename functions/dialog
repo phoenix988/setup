@@ -109,6 +109,3 @@ done
 xdg-settings set default-web-browser $choice
 
 }
-do_settings
-do_shell
-do_browser

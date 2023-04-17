@@ -7,7 +7,7 @@
 #                                     
 # -*- coding: utf-8 -*-
 # Can directly make a choice -c for basic install
-# and -f for full
+# and -f for full install
 while getopts ":cf" opt; do
   case $opt in
      c)
@@ -36,7 +36,7 @@ for source in $(ls variables | xargs -n1) ; do
 done
 
 
-# Install ansible and dialog if its needed
+# Install fzf and dialog if its needed
 echo "#####################################################"
 echo "## Installing 'dialog' and 'fzf' if not installed ##"
 echo "#####################################################"
