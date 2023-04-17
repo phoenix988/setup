@@ -134,7 +134,7 @@ SOURCE_FILE=$(printf '%s\n' "${files["${FILES}"]}")
 
 if [ -d $SOURCE_FILE ] ; then
 
-[ -d $FILES ] || mkdir $FILES
+[ -d $FILES ] || mkdir -p $FILES
 
 cp -r $SOURCE_FILE/* $FILES 2> /dev/null
 printf '%s\n' "Moving: $SOURCE_FILE to $FILES"
