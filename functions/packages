@@ -153,7 +153,6 @@ sudo pacman -S --noconfirm --needed $(printf '%s\n' "${packages[@]}")
 
 install_pacman_base() {
 
-
 declare -a packages=(
     "vifm"
     "base-devel"
@@ -180,6 +179,7 @@ declare -a packages=(
     "btop"
     "unzip"
     "zip"
+)
 
 sudo pacman -S --noconfirm --needed $(printf '%s\n' "${packages[@]}")
 

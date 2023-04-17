@@ -24,7 +24,7 @@ while getopts ":cf" opt; do
 done
 
 # Gets the hostname of the machine
-hostname=$(cat /etc/hostname)
+hostname=$(cat /etc/hostname &> /dev/null)
 
 # Source Variables and all functions
 for source in $(ls functions | xargs -n1) ; do
@@ -59,8 +59,6 @@ welcome ; clear
 # asks what kind of install you want
 [ -z "$INSTALL_TYPE" ] && do_settings ; clear
 
-echo $INSTALL_TYPE
-
 
 Lastchance ; clear
 
@@ -84,7 +82,7 @@ clear
 echo "###################################"
 echo "## installing pfetch from source ##"
 echo "###################################"
-command_exist pacman && pacman -S --needed --noconfirm base-devel
+command_exist pacman && sudo pacman -S --needed --noconfirm base-devel
 
 install_pfetch 
 
@@ -94,10 +92,9 @@ echo "#########################################################"
 
 cd ./scripts
 
-./scripts/rsync-my-configs
+./scripts/dotfiles.sh 
 
 cd ..
-
 
 do_shell
 
@@ -117,7 +114,7 @@ if [ "$INSTALL_TYPE" = "basic" ] ; then
 fi
 
 
-# If you did choose basi install then the script will exit herre
+# If you did choose basic install then the script will exit herre
 [ "$INSTALL_TYPE" = "basic" ] && exit
 
 
