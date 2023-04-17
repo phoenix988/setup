@@ -13,7 +13,7 @@ DMSCRIPTS_REPO_PATH="$HOME/dmscripts"
 
 # imports the function to clone my wallpaper repo
 source ../functions/wallpaper
-source ../functions/main-config
+source ../functions/main
 source ../functions/install
 
 # Will exit the script if git command doesn't exist
