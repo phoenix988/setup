@@ -118,7 +118,7 @@ clear
 
 
 # If you did choose basic install then the script will exit herre
-[ "$INSTALL_TYPE" = "full" ] && exit
+[ "$INSTALL_TYPE" = "basic" ] && exit
 
 
 # Installs packages 
@@ -133,7 +133,7 @@ fi
  
 clear
 
-if command_exit qtile ; then
+if command_exist qtile ; then
 
      echo "Qtile is already installed"
 

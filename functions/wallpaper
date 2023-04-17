@@ -3,11 +3,9 @@
 
 function wallpaper() {
 
-
 [ -d $HOME/Pictures ] || mkdir $HOME/Pictures
 
 [ -d $HOME/Pictures/Wallpapers/ ] || git clone https://github.com/phoenix988/wallpapers.git $HOME/Pictures/Wallpapers && echo "Wallpaper directory already exist"
-
 
 
 
