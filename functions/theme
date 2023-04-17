@@ -1,6 +1,6 @@
 #!/bin/bash
 
-gtk_theme() { \
+GTK_theme() { \
 
 theme_icon="Dracula"
 theme_gtk="Dracula"
@@ -86,5 +86,14 @@ sudo cp -r $theme_name /usr/share/sddm/themes/$choosentheme
 rm -rf $theme_name.tar.gz
 rm -rf $theme_name
 
+
+}
+
+home_folders() {
+
+[ -d $HOME/Documents ] && mkdir $HOME/Documents
+[ -d $HOME/Downloads ] && mkdir $HOME/Pictures
+[ -d $HOME/Pictures ] && mkdir $HOME/Videos
+[ -d $HOME/Videos ] && mkdir $HOME/Videos
 
 }

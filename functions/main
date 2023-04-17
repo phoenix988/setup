@@ -13,36 +13,21 @@ welcome() { \
     }
 
 Lastchance() { \
-        dialog --colors --title "\Z7\ZbPoint of no Return" --yes-label "Yes Continue with the install" --no-label "No" --yesno "\Z4Up to this point No changes Have been Made. But now the installation will begin if you click yes there will be no going back. Are you sure you want to do this?" 8 60 || error "user choose to exist" 
+        dialog --colors --title "\Z7\ZbPoint of no Return" --yes-label "Yes Continue with the install" --no-label "No" --yesno "\Z4Up to this point No changes Have been Made. But now the installation will begin if you click yes there will be no going back. Are you sure you want to do this?" 8 60 || error "user choose to exist"
     }
 
 command_exist() {
         type "$1" &> /dev/null;
 }
 
-nano-nuke(){
 
-        if [ -e /usr/bin/nano ] ; then
-
-             if command_exist apt; then
-                 sudo apt purge nano -y
-             elif command_exist pacman; then
-                 sudo pacman -R nano --noconfirm
-             fi    
-
-        fi
-}
-
-no-root() { \
+deactivate_root() { \
 
          #This will deactivate logins for root
          echo "#####################################################################"
-         echo "##  Deactivating root account for security reasons , if its needed ##" 
+         echo "##  Deactivating root account for security reasons , if its needed ##"
          echo "#####################################################################"
          check_root_if_activated=$(grep "root" /etc/passwd | awk -F : '{print $NF}' | awk -F / '{print $NF}')
-         [ "$check_root_if_activated" != "nologin" ] && usermod_root=$(sudo usermod -s /usr/sbin/nologin root | awk '{print $3}')       
-
+         [ "$check_root_if_activated" != "nologin" ] && usermod_root=$(sudo usermod -s /usr/sbin/nologin root | awk '{print $3}')
 
 }
- 
-nano-nuke
