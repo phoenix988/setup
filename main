@@ -43,7 +43,7 @@ echo "#####################################################"
 
 sleep 1;clear
 
-#command_exist pacman && sudo pacman -Syyu --needed --noconfirm ansible fzf || error "failed to install ansible"
+command_exist pacman && sudo pacman -Syyu --needed --noconfirm dialog fzf || error "failed to install fzf"
 
 sleep 1;clear
 
