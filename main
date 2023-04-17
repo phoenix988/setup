@@ -92,7 +92,7 @@ echo "#########################################################"
 
 cd ./scripts
 
-./scripts/dotfiles.sh 
+./dotfiles.sh 
 
 cd ..
 
