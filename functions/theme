@@ -91,9 +91,9 @@ rm -rf $theme_name
 
 home_folders() {
 
-[ -d $HOME/Documents ] && mkdir $HOME/Documents
-[ -d $HOME/Downloads ] && mkdir $HOME/Pictures
-[ -d $HOME/Pictures ] && mkdir $HOME/Videos
-[ -d $HOME/Videos ] && mkdir $HOME/Videos
+[ -d $HOME/Documents ] || mkdir $HOME/Documents
+[ -d $HOME/Downloads ] || mkdir $HOME/Pictures
+[ -d $HOME/Pictures ] || mkdir $HOME/Videos
+[ -d $HOME/Videos ] || mkdir $HOME/Videos
 
 }

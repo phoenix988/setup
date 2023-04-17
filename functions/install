@@ -149,7 +149,7 @@ install_picom() { \
 
 }
 
-pfetch_install() { \
+install_pfetch() { \
 
     if command_exist pacman ; then
 
