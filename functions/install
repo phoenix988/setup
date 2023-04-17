@@ -151,12 +151,6 @@ install_picom() { \
 
 install_pfetch() { \
 
-    if command_exist pacman ; then
-
-        sudo pacman -S base-devel --needed --noconfirm
-
-    fi
-
     git clone https://github.com/dylanaraps/pfetch.git $HOME/pfetch
 
     cd $HOME/pfetch

@@ -81,13 +81,12 @@ install_oh_my_tmux || error "failed to install oh my tmux"
 
 clear
 
-
 echo "###################################"
 echo "## installing pfetch from source ##"
 echo "###################################"
+command_exist pacman && pacman -S --needed --noconfirm base-devel
 
-install_pfetch || error "failed to install pfetch" ; clear
-
+install_pfetch 
 
 echo "#########################################################"
 echo "## Getting all my config files and moving them to home ##"
