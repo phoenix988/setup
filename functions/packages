@@ -94,7 +94,7 @@ sudo apt install -y $(printf '%s\n' "${packages[@]}")
 
 
 # Declare function for pacman
-install_pacman(){
+install_pacman_full(){
 
 declare -a packages=(
     "vifm"
@@ -144,8 +144,51 @@ declare -a packages=(
     "qt5"
     "qt5-quickcontrols2"
     "swaylock"
+    "hyprland"
     "waybar")
 
 sudo pacman -S --noconfirm --needed $(printf '%s\n' "${packages[@]}")
 
 }
+
+install_pacman_base() {
+
+
+declare -a packages=(
+    "vifm"
+    "base-devel"
+    "git"
+    "nfs-utils"
+    "openssh"
+    "tmux"
+    "zsh"
+    "curl"
+    "wget"
+    "fish"
+    "neovim"
+    "lsd"
+    "exa"
+    "rsync"
+    "paru"
+    "htop"
+    "neomutt"
+    "cronie"
+    "qtile"
+    "bat"
+    "net-tools"
+    "neofetch"
+    "btop"
+    "unzip"
+    "zip"
+
+sudo pacman -S --noconfirm --needed $(printf '%s\n' "${packages[@]}")
+
+}
+
+
+
+
+
+
+
+

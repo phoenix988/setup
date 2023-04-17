@@ -83,8 +83,9 @@ files[$HOME/.Xresources]="$DOTFILES_REPO_PATH/.Xresources"
 files[$HOME/.tmux.conf.local]="$DOTFILES_REPO_PATH/.tmux.conf.local"
 files[$HOME/.scripts]="$DOTFILES_REPO_PATH/.scripts"
 files[$HOME/.dmenu]="$DMSCRIPTS_REPO_PATH/.dmenu"
+files[$HOME/.config/swayshot.sh]="$DMSCRIPTS_REPO_PATH/.config/swayshot.sh"
 files[$HOME/.config/dm-scripts.conf]="$DMSCRIPTS_REPO_PATH/.config/dm-script.conf"
-files[$HOME/.config/alias-zsh-bash]="$DOTFILES_REPO_PATH/alias-zsh-bash"
+files[$HOME/.config/alias-zsh-bash]="$DOTFILES_REPO_PATH/.config/alias-zsh-bash"
 files[$HOME/.local/share/applications]="$DOTFILES_REPO_PATH/.local/share/applications"
 
 

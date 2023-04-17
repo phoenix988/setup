@@ -6,6 +6,23 @@
 #|_|   |_| |_|\___/ \___|_| |_|_/_/\_\
 #                                     
 # -*- coding: utf-8 -*-
+# Can directly make a choice -c for basic install
+# and -f for full
+while getopts ":cf" opt; do
+  case $opt in
+     c)
+      INSTALL_TYPE=basic 
+      ;;
+     f)
+      INSTALL_TYPE=full
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+  esac
+done
+
 # Gets the hostname of the machine
 hostname=$(cat /etc/hostname)
 
@@ -18,145 +35,162 @@ for source in $(ls variables | xargs -n1) ; do
       source variables/$source
 done
 
+
 # Install ansible and dialog if its needed
-echo "########################################################"
-echo "## Installing 'ansible' and 'dialog' if not installed ##"
-echo "########################################################"
-
-sleep 2;clear
-
-command_exist apt && sudo apt install -y ansible || error "failed to install ansible"
-command_exist pacman && sudo pacman -Syyu --needed --noconfirm ansible || error "failed to install ansible"
+echo "#####################################################"
+echo "## Installing 'dialog' and 'fzf' if not installed ##"
+echo "#####################################################"
 
 sleep 1;clear
 
-# If you run this on the archiso it will go ahead and install arch for you
-# just answer some questions and it will install arch for you OBS( YOU NEED TO PARTITION DRIVES FIRST )
-[ "$hostname" = "archiso" ] && main-arch-install
+#command_exist pacman && sudo pacman -Syyu --needed --noconfirm ansible fzf || error "failed to install ansible"
 
+sleep 1;clear
+
+# Welcome Message
 welcome ; clear
 
-default-settings ; clear
+# If you run this on the archiso it will go ahead and install arch for you
+# just answer some questions and it will install arch for you OBS( YOU NEED TO PARTITION DRIVES FIRST )
+# This is not working right now so I disabled it
+#[ "$hostname" = "archiso" ] && main-arch-install
 
 
-# If you choose to only use default settings 
-# These will be the defaults you can change them if you like
-# install_fonts accepts y for yes and n for no
-# shells that you can use is zsh, bash or fish
-# browser you can choose is firefox, brave, chromium or qutebrowser
-if [ "$use_default" = "y" ] ; then
+# asks what kind of install you want
+[ -z "$INSTALL_TYPE" ] && do_settings ; clear
 
-     install_fonts=y
-     shell="zsh"
-     browser="brave"
+echo $INSTALL_TYPE
 
-else
-
-     install-fonts ; clear
-     
-     shell 
-     
-     browser
-     
-
-fi
 
 Lastchance ; clear
 
+exit
+     
 
-echo "##############################################"
-echo "## Making common user folders using ansible ##"
-echo "##############################################" 
-sed -i "s|Home|$HOME|g" playbooks/home-folder.yml ; sleep 2
+    
+echo "################################"
+echo "## Making common user folders ##"
+echo "################################" 
 
-ansible-playbook playbooks/home-folder.yml -i playbooks/hosts
+home_folders
 
 clear
 
-install-oh-my-zsh || error "failed to install oh my zsh"
+echo "############################"
+echo "## Installing oh my tmux ##"
+echo "###########################"
 
-install-oh-my-tmux || error "failed to install oh my tmux"
+install_oh_my_tmux || error "failed to install oh my tmux"
 
-install-starship-prompt || error "failed to install starship"
+clear
+
+
+echo "###################################"
+echo "## installing pfetch from source ##"
+echo "###################################"
+
+install_pfetch || error "failed to install pfetch" ; clear
+
 
 echo "#########################################################"
 echo "## Getting all my config files and moving them to home ##"
 echo "#########################################################"
 
+cd ./scripts
+
 ./scripts/rsync-my-configs
+
+cd ..
+
+
+do_shell
 
 clear
 
 
-if command_exist apt; then
+if [ "$INSTALL_TYPE" = "basic" ] ; then
 
-    sed -i "s|Home|$HOME|g" playbooks/debian-base-run.yml
-    ansible-playbook playbooks/debian-base-run.yml -i playbooks/hosts -K || error "failed to install all packages"
-    clear
-
-elif command_exist pacman; then      
-
-    sed -i "s|Home|$HOME|g" playbooks/arch-base-run.yml
-    ansible-playbook playbooks/arch-base-run.yml -i playbooks/hosts -K || error "failed to install all packages"
-    clear
-
-fi    
-
-
-echo "#################################"
-echo "## installing btop from source ##"
-echo "#################################" 
-btop-from-source | error "failed to install btop" ; clear
-
-echo "###############################################"
-echo "## installing graphical interface for neovim ##"
-echo "###############################################" 
-neovim-graphical-install || error "failed to install goneovim" ;  clear
-
-echo "###########################################"
-echo "## installing the browser of your choice ##"
-echo "###########################################" 
-install-choosen-browser || error "failed to install the browser" ; clear
-
-echo "#############################"
-echo "## setting default browser ##"
-echo "#############################" 
-default-browser || error "failed to configure default browser" ; clear
-
-
-echo "######################"
-echo "## installing qtile ##"
-echo "######################" 
-install-qtile || error "failed to install qtile" ; clear
-
-
-echo "###########################"
-echo "## setting default shell ##"
-echo "###########################" 
-sudo usermod -s /bin/$shell $USER || error "failed to set default shell" ; clear
-
-
-echo "##################################"
-echo "## installing slock from source ##"
-echo "##################################" 
-slock-install || error "failed to install slock" ; clear
-
-
-if [ $install_fonts = "y" ] ; then
-
-    echo "###########################################"
-    echo "## moving my fonts to .local/share/fonts ##"
-    echo "###########################################" 
-    get-my-fonts 
-
+   if command_exist pacman; then      
+   
+        install_pacman_base
+   
+        clear
+   
+   fi
 
 fi
 
 
-nano_nuke ; clear
+# If you did choose basi install then the script will exit herre
+[ "$INSTALL_TYPE" = "basic" ] && exit
 
 
-picom-jona || error "failed to install picom-jonaburg" ; clear 
+# Installs packages 
+if command_exist pacman; then      
+
+    install_pacman_full
+
+    clear
+
+fi    
+
+ 
+clear
+
+if command_exit qtile ; then
+
+     echo "Qtile is already installed"
+
+else
+
+     echo "######################"
+     echo "## installing qtile ##"
+     echo "######################"
+
+     install_qtile || error "failed to install qtile" ; clear
+
+fi
+
+
+clear
+
+
+if command_exit slock ; then
+
+     echo "Slock is already installed"
+
+else
+
+     echo "##################################"
+     echo "## installing slock from source ##"
+     echo "##################################"
+
+     install_slock || error "failed to install slock" ; clear
+
+fi
+
+clear
+
+if command_exit picom ; then
+
+     echo "Picom is already installed"
+
+else
+    
+     echo "######################"
+     echo "## Installing Picom ##"
+     echo "######################"
+
+     install_picom || error "failed to install picom-jonaburg" ; clear
+
+fi
+
+
+echo "#############################"
+echo "## Setting default browser ##"
+echo "#############################"
+
+do_browser
 
 
 

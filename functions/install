@@ -1,314 +1,170 @@
 #!/bin/bash
-
 #This script contains functions to install some of my commonly used programs
-install-choosen-browser(){ \
-  
-   if [ -d /etc/dnf ] ; then
-   
-         [ "$browser" = "brave" ] && sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/ && \
-                                     sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc && \
-                                     sudo dnf install -y brave-browser && sudo ln -s /usr/bin/brave-browser /usr/bin/brave
-         [ "$browser" = "qutebrowser" ] && sudo dnf install -y qutebrowser
-         [ "$browser" = "chromium" ] && sudo dnf install -y chromium
-         [ "$browser" = "firefox" ] && sudo dnf install -y firefox
-     
-   
-   fi
-   
-   if [ -d /etc/apt ] ; then
-         [ "$browser" = "brave" ] && sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg && \
-                                     echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"| sudo tee /etc/apt/sources.list.d/brave-browser-release.list && \
-                                     sudo apt update && sudo apt install -y brave-browser && sudo ln -s /usr/bin/brave-browser /usr/bin/brave
-         [ "$browser" = "qutebrowser" ] && sudo apt install -y qutebrowser
-         [ "$browser" = "chromium" ] && sudo apt install -y --ignore-missing chromium
-         [ "$browser" = "firefox" ] && sudo apt install -y --ignore-missing firefox firefox-esr 
-   
-   fi
-   
-   if [ -e /etc/pacman.conf ] ; then
-   
-         [ "$browser" = "brave" ] && sudo pacman -S brave-bin --needed --noconfirm && sudo ln -s /usr/bin/brave-browser /usr/bin/brave
-         [ "$browser" = "qutebrowser" ] && sudo pacman -S qutebrowser --needed --noconfirm
-         [ "$browser" = "chromium" ] && sudo pacman -S chromium --needed --noconfirm
-         [ "$browser" = "firefox" ] && sudo pacman -S firefox --needed --noconfirm
-   
-   
-   fi
 
-}
+install_qtile() { \
 
-install-qtile() { \
-       
 [ -d /etc/apt ] && sudo apt install -y python3-pip python3-cairocffi
-         
-         pip install xffib
-         pip install qtile
-         
-         xsession_content=$(printf "[Desktop Entry]\n
-         Name=Qtile\n
-         Comment=This will start qtile wm\n
-         Exec=/usr/bin/qtile start\n
-         Type=Application"\n )
-         
-         printf '%s\n' "${xsession_content[@]}" | sed '/^ *$/d' > $HOME/qtile.desktop
-         
-         sudo mv $HOME/qtile.desktop /usr/share/xsessions
-         
-         sudo ln -s $HOME/.local/bin/qtile /usr/bin/qtile
 
-         git clone https://github.com/elParaguayo/qtile-extras.git $HOME/qtile-extras
-          
-         cd $HOME/qtile-extras
+    pip install xffib
+    pip install qtile
 
-         sudo python3 setup.py install
+    xsession_content=$(printf "[Desktop Entry]\n
+    Name=Qtile\n
+    Comment=This will start qtile wm\n
+    Exec=/usr/bin/qtile start\n
+    Type=Application"\n )
 
-         cd -
-         
-         rm -rf $HOME/qtile-extras
+    printf '%s\n' "${xsession_content[@]}" | sed '/^ *$/d' > $HOME/qtile.desktop
 
-}
+    sudo mv $HOME/qtile.desktop /usr/share/xsessions
 
-uwufetch-from-source() { \
+    sudo ln -s $HOME/.local/bin/qtile /usr/bin/qtile
 
-         git clone https://github.com/TheDarkBug/uwufetch.git $HOME/uwufetch
+    git clone https://github.com/elParaguayo/qtile-extras.git $HOME/qtile-extras
 
-         cd $HOME/uwufetch
+    cd $HOME/qtile-extras
 
-         sudo make install
+    sudo python3 setup.py install
 
-         cd -
+    cd -
 
-         rm -rf $HOME/uwufetch
+    rm -rf $HOME/qtile-extras
 
 }
 
-neovim-graphical-install() { \
+install_uwufetch() { \
+
+    git clone https://github.com/TheDarkBug/uwufetch.git $HOME/uwufetch
+
+    cd $HOME/uwufetch
+
+    sudo make install
+
+    cd -
+
+    rm -rf $HOME/uwufetch
+
+}
+
+
+install_btop() { \
+
+    git clone https://github.com/aristocratos/btop.git $HOME/btop
+
+    cd $HOME/btop
+
+    make && sudo make install
+
+    cd -
+
+    rm -rf $HOME/btop
+}
+
+install_muttwizard() {\
+
+    git clone https://github.com/LukeSmithxyz/mutt-wizard $HOME/mutt-wizard
+
+    cd $HOME/mutt-wizard
+
+    sudo make install
+
+    cd -
+
+    rm -rf $HOME/mutt-wizard
+
+}
+
+install_slock() { \
+
+    git clone https://github.com/phoenix988/slock.git $HOME/slock
+
+    cd $HOME/slock
+
+    sed -i "s|nobody|$USER|g" config.def.h
+    sed -i "s|nogroup|$USER|g" config.def.h
+
+    rm -rf config.h
+
+    sudo make install
+
+    cd -
+
+    rm -rf $HOME/slock
+
+}
+
+
+
+
+install_oh_my_tmux() { \
+
+     # Clones oh my tmux
+     [ -d $HOME/.tmux ] && cp -r $HOME/.tmux $HOME/.tmux.bak
+      
+     rm -rf $HOME/.tmux
+         
+     git clone https://github.com/gpakosz/.tmux.git  $HOME/.tmux
+
+     clear
+
+     [ -e $HOME/.tmux.conf ] && cp $HOME/.tmux.conf.bak
+     
+       rm $HOME/.tmux.conf
   
+       ln -s $HOME/.tmux/.tmux.conf $HOME/.tmux.conf
 
-  if [ -e /usr/bin/goneovim ] ; then
-
-        echo "" &> /dev/null 
-
-  else
-        wget https://github.com/akiyosi/goneovim/releases/download/v0.6.2/goneovim-v0.6.2linux.tar.bz2
-        
-        tar -jxf goneovim-v0.6.2linux.tar.bz2
-        
-        sudo cp -r goneovim-v0.6.2linux /opt/goneovim
-        rm -rf goneovim-v0.6.2linux 
-        rm -rf goneovim-v0.6.2linux.tar.bz2 
-        sudo ln -s /opt/goneovim/goneovim /usr/bin/goneovim
-        
-        desktop_content=$(printf "[Desktop Entry]\n
-        Name=Neovide\n
-        Comment=Start your gui neovim editor\n
-        Exec=/usr/bin/neovide\n
-        Type=Application"\n )
-        
-        printf '%s\n' "${desktop_content[@]}" | sed '/^ *$/d' > $HOME/neovide.desktop
-        
-        sudo cp -r $HOME/neovide.desktop /usr/share/applications
-
-        rm $HOME/neovide.desktop
-
-        sudo ln -s /usr/bin/goneovim /usr/bin/neovide
-  fi
-
-}
-
-btop-from-source() { \
-
-        git clone https://github.com/aristocratos/btop.git $HOME/btop
-
-        cd $HOME/btop
-
-        make && sudo make install
-
-        cd -
-
-        rm -rf $HOME/btop
-}
-
-muttwizard_from_source() {\
-
-       git clone https://github.com/LukeSmithxyz/mutt-wizard $HOME/mutt-wizard
-
-       cd $HOME/mutt-wizard
-
-       sudo make install
-
-       cd -
-
-       rm -rf $HOME/mutt-wizard
-
-}
-
-slock-install() { \
-
-       git clone https://github.com/phoenix988/slock.git $HOME/slock
-
-       cd $HOME/slock
-
-       sed -i "s|nobody|$USER|g" config.def.h
-       sed -i "s|nogroup|$USER|g" config.def.h
-
-       rm -rf config.h
-
-       sudo make install
-
-       cd -
-
-       rm -rf $HOME/slock
-
+       clear
 }
 
 
-install-oh-my-zsh() {  \
+install_fonts() {
 
-#Checks if oh my zsh is installed already
-#Otherwise we will install it
-if [ -e $HOME/.config/oh-my-zsh/oh-my-zsh.sh ] ; then
+    git clone https://github.com/phoenix988/fonts.git $HOME/fonts
 
-     sleep 2
-     clear
-else
-
-     echo "##########################"
-     echo "## Installing OH-MY-ZSH ##"
-     echo "##########################"
-     sleep 2
-
-     [ -d $HOME/.config ] || mkdir $HOME/.config
-     
-     [ -d $HOME/.config/oh-my-zsh/ ] && sudo rm -rf $HOME/.config/oh-my-zsh/
-     
-     sh -c "$(curl -fsSL https://raw.githubusercontent.com/phoenix988/setup/main/scripts/ohmyzsh.sh)" "" --unattended 
-     
-     sudo chown karl:karl -R $HOME/.config/oh-my-zsh
-     
-     sleep 2 
-     clear 
-    
-     #Installs ZSH plugins
-     echo "##################################"
-     echo "## Installing OH-MY-ZSH Plugins ##"
-     echo "##################################"
-     
-     sleep 2 
-
-     git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.config/oh-my-zsh/zsh-autosuggestions  
-     
-     git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.config/oh-my-zsh/zsh-syntax-highlighting 
-     
-     sleep 2 
-     clear     
-     
-fi
-
-}
-
-#Installs the starship prompt if its not installed   
-#This will print the version of starship Installed 
-#But if it's not installed this script will go ahead and install it
-install-starship-prompt() { \  
-if [ -e /usr/local/bin/starship ] ; then
-     
-     sleep 2
-     clear
-
-else 
-
-     echo "#########################"
-     echo "## Installing Starship ##"
-     echo "#########################"
-     
-     sleep 2
-     $HOME/setup/scripts/starship.sh --yes  
-
-     sleep 1
-     clear
-
-fi 
-
-}
-
-
-install-oh-my-tmux() { \
-  
-     #Clones oh my tmux
-     echo "#########################"
-     echo "## Installs OH-MY-TMUX ##"
-     echo "#########################"
-     
-     sleep 2
-     [ -d $HOME/.tmux ] || git clone https://github.com/gpakosz/.tmux.git  $HOME/.tmux 
-     
-     clear
-     
-     #Only links .tmux.conf if it doesnt exist already
-     echo "#############################################"
-     echo "## Creates HOME/.tmux/.tmux.conf if needed ##"
-     echo "#############################################"
-     
-     sleep 2
-     
-     [ -e $HOME/.tmux.conf ] || ln -s $HOME/.tmux/.tmux.conf $HOME/.tmux.conf 
-     
-     clear   
-
-}
-
-
-default-browser() {
-     
-     check_browser=$(grep "^browser" $HOME/dotfiles/.dmenu/dm-openweb-fullscreen  | awk -F "=" '{print $2}' | sed -e 's/"//g')
-     sed -i -e "s|$check_browser|$browser|g" $HOME/.dmenu/dm-openweb-fullscreen
-     
-     check_browser=$(grep -i "^#BROWSER" $HOME/.config/qtile/config.py | awk '{print $3}')
-     sed -i -e "s|$check_browser|$browser|g" $HOME/.config/qtile/config.py
-}
-
-
-get-my-fonts() {
-
-    git clone https://github.com/phoenix988/fonts.git $HOME/fonts 
-    
     [ -d $HOME/.local/share/fonts ] || mkdir -p $HOME/.local/share/fonts
+
     sudo cp -r $HOME/fonts/fonts/* $HOME/.local/share/fonts
+
     rm -rf $HOME/fonts &> /dev/null
+
     sleep 1
 
+}
+
+install_picom() { \
+
+    git clone https://github.com/jonaburg/picom $HOME/picom
+
+    cd $HOME/pciom
+
+    meson --buildtype=release . build
+
+    ninja -C build
+
+    sudo ninja -C build install
+
+    cd -
+
+    rm -rf $HOME/picom
 
 }
 
-picom-jona() { \
+pfetch_install() { \
 
-git clone https://github.com/jonaburg/picom $HOME/picom
+    if command_exist pacman ; then
 
-cd $HOME/pciom
+        sudo pacman -S base-devel --needed --noconfirm
 
-meson --buildtype=release . build
+    fi
 
-ninja -C build
+    git clone https://github.com/dylanaraps/pfetch.git $HOME/pfetch
 
-sudo ninja -C build install
+    cd $HOME/pfetch
 
-cd -
+    sudo make install
 
-rm -rf $HOME/picom
+    cd -
 
-}
-
-PFETCH_INSTALL() { \
-
-git clone https://github.com/dylanaraps/pfetch.git $HOME/pfetch
-
-cd $HOME/pfetch
-
-sudo make install
-
-cd -
-
-rm -rf $HOME/pfetch
+    rm -rf $HOME/pfetch
 
 }
