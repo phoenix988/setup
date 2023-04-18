@@ -1,3 +1,9 @@
+#+title: Setup Utility
+#+author: Karl Fredin
+#+DESCRIPTION: Utility to configure a new desktop with all my config files
+
+* TABLE OF CONTENTS
+
 # Setup - Utility that will configure my desktop
 
 Utility that will configure your desktop using my configuration files
@@ -5,9 +11,9 @@ Utility that will configure your desktop using my configuration files
 My plan is to make this work on any distro but currently its just in testing phase and isn't that stable, But this script will work best on arch for now
 
 # OBS This project is work in progress use on your own risk (I recommendnd to not use it at all not working right now!!!)
-## Currently testing on 
+## Currently testing on
 
-Arch 
+Arch
 
 Ubuntu
 
@@ -40,7 +46,7 @@ Slock - Lockscreen
 
 ![slock](https://i.imgur.com/74fazMq.png)
 
-Tmux with OH-MY-TMUX - Terminal Multiplexer 
+Tmux with OH-MY-TMUX - Terminal Multiplexer
 
 Vifm - Terminal FileManager
 
@@ -58,11 +64,11 @@ Grub Theme (Only have it tested and working on Debian and Arch)
 
 BTOP - Terminal System Resource Monitor
 
-Docker - Container Virtulization 
+Docker - Container Virtulization
 
 OBS this script also deactivates root password prompt when using sudo this will be a security risk I just prefer it because I'm lazy
 
-Some of these Programs are optional and the script will prompt you if you want to install it or not. 
+Some of these Programs are optional and the script will prompt you if you want to install it or not.
 
 ## This script installs some GTK themes which includes
 
@@ -89,11 +95,9 @@ This is in Beta I recommend to not use this on a production machine use it in  V
 
 ## In order to use this script follow these steps
 
-1. git clone https://github.com/phoenix988/setup.git 
+1. git clone https://github.com/phoenix988/setup.git
 2. cd setup
 3. ./config.sh
 
 
 And lastly just follow the prompts this script will ask you some questions before it run
-
-
