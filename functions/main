@@ -23,7 +23,7 @@ command_exist() {
 
 deactivate_root() { \
 
-         #This will deactivate logins for root
+         # This will deactivate logins for root
          echo "#####################################################################"
          echo "##  Deactivating root account for security reasons , if its needed ##"
          echo "#####################################################################"

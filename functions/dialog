@@ -94,18 +94,59 @@ _INSTALLED=$(echo "$INSTALLED_BROWSERS" "$_INSTALLED" )
 
 done
 
-read -p "Please Select your default browser: Enter to continue"
+if [ -z "$_INSTALLED" ] ; then
 
-clear
+    echo "you didn't make a choice. Make a choice kiddo"
 
-while [ -z $choice ] ; do
+else
 
-choice=$( printf '%s\n' "${_INSTALLED[@]}" | xargs -n 1 | fzf )
+    read -p "Please Select your default browser: Enter to continue"
 
-[ -z $choice ] && echo "you didn't make a choice. Make a choice kiddo"
+    clear
 
-done
+    while [ -z $choice ] ; do
 
-xdg-settings set default-web-browser $choice
+    choice=$( printf '%s\n' "${_INSTALLED[@]}" | xargs -n 1 | fzf )
+
+    [ -z $choice ] && echo "you didn't make a choice. Make a choice kiddo"
+
+    sleep 1
+
+    done
+
+    xdg-settings set default-web-browser $choice
+fi
 
 }
+
+
+do_windowmanager() { \
+
+     # Define an array of windowmanager options
+     options=("Hyprland" "Qtile" "Quit")
+
+      echo "Please Choose your Window Manager"
+
+     # Print the menu prompt and allow the user to select an option
+     select shell_option in "${options[@]}"
+     do
+         case $shell_option in
+             "Hyprland")
+                 break
+                 ;;
+             "Qtile")
+                 break
+                 ;;
+             "Quit")
+                 echo "Exiting..."
+                 exit
+                 ;;
+             *)
+                 echo "Invalid option. Please select a valid option."
+                 ;;
+         esac
+     done
+
+
+}
+

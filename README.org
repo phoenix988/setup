@@ -4,24 +4,25 @@
 
 * TABLE OF CONTENTS
 - [[ABOUT SETUP]]
-- [[Configs]]
-  - [[Window Managers]]
-    - [[Hyprland]]
-    - [[Qtile]]
-  - [[Text Editors]]
-    - [[Neovim]]
-    - [[Doom Emacs]]
-  - [[Run Launchers]]
-    - [[Wofi]]
-    - [[Rofi]]
-  - [[Terminal]]
-    - [[Kitty]]
-    - [[Tmux]]
-  - [[DisplayManager]]
-    - [[Sddm]]
-  - [[Lockscreen]]
-    - [[Swaylock]]
-    - [[Slock]]
+- [[FEATURES]]
+- [[CONFIGS]]
+  - [[WINDOW MANAGERS]]
+    - [[HYPRLAND]]
+    - [[QTILE]]
+  - [[TEXT EDITORS]]
+    - [[NEOVIM]]
+    - [[DOOM Emacs]]
+  - [[RUN LAUNCHERS]]
+    - [[WOFI]]
+    - [[ROFI]]
+  - [[TERMINAL]]
+    - [[KITTY]]
+    - [[TMUX]]
+  - [[DISPLAYMANAGER]]
+    - [[SDDM]]
+  - [[LOCKSCREEN]]
+    - [[SWAYLOCK]]
+    - [[SLOCK]]
 
 
 
@@ -31,25 +32,25 @@ software on a new system to make reinstall easier. Right now only Arch is suppor
 on debian base.
 
 
-*** Configs
-**** Window Managers
+*** CONFIGS
+**** WINDOW MANAGERS
 ***** Qtile
 ***** Hyprland
-**** Text Editors
+**** TEXT EDITORS
 ***** Neovim
 ***** Doom Emacs
 
-**** Run Launchers
-***** Wofi
-***** Rofi
+**** RUN LAUNCHERS
+***** WOFI
+***** ROFI
 
 [[file:./.images/rofi-dracula.png]]
-**** Terminal
-***** Kitty
-***** Tmux
-**** DisplayManager
-***** Sddm
-**** Lockscreen
-***** Swaylock
-***** Slock
+**** TERMINAL
+***** KITTY
+***** TMUX
+**** DISPLAYMANAGER
+***** SDDM
+**** LOCKSCREEN
+***** SWAYLOCK
+***** SLOCK
 [[file:./.images/slock.png]]

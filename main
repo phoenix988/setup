@@ -8,27 +8,72 @@
 # -*- coding: utf-8 -*-
 # Can directly make a choice -c for basic install
 # and -f for full install
-while getopts ":cfs:" opt; do
-  case $opt in
-     c)
-      INSTALL_TYPE=basic 
-      ;;
-     f)
-      INSTALL_TYPE=full
-      ;;
-     s)
-       SHELL_CHOICE="$OPTARG"  
-      ;;   
+
+# -w for window manager
+# -s for shell
+# -c for basic install
+# -f for full install
+while getopts ":w:s:cf" opt; do
+  case ${opt} in
+    c)
+     INSTALL_TYPE=basic
+     ;;
+    f)
+     INSTALL_TYPE=full
+     ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
       exit 1
       ;;
-     :) 
-       echo "-$OPTARG: Requires an argument"  
-         
+    w )
+      case ${OPTARG} in
+        "hyprland" )
+         WINDOW_MANAGER="$OPTARG"
+          ;;
+        "qtile" )
+         WINDOW_MANAGER="$OPTARG"
+          ;;
+        * )
+          echo "Invalid value. Please select hyperland, qtile, or xmonad."
+          exit 1
+          ;;
+      esac
+      ;;
+    s )
+      case ${OPTARG} in
+        "zsh" )
+         SHELL_CHOICE="$OPTARG"
+          ;;
+        "bash" )
+         SHELL_CHOICE="$OPTARG"
+          ;;
+        "fish" )
+        SHELL_CHOICE="$OPTARG"
+          ;;
+        * )
+          echo "Invalid value. Please select zsh, bash, or fish."
+          exit 1
+          ;;
+      esac
+      ;;
+    \? )
+         echo "Invalid option: -$OPTARG. Please select hyperland, qtile, or xmonad" 1>&2
+         echo "-w (hyprland, qtile, xmonad)"
+         echo "-s (zsh, bash, fish)"
+         exit 1
+      ;;
+    : )
+         echo "Invalid option: -$OPTARG requires an argument." 1>&2
+         echo "-w (hyprland, qtile, xmonad)"
+         echo "-s (zsh, bash, fish)"
+         exit 1
+      ;;
   esac
+
 done
 
+
+exit
 # Gets the hostname of the machine
 hostname=$(cat /etc/hostname &> /dev/null)
 
@@ -56,24 +101,28 @@ sleep 1;clear
 # Welcome Message
 welcome ; clear
 
-# If you run this on the archiso it will go ahead and install arch for you
-# just answer some questions and it will install arch for you OBS( YOU NEED TO PARTITION DRIVES FIRST )
-# This is not working right now so I disabled it
-#[ "$hostname" = "archiso" ] && main-arch-install
-
-
-# asks what kind of install you want
+# Asks what kind of install you want if you
+# Didn't use -c or -f
 [ -z "$INSTALL_TYPE" ] && do_settings ; clear
 
-
 Lastchance ; clear
+
+# If you didn't choocse window manager and choose full install
+# Then it will ask you which one you want to install
+if [ "$INSTALL_TYPE" = "full" ] ; then
+
+      [ -z "$WINDOW_MANAGER" ] && do_windowmanager
+
+fi
+
+[ "$INSTALL_TYPE" = "full" ] && do_browser
 
     
 echo "################################"
 echo "## Making common user folders ##"
 echo "################################" 
 
-home_folders
+home_folders || error "Failed to create home folders"
 
 clear
 
@@ -95,11 +144,10 @@ install_pfetch
 if [ "$INSTALL_TYPE" = "basic" ] ; then
 
    command_exist pacman && install_pacman_base
-   
-   
+
         clear
    
-   fi
+fi
 
 
 echo "#########################################################"
@@ -108,14 +156,17 @@ echo "#########################################################"
 
 cd ./scripts
 
+# Runs the dotfiles script
 ./dotfiles.sh 
 
 cd ..
 
-do_shell
-
 clear
 
+# If you didnt choose shell then it will ask you
+[ -z "$SHELL_CHOICE" ] && do_shell
+
+clear
 
 # If you did choose basic install then the script will exit herre
 [ "$INSTALL_TYPE" = "basic" ] && exit
@@ -130,64 +181,38 @@ if command_exist pacman; then
 
 fi    
 
- 
 clear
+
+if [ $WINDOW_MANAGER = "qtile" ] ; then
 
 if command_exist qtile ; then
 
-     echo "Qtile is already installed"
+      echo "Qtile is already installed"
 
 else
 
-     echo "######################"
-     echo "## installing qtile ##"
-     echo "######################"
+      echo "######################"
+      echo "## installing qtile ##"
+      echo "######################"
 
-     install_qtile || error "failed to install qtile" ; clear
+      install_qtile || error "failed to install qtile" ; clear
 
 fi
 
-
 clear
-
 
 if command_exit slock ; then
 
-     echo "Slock is already installed"
+      echo "Slock is already installed"
 
 else
+      echo "##################################"
+      echo "## installing slock from source ##"
+      echo "##################################"
 
-     echo "##################################"
-     echo "## installing slock from source ##"
-     echo "##################################"
-
-     install_slock || error "failed to install slock" ; clear
-
-fi
-
-clear
-
-if command_exit picom ; then
-
-     echo "Picom is already installed"
-
-else
-    
-     echo "######################"
-     echo "## Installing Picom ##"
-     echo "######################"
-
-     install_picom || error "failed to install picom-jonaburg" ; clear
+      install_slock || error "failed to install slock" ; clear
 
 fi
 
 
-echo "#############################"
-echo "## Setting default browser ##"
-echo "#############################"
-
-do_browser
-
-
-
-
+fi
