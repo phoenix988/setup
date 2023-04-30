@@ -66,12 +66,11 @@ install_muttwizard() {\
 # install my build of slock
 install_slock() { \
 
+    sudo groupadd nogroup 2> /dev/null
+
     git clone https://github.com/phoenix988/slock-phoenix.git $HOME/slock
 
     cd $HOME/slock
-
-    sed -i "s|nobody|$USER|g" config.def.h
-    sed -i "s|nogroup|$USER|g" config.def.h
 
     sudo make install
 
