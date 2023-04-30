@@ -188,14 +188,16 @@ if [ "$INSTALL_TYPE" = "basic" ] ; then
    
 fi
 
+sleep 2
+clear
+
 
 # Runs the dotfiles script which clones my dotfiles repo
 # and moves all my configuration files to home
 echo "#########################################################"
 echo "## Getting all my config files and moving them to home ##"
 echo "#########################################################"
-sleep 20
-sleep 1
+sleep 2
 install_config
 
 clear
