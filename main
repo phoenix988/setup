@@ -81,6 +81,9 @@ while getopts ":w:s:cf" opt; do
 done
 
 
+
+
+
 # Source Variables and all functions
 # So we can get all my functions
 # I wrote them in seperate files to try and stay organized
@@ -92,6 +95,36 @@ for source in $(ls variables | xargs -n1) ; do
       source variables/$source
 done
 
+# Welcome Message
+welcome ; clear
+
+# Asks you one last time if you really wanna continue
+Lastchance ; clear
+
+if [ $DOTFILES_ONLY = "y" ] ; then
+
+   # Runs the dotfiles script which clones my dotfiles repo
+   # and moves all my configuration files to home
+   echo "#########################################################"
+   echo "## Getting all my config files and moving them to home ##"
+   echo "#########################################################"
+   sleep 2
+   install_config
+   exit
+
+
+else
+
+    # Runs the dotfiles script which clones my dotfiles repo
+    # and moves all my configuration files to home
+    echo "#########################################################"
+    echo "## Getting all my config files and moving them to home ##"
+    echo "#########################################################"
+    sleep 2
+
+    install_config
+
+fi
 
 # Install fzf and dialog if its needed cause it will be used in the script
 # So we need to install them
@@ -105,15 +138,11 @@ command_exist pacman && sudo pacman -Syy --needed --noconfirm dialog fzf zsh || 
 
 sleep 1;clear
 
-# Welcome Message
-welcome ; clear
 
 # Asks what kind of install you want if you
 # Didn't use -c or -f
 [ -z "$INSTALL_TYPE" ] && do_settings ; clear
 
-# Asks you one last time if you really wanna continue
-Lastchance ; clear
 
 # If you didn't choocse window manager and choose full install
 # Then it will ask you which one you want to install
@@ -198,18 +227,6 @@ sleep 2
 
 clear
 
-# Runs the dotfiles script which clones my dotfiles repo
-# and moves all my configuration files to home
-echo "#########################################################"
-echo "## Getting all my config files and moving them to home ##"
-echo "#########################################################"
-
-sleep 2
-
-install_config
-
-clear
-
 # Change default shell
 sudo usermod -s "/usr/bin/$SHELL_CHOICE" $USER
 clear
@@ -268,7 +285,7 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
 elif [ $WINDOW_MANAGER = "hyprland" ] ; then
 
 
-    paru -S --needed --noconfirm waybar-hyprland-git swaylock swaybg grim wofi awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono xdg-desktop-portal-hyprland-git
+    paru -S --needed --noconfirm waybar-hyprland-git swaylock swaybg grim wofi awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono xdg-desktop-portal-hyprland-git wlogout
 
 
    # Only installs qtile if needed
