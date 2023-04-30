@@ -81,8 +81,6 @@ while getopts ":w:s:cf" opt; do
 done
 
 
-exit
-
 # Gets the hostname of the machine
 # cause why not lol. It is not used right now
 # in this script but I was planing to add a function later on
