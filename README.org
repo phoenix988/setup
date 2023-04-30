@@ -1,6 +1,6 @@
-#+title: Setup Utility
+#+title: SETUP UTILITY
 #+author: Karl Fredin
-#+DESCRIPTION: Utility to configure a new desktop with all my config files
+#+DESCRIPTION: Utility to configure my desktop for arch
 
 * TABLE OF CONTENTS
 - [[ABOUT SETUP]]
@@ -31,14 +31,16 @@ This is a project I am working on that will grab my config files and install my 
 software on a new system to make reinstall easier. Right now only Arch is supported wont work
 on debian base.
 
+* FEATURES
+
 
 *** CONFIGS
 **** WINDOW MANAGERS
-***** Qtile
-***** Hyprland
+***** QTILE
+***** HYPRLAND
 **** TEXT EDITORS
-***** Neovim
-***** Doom Emacs
+***** NEOVIM
+***** DOOM EMACS
 
 **** RUN LAUNCHERS
 ***** WOFI

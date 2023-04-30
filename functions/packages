@@ -139,6 +139,7 @@ declare -a packages=(
     "zip"
     "pcmanfm"
     "qt5ct"
+    "qt6ct"
     "sxiv"
     "qt5"
     "qt5-quickcontrols2"

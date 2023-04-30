@@ -132,6 +132,11 @@ if [ -d $SOURCE_FILE ] ; then
 
 [ -d $FILES ] || mkdir -p $FILES
 
+
+echo "#########################################################"
+echo "## Getting all my config files and moving them to home ##"
+echo "#########################################################"
+sleep 2
 cp -r $SOURCE_FILE/* $FILES 2> /dev/null
 printf '%s\n' "Moving: $SOURCE_FILE to $FILES"
 

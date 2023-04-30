@@ -1,6 +1,7 @@
 #!/bin/bash
 #This script contains functions to install some of my commonly used programs
 
+# Install qtile from source
 install_qtile() { \
 
 [ -d /etc/apt ] && sudo apt install -y python3-pip python3-cairocffi
@@ -32,21 +33,8 @@ install_qtile() { \
 
 }
 
-install_uwufetch() { \
 
-    git clone https://github.com/TheDarkBug/uwufetch.git $HOME/uwufetch
-
-    cd $HOME/uwufetch
-
-    sudo make install
-
-    cd -
-
-    rm -rf $HOME/uwufetch
-
-}
-
-
+# install btop from source
 install_btop() { \
 
     git clone https://github.com/aristocratos/btop.git $HOME/btop
@@ -60,6 +48,7 @@ install_btop() { \
     rm -rf $HOME/btop
 }
 
+# install muttwizard from source
 install_muttwizard() {\
 
     git clone https://github.com/LukeSmithxyz/mutt-wizard $HOME/mutt-wizard
@@ -74,6 +63,7 @@ install_muttwizard() {\
 
 }
 
+# install my build of slock
 install_slock() { \
 
     git clone https://github.com/phoenix988/slock.git $HOME/slock
@@ -95,7 +85,7 @@ install_slock() { \
 
 
 
-
+# Install oh-my-tmux
 install_oh_my_tmux() { \
 
      # Clones oh my tmux
@@ -116,21 +106,7 @@ install_oh_my_tmux() { \
        clear
 }
 
-
-install_fonts() {
-
-    git clone https://github.com/phoenix988/fonts.git $HOME/fonts
-
-    [ -d $HOME/.local/share/fonts ] || mkdir -p $HOME/.local/share/fonts
-
-    sudo cp -r $HOME/fonts/fonts/* $HOME/.local/share/fonts
-
-    rm -rf $HOME/fonts &> /dev/null
-
-    sleep 1
-
-}
-
+# Install picom jonaburg fork
 install_picom() { \
 
     git clone https://github.com/jonaburg/picom $HOME/picom
@@ -149,6 +125,7 @@ install_picom() { \
 
 }
 
+# Install pfetch from source
 install_pfetch() { \
 
     git clone https://github.com/dylanaraps/pfetch.git $HOME/pfetch
@@ -164,27 +141,43 @@ install_pfetch() { \
 }
 
 
+# start a portainer instance in docker
 install_docker_portainer() {
 
-docker -v &> /dev/null
+  docker -v &> /dev/null
 
-if [ $? = "0" ] ; then
-       echo "###########################################################"
-       echo "## Installing Portainer agent so you can use this server ##"
-       echo "## For docker containers only if its needed              ##"
-       echo "###########################################################"
-       sleep 2
-       portainer_agent=$(sudo docker ps | awk '$NF == "portainer_agent" {print $NF}' 2> /dev/null)
+  if [ $? = "0" ] ; then
+         echo "###########################################################"
+         echo "## Installing Portainer agent so you can use this server ##"
+         echo "## For docker containers only if its needed              ##"
+         echo "###########################################################"
+         sleep 2
+         portainer_agent=$(sudo docker ps | awk '$NF == "portainer_agent" {print $NF}' 2> /dev/null)
 
-       sudo docker volume create portainer_data_agent
+         sudo docker volume create portainer_data_agent
 
-       [ "$portainer_agent" != "portainer_agent" ] && \
-       sudo docker run -d -p 9001:9001 --name portainer_agent --restart=always \
-       -v /var/run/docker.sock:/var/run/docker.sock  \
-       -v portainer_data_agent:/var/lib/docker/volumes portainer/agent
-fi
+         [ "$portainer_agent" != "portainer_agent" ] && \
+         sudo docker run -d -p 9001:9001 --name portainer_agent --restart=always \
+         -v /var/run/docker.sock:/var/run/docker.sock  \
+         -v portainer_data_agent:/var/lib/docker/volumes portainer/agent
+  fi
 
-sleep 2
-clear
+  sleep 2
+  clear
+
+}
+
+# Install paru function
+install_paru() {
+
+     git clone https://aur.archlinux.org/paru.git $HOME/paru
+
+     cd $HOME/paru
+
+     makepkg -si
+
+     rm -rf $HOME/paru
+
+
 
 }

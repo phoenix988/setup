@@ -47,18 +47,15 @@ do_shell() { \
      do
          case $shell_option in
              "bash")
-                 echo "You selected Bash as your default shell."
-                 chsh -s /bin/bash $USER
+                 SHELL_CHOICE="bash"
                  break
                  ;;
              "zsh")
-                 echo "You selected Zsh as your default shell."
-                 chsh -s /bin/zsh $USER
+                 SHELL_CHOICE="zsh"
                  break
                  ;;
              "fish")
-                 echo "You selected Fish as your default shell."
-                 chsh -s /usr/bin/fish $USER
+                 SHELL_CHOICE="fish"
                  break
                  ;;
              "quit")
@@ -96,7 +93,9 @@ done
 
 if [ -z "$_INSTALLED" ] ; then
 
-    echo "you didn't make a choice. Make a choice kiddo"
+    echo "##########################################"
+    echo "#No browser, Installed nothing to do here#"
+    echo "##########################################"
 
 else
 
@@ -132,9 +131,11 @@ do_windowmanager() { \
      do
          case $shell_option in
              "Hyprland")
+                 WINDOW_MANAGER=hyprland
                  break
                  ;;
              "Qtile")
+                 WINDOW_MANAGER=qtile
                  break
                  ;;
              "Quit")
@@ -142,7 +143,7 @@ do_windowmanager() { \
                  exit
                  ;;
              *)
-                 echo "Invalid option. Please select a valid option."
+                 echo "Invalid option. Please select a valid option. Hyprland or Qtile"
                  ;;
          esac
      done
