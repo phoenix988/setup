@@ -68,9 +68,11 @@ install_slock() { \
 
     sudo groupadd nogroup 2> /dev/null
 
-    git clone https://github.com/phoenix988/slock-phoenix.git $HOME/slock
+    cd $HOME
 
-    cd $HOME/slock
+    git clone https://github.com/phoenix988/slock-phoenix.git
+
+    cd slock
 
     sudo make install
 
