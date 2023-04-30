@@ -176,8 +176,6 @@ install_paru() {
 
      rm -rf $HOME/paru
 
-
-
 }
 
 

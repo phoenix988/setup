@@ -178,7 +178,7 @@ sudo pacman -S --noconfirm --needed $(printf '%s\n' "${packages[@]}")
 
 }
 
-install_paru() {
+install_paru_base() {
 
 declare -a packages=(
 
