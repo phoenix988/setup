@@ -72,11 +72,11 @@ install_slock() { \
 
     git clone https://github.com/phoenix988/slock-phoenix.git
 
-    cd slock
+    cd slock-phoenix
 
     sudo make install
 
-    cd -
+    cd $HOME/setup
 
     rm -rf $HOME/slock
 
