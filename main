@@ -107,7 +107,7 @@ echo "#####################################################"
 
 sleep 1;clear
 
-command_exist pacman && sudo pacman -Syy --needed --noconfirm dialog fzf || error "failed to install fzf"
+command_exist pacman && sudo pacman -Syy --needed --noconfirm dialog fzf zsh || error "failed to install fzf"
 
 sleep 1;clear
 
@@ -194,6 +194,7 @@ fi
 echo "#########################################################"
 echo "## Getting all my config files and moving them to home ##"
 echo "#########################################################"
+sleep 20
 sleep 1
 install_config
 
@@ -249,7 +250,7 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
    clear
 
    # If slock is installed it wont install it
-   if command_exit slock ; then
+   if command_exist slock ; then
 
          echo "Slock is already installed"
 

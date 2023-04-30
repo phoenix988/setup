@@ -15,20 +15,6 @@ install_config() {
 DOTFILES_REPO_PATH="$HOME/dotfiles"
 DMSCRIPTS_REPO_PATH="$HOME/dmscripts"
 
-# Will exit the script if git command doesn't exist
-if command_exist git ; then
-
-    printf ""
-    clear
-
-else
-
-    printf '%s\n' "git is not installed"
-    printf '%s\n' "Aborting....Please install git"
-    exit
-
-fi
-
 # Clones my dotfiles repo
 [ -d $DOTFILES_REPO_PATH ] || git clone https://github.com/phoenix988/dotfiles.git $DOTFILES_REPO_PATH
 
