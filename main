@@ -188,12 +188,10 @@ if [ "$INSTALL_TYPE" = "basic" ] ; then
 
 elif [ "$INSTALL_TYPE" = "full" ] ; then
 
-    if command_exist pacman; then
+   command_exist pacman &&  install_pacman_full
 
-        install_pacman_full
+   clear
 
-        clear
-    fi
 fi
 
 sleep 2
