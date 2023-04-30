@@ -107,7 +107,7 @@ echo "#####################################################"
 
 sleep 1;clear
 
-command_exist pacman && sudo pacman -Syyu --needed --noconfirm dialog fzf || error "failed to install fzf"
+command_exist pacman && sudo pacman -Syy --needed --noconfirm dialog fzf || error "failed to install fzf"
 
 sleep 1;clear
 
@@ -129,14 +129,14 @@ if [ "$INSTALL_TYPE" = "full" ] ; then
 
 fi
 
-
+clear
 
 # If you didnt choose shell then it will ask you
 [ -z "$SHELL_CHOICE" ] && do_shell
 
 
-# asks you which default browser you want
-[ "$INSTALL_TYPE" = "full" ] && do_browser
+# Asks you which default browser you want
+#[ "$INSTALL_TYPE" = "full" ] && do_browser
 
 
 # Just making some home folders cause why notepad
@@ -174,6 +174,7 @@ install_pfetch
 
 clear
 
+# Installs paru aur helper if its not installed
 echo "#####################"
 echo "## installing paru ##"
 echo "#####################"
@@ -192,6 +193,10 @@ fi
 # Runs the dotfiles script which clones my dotfiles repo
 # and moves all my configuration files to home
 
+echo "#########################################################"
+echo "## Getting all my config files and moving them to home ##"
+echo "#########################################################"
+sleep 1
 install_config
 
 clear
@@ -216,6 +221,12 @@ fi
 
 clear
 
+echo "######################"
+echo "## installing fonts ##"
+echo "######################"
+install_fonts
+
+clear
 
 # If you choose qtile then it will go and do things thats specific for
 # qtile and xorg this is important because hyprland is based on wayland
@@ -255,7 +266,7 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
 elif [ $WINDOW_MANAGER = "hyprland" ] ; then
 
 
-    paru -S --needed --noconfirm waybar-hyprland-git hyprland-bin swaylock swaybg grim wofi awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono
+    paru -S --needed --noconfirm waybar-hyprland-git hyprland-bin swaylock swaybg grim wofi awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono xdg-desktop-portal-hyprland-git
 
 
    # Only installs qtile if needed
@@ -264,16 +275,17 @@ elif [ $WINDOW_MANAGER = "hyprland" ] ; then
          echo "Hyprland is already installed"
 
    else
-
+         # Installs hyprland
          echo "#########################"
          echo "## installing hyprland ##"
          echo "#########################"
 
-         install_hyprland || error "failed to install hyprland" ; clear
+         paru -S --needed --noconfirm hyprland-bin || error "failed to install hyprland" ; clear
 
    fi
 
    clear
+
 
 
 fi

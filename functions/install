@@ -66,14 +66,12 @@ install_muttwizard() {\
 # install my build of slock
 install_slock() { \
 
-    git clone https://github.com/phoenix988/slock.git $HOME/slock
+    git clone https://github.com/phoenix988/slock-phoenix.git $HOME/slock
 
     cd $HOME/slock
 
     sed -i "s|nobody|$USER|g" config.def.h
     sed -i "s|nogroup|$USER|g" config.def.h
-
-    rm -rf config.h
 
     sudo make install
 
@@ -179,5 +177,16 @@ install_paru() {
      rm -rf $HOME/paru
 
 
+
+}
+
+
+install_fonts() {
+
+     git clone https://github.com/phoenix988/fonts.git $HOME/fonts
+
+     cp -r $HOME/fonts/fonts $HOME/.local/share
+
+     rm -rf $HOME/fonts
 
 }

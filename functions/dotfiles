@@ -61,24 +61,23 @@ files[$HOME/.config/wofi]="$DOTFILES_REPO_PATH/.config/wofi"
 files[$HOME/.config/wlogout]="$DOTFILES_REPO_PATH/.config/wlogout"
 files[$HOME/.config/vifm]="$DOTFILES_REPO_PATH/.config/vifm"
 files[$HOME/.config/starship.toml]="$DOTFILES_REPO_PATH/.config/starship.toml"
+files[$HOME/.config/starship-themes]="$DOTFILES_REPO_PATH/.config/starship-themes"
 files[$HOME/.config/picom]="$DOTFILES_REPO_PATH/.config/picom"
 files[$HOME/.config/conky]="$DOTFILES_REPO_PATH/.config/conky"
 files[$HOME/.config/qutebrowser]="$DOTFILES_REPO_PATH/.config/qutebrowser"
 files[$HOME/.config/sxiv]="$DOTFILES_REPO_PATH/.config/sxiv"
 files[$HOME/.config/urxvt]="$DOTFILES_REPO_PATH/.config/urxvt"
 files[$HOME/.config/alacritty]="$DOTFILES_REPO_PATH/.config/alacritty"
+files[$HOME/.config/fzf]="$DOTFILES_REPO_PATH/.config/alacritty"
 files[$HOME/.config/oh-my-zsh/themes/nord.zsh-theme]="$DOTFILES_REPO_PATH/.config/oh-my-zsh/themes"
 files[$HOME/.zshrc]="$DOTFILES_REPO_PATH/.zshrc"
 files[$HOME/.bashrc]="$DOTFILES_REPO_PATH/.bashrc"
 files[$HOME/.fehbg]="$DOTFILES_REPO_PATH/.fehbg"
-files[$HOME/.NERDTreeBookmarks]="$DOTFILES_REPO_PATH/.NERDTreeBookmarks"
-files[$HOME/.xmonad]="$DOTFILES_REPO_PATH/.xmonad"
-files[$HOME/.config/spectrwm]="$DOTFILES_REPO_PATH/.config/spectrwm"
 files[$HOME/.tmux.conf.local]="$DOTFILES_REPO_PATH/.tmux.conf.local"
 files[$HOME/.scripts]="$DOTFILES_REPO_PATH/.scripts"
 files[$HOME/.dmenu]="$DMSCRIPTS_REPO_PATH/.dmenu"
 files[$HOME/.config/swayshot.sh]="$DMSCRIPTS_REPO_PATH/.config/swayshot.sh"
-files[$HOME/.config/dm-scripts.conf]="$DMSCRIPTS_REPO_PATH/.config/dm-script.conf"
+files[$HOME/.config/dm-script.conf]="$DMSCRIPTS_REPO_PATH/.config/dm-script.conf"
 files[$HOME/.config/alias-zsh-bash]="$DOTFILES_REPO_PATH/.config/alias-zsh-bash"
 
 
@@ -117,7 +116,7 @@ clear
 
 # Install starship prompt
 
-command_exist starship || sh ./starship.sh
+command_exist starship || sh ./scripts/starship.sh
 
 clear
 
@@ -131,13 +130,7 @@ if [ -d $SOURCE_FILE ] ; then
 
 [ -d $FILES ] || mkdir -p $FILES
 
-
-echo "#########################################################"
-echo "## Getting all my config files and moving them to home ##"
-echo "#########################################################"
-sleep 2
 cp -r $SOURCE_FILE/* $FILES 2> /dev/null
-printf '%s\n' "Moving: $SOURCE_FILE to $FILES"
 
 elif [ -f $SOURCE_FILE ] ; then
 
