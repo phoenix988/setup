@@ -102,11 +102,11 @@ bash ./scripts/zsh-plugins.sh
 clear
 
 # Install starship prompt
-
 command_exist starship || sh ./scripts/starship.sh
 
 clear
 
+[ -d $HOME/.config ] || mkdir $HOME/.config
 
 for FILES in $(printf '%s\n' "${!files[@]}") ; do
 
