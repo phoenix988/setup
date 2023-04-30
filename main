@@ -177,7 +177,7 @@ clear
 echo "#####################"
 echo "## installing paru ##"
 echo "#####################"
-install_paru
+command_exist paru || install_paru
 
 
 
