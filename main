@@ -17,8 +17,7 @@
 # -f for full install (Here you get to choose an Window Manager too and gets some other things)
 # -w for window manager
 # -s for shell
-# -c for basic install
-# -f for full install
+# -d for just my dotfiles,zsh,tmux and starship prompt
 while getopts ":w:s:cf" opt; do
   case ${opt} in
     c)
@@ -240,10 +239,11 @@ echo "## installing fonts ##"
 echo "######################"
 sleep 1
 
-
 [ -d $HOME/.local/share ] || mkdir -p $HOME/.local/share
-git clone https://github.com/phoenix988/fonts.git $HOME/.local/share/fonts 2> /dev/null
 
+sleep 20
+
+git clone https://github.com/phoenix988/fonts.git $HOME/.local/share/fonts || error "Failed to install my fonts"
 
 clear
 
