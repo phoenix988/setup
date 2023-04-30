@@ -18,6 +18,7 @@
 # -w for window manager
 # -s for shell
 # -d for just my dotfiles,zsh,tmux and starship prompt
+# -n for no config files (useful if you already have config files you want to use and dont want to overwrite)
 while getopts ":w:s:cfd" opt; do
   case ${opt} in
     c)
@@ -282,7 +283,7 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
          echo "##################################"
 
          install_slock
-
+         sleep 1;clear
    fi
 
 
@@ -318,7 +319,7 @@ echo "## installing aur packages ##"
 echo "#############################"
 sleep 1;clear
 
-command_exist paru && paru_install_base
+command_exist paru && install_paru_base
 
 clear
 
@@ -336,7 +337,9 @@ clear;GTK_theme
 
 sleep 2;clear
 
+install_doom
 
+sleep 2;clear
 echo "#########################"
 echo "## Everything is done! ##"
 echo "#########################"

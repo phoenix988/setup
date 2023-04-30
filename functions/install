@@ -187,3 +187,12 @@ install_fonts() {
      git clone https://github.com/phoenix988/fonts.git $HOME/.local/share/fonts 2> /dev/null
 
 }
+
+install_doom() {
+
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
+
+~/.config/emacs/bin/doom install
+
+
+}
