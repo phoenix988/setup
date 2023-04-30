@@ -268,7 +268,7 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
 elif [ $WINDOW_MANAGER = "hyprland" ] ; then
 
 
-    paru -S --needed --noconfirm waybar-hyprland-git hyprland-bin swaylock swaybg grim wofi awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono xdg-desktop-portal-hyprland-git
+    paru -S --needed --noconfirm waybar-hyprland-git swaylock swaybg grim wofi awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono xdg-desktop-portal-hyprland-git
 
 
    # Only installs qtile if needed
@@ -282,7 +282,7 @@ elif [ $WINDOW_MANAGER = "hyprland" ] ; then
          echo "## installing hyprland ##"
          echo "#########################"
 
-         paru -S --needed --noconfirm hyprland-bin || error "failed to install hyprland" ; clear
+         paru -S --needed --noconfirm hyprland || error "failed to install hyprland" ; clear
 
    fi
 
