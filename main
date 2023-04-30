@@ -281,7 +281,7 @@ elif [ $WINDOW_MANAGER = "hyprland" ] ; then
 
          paru -S --needed --noconfirm hyprland-bin || error "failed to install hyprland" ; clear
 
-l   fi
+   fi
 
    clear
 
