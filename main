@@ -95,6 +95,16 @@ for source in $(ls variables | xargs -n1) ; do
       source variables/$source
 done
 
+# Install fzf and dialog if its needed cause it will be used in the script
+# So we need to install them
+echo "#####################################################"
+echo "## Installing 'dialog' and 'fzf' if not installed ##"
+echo "#####################################################"
+
+sleep 1;clear
+
+command_exist pacman && sudo pacman -Syy --needed --noconfirm dialog fzf zsh || error "failed to install fzf"
+
 # Welcome Message
 welcome ; clear
 
@@ -126,18 +136,7 @@ else
 
 fi
 
-# Install fzf and dialog if its needed cause it will be used in the script
-# So we need to install them
-echo "#####################################################"
-echo "## Installing 'dialog' and 'fzf' if not installed ##"
-echo "#####################################################"
-
 sleep 1;clear
-
-command_exist pacman && sudo pacman -Syy --needed --noconfirm dialog fzf zsh || error "failed to install fzf"
-
-sleep 1;clear
-
 
 # Asks what kind of install you want if you
 # Didn't use -c or -f
