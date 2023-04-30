@@ -81,12 +81,6 @@ while getopts ":w:s:cf" opt; do
 done
 
 
-# Gets the hostname of the machine
-# cause why not lol. It is not used right now
-# in this script but I was planing to add a function later on
-# But I have been kinda lazy.
-hostname=$(cat /etc/hostname &> /dev/null)
-
 # Source Variables and all functions
 # So we can get all my functions
 # I wrote them in seperate files to try and stay organized
@@ -177,52 +171,60 @@ clear
 echo "#####################"
 echo "## installing paru ##"
 echo "#####################"
-command_exist paru || install_paru
 
+sleep 2
+
+clear
+
+command_exist paru || install_paru && echo "Paru is installed"
 
 if [ "$INSTALL_TYPE" = "basic" ] ; then
 
    command_exist pacman && install_pacman_base
 
    clear
-   
+
+
+
+elif [ "$INSTALL_TYPE" = "full" ] ; then
+
+    if command_exist pacman; then
+
+        install_pacman_full
+
+        clear
+    fi
 fi
 
 sleep 2
-clear
 
+clear
 
 # Runs the dotfiles script which clones my dotfiles repo
 # and moves all my configuration files to home
 echo "#########################################################"
 echo "## Getting all my config files and moving them to home ##"
 echo "#########################################################"
+
 sleep 2
+
 install_config
 
 clear
 
 # Change default shell
 sudo usermod -s "/usr/bin/$SHELL_CHOICE" $USER
+clear
 
 # If you did choose basic install then the script will exit herre
 [ "$INSTALL_TYPE" = "basic" ] && exit
-
-
-# Installs packages for full installation
-if command_exist pacman; then      
-
-    install_pacman_full
-
-    clear
-
-fi    
 
 clear
 
 echo "######################"
 echo "## installing fonts ##"
 echo "######################"
+sleep 1
 install_fonts
 
 clear
