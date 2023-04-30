@@ -111,7 +111,7 @@ welcome ; clear
 # Asks you one last time if you really wanna continue
 Lastchance ; clear
 
-if [ $DOTFILES_ONLY = "y" ] ; then
+if [ "$DOTFILES_ONLY" = "y" ] ; then
 
    # Runs the dotfiles script which clones my dotfiles repo
    # and moves all my configuration files to home
@@ -191,7 +191,7 @@ echo "## installing pfetch from source ##"
 echo "###################################"
 command_exist pacman && sudo pacman -S --needed --noconfirm base-devel
 
-install_pfetch 
+command_exist pfetch || install_pfetch
 
 clear
 
@@ -239,7 +239,11 @@ echo "######################"
 echo "## installing fonts ##"
 echo "######################"
 sleep 1
-install_fonts
+
+
+[ -d $HOME/.local/share ] || mkdir -p $HOME/.local/share
+git clone https://github.com/phoenix988/fonts.git $HOME/.local/share/fonts 2> /dev/null
+
 
 clear
 
@@ -277,7 +281,20 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
          echo "## installing slock from source ##"
          echo "##################################"
 
-         install_slock || error "failed to install slock" ; clear
+         sudo groupadd nogroup 2> /dev/null
+
+         git clone https://github.com/phoenix988/slock-phoenix.git $HOME/slock
+
+         cd $HOME/slock
+
+         sudo make install
+
+         cd -
+
+         rm -rf $HOME/slock
+
+
+
 
    fi
 
