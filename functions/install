@@ -181,6 +181,7 @@ install_paru() {
 
 install_fonts() {
 
+     mkdir -p $HOME/.local/share 2> /dev/null
      git clone https://github.com/phoenix988/fonts.git $HOME/.local/share/fonts 2> /dev/null
 
 }

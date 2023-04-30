@@ -131,6 +131,7 @@ declare -a packages=(
     "psmisc"
     "pipewire"
     "pipewire-pulse"
+    "pavucontrol"
     "neofetch"
     "btop"
     "yad"
