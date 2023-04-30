@@ -180,7 +180,6 @@ echo "#####################"
 command_exist paru || install_paru
 
 
-
 if [ "$INSTALL_TYPE" = "basic" ] ; then
 
    command_exist pacman && install_pacman_base
@@ -192,17 +191,13 @@ fi
 
 # Runs the dotfiles script which clones my dotfiles repo
 # and moves all my configuration files to home
-cd ./scripts
 
-./dotfiles.sh 
-
-cd ..
+install_config
 
 clear
 
 # Change default shell
-sudo usermod -s "/bin/$SHELL_CHOICE"
-
+sudo usermod -s "/usr/bin/$SHELL_CHOICE" $USER
 
 # If you did choose basic install then the script will exit herre
 [ "$INSTALL_TYPE" = "basic" ] && exit

@@ -108,10 +108,10 @@ fi
 command_exist zsh || error "ZSH: Failed to Install"
 
 # Installs oh-my-zsh framework
-bash ./ohmyzsh.sh
+bash ./scripts/ohmyzsh.sh
 
 # Installs the plugins I use
-bash ./zsh-plugins.sh
+bash ./scripts/zsh-plugins.sh
 
 clear
 
