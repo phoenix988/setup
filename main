@@ -161,7 +161,6 @@ install_oh_my_tmux || error "failed to install oh my tmux"
 clear
 
 
-
 # Installs pfetch from source cloning the repo
 # and runs make install. You can find the function under
 # function directory called install
@@ -192,7 +191,6 @@ fi
 
 # Runs the dotfiles script which clones my dotfiles repo
 # and moves all my configuration files to home
-
 echo "#########################################################"
 echo "## Getting all my config files and moving them to home ##"
 echo "#########################################################"
@@ -213,8 +211,6 @@ if command_exist pacman; then
 
     install_pacman_full
 
-    pacman -S --needed --noconfirm $WINDOW_MANAGER
-
     clear
 
 fi    
@@ -233,6 +229,9 @@ clear
 # so the dependencies will be diffrent
 if [ $WINDOW_MANAGER = "qtile" ] ; then
 
+
+    paru -S --needed --noconfirm  qtile-extras xorg-xrandr
+
    # Only installs qtile if needed
    if command_exist qtile ; then
 
@@ -243,7 +242,7 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
          echo "######################"
          echo "## installing qtile ##"
          echo "######################"
-         paru -S --needed --noconfirm qtile qtile-extras xorg-xrandr
+         paru -S --needed --noconfirm qtile
 
    fi
 
@@ -282,7 +281,7 @@ elif [ $WINDOW_MANAGER = "hyprland" ] ; then
 
          paru -S --needed --noconfirm hyprland-bin || error "failed to install hyprland" ; clear
 
-   fi
+l   fi
 
    clear
 
