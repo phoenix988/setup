@@ -19,7 +19,7 @@
 # -s for shell
 # -d for just my dotfiles,zsh,tmux and starship prompt
 # -n for no config files (useful if you already have config files you want to use and dont want to overwrite)
-while getopts ":w:s:cfd" opt; do
+while getopts ":w:s:cfdn" opt; do
   case ${opt} in
     c)
      INSTALL_TYPE=basic
@@ -29,6 +29,9 @@ while getopts ":w:s:cfd" opt; do
      ;;
     d)
      DOTFILES_ONLY="y"
+     ;;
+    n)
+     NO_CONFIG="y"
      ;;
     \?)
       echo "Invalid option: -$OPTARG. Please select hyperland, qtile, or xmonad" 1>&2
@@ -113,14 +116,14 @@ Lastchance ; clear
 
 if [ "$DOTFILES_ONLY" = "y" ] ; then
 
-   # Runs the dotfiles script which clones my dotfiles repo
-   # and moves all my configuration files to home
-   echo "#########################################################"
-   echo "## Getting all my config files and moving them to home ##"
-   echo "#########################################################"
-   sleep 2
-   install_config
-   exit
+    # Runs the dotfiles script which clones my dotfiles repo
+    # and moves all my configuration files to home
+    echo "#########################################################"
+    echo "## Getting all my config files and moving them to home ##"
+    echo "#########################################################"
+    sleep 2
+    install_config
+    exit
 
 
 else
@@ -132,7 +135,7 @@ else
     echo "#########################################################"
     sleep 2
 
-    install_config
+    [ NO_CONFIG = "y" ] || install_config
 
 fi
 
