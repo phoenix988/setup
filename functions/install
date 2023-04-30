@@ -68,15 +68,14 @@ install_slock() { \
 
     sudo groupadd nogroup 2> /dev/null
 
-    cd $HOME
 
-    git clone https://github.com/phoenix988/slock-phoenix.git
+    git clone https://github.com/phoenix988/slock-phoenix.git $HOME/slock
 
-    cd slock-phoenix
+    cd $HOME/slock
 
     sudo make install
 
-    cd $HOME/setup
+    cd -
 
     rm -rf $HOME/slock
 
@@ -98,11 +97,11 @@ install_oh_my_tmux() { \
 
      [ -e $HOME/.tmux.conf ] && cp $HOME/.tmux.conf.bak
      
-       rm $HOME/.tmux.conf
+     rm $HOME/.tmux.conf
   
-       ln -s $HOME/.tmux/.tmux.conf $HOME/.tmux.conf
+     ln -s $HOME/.tmux/.tmux.conf $HOME/.tmux.conf
 
-       clear
+     clear
 }
 
 # Install picom jonaburg fork
@@ -174,6 +173,8 @@ install_paru() {
      cd $HOME/paru
 
      makepkg -si
+
+     cd -
 
      rm -rf $HOME/paru
 

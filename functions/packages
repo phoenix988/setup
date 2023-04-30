@@ -182,10 +182,8 @@ sudo pacman -S --noconfirm --needed $(printf '%s\n' "${packages[@]}")
 install_paru_base() {
 
 declare -a packages=(
-
     "oreo-nord-cursors-git"
-
-)
+    "multicolor-sddm-theme")
 
 paru -S --noconfirm --needed $(printf '%s\n' "${packages[@]}")
 

@@ -2,54 +2,10 @@
 
 GTK_theme() { \
 
-theme_icon="Dracula"
-theme_gtk="Dracula"
+     git clone https://github.com/Fausto-Korpsvart/Rose-Pine-GTK-Theme.git $HOME/rose-pine
 
-[ -d "$HOME/.config/gtk-3.0" ] || mkdir -p $HOME/.config/gtk-3.0  
-[ -e "$HOME/.gtkrc-2.0" ] || touch $HOME/.gtkrc-2.0  
-
-if [ -d /usr/share/themes/$theme_gtk ] ; then 
-        echo "" &> /dev/null  
-else
-        wget https://github.com/dracula/gtk/archive/master.zip 
-
-        unzip master.zip && sudo mv gtk-master /usr/share/themes/Dracula
-
-        rm master.zip
-fi
-
-if [ -d /usr/share/icons/$theme_icon ] ; then 
-        
-        echo "" &> /dev/null  
-else
-        wget https://github.com/dracula/gtk/files/5214870/Dracula.zip
-        unzip Dracula.zip && sudo mv Dracula /usr/share/icons/Dracula
-        rm Dracula.zip
-fi
-
-check_gtk=$(grep "gtk-theme-name" "$HOME/.config/gtk-3.0/settings.ini" | awk -F "=" '{ print $NF }')
-
-check_icon=$(grep "gtk-icon-theme-name" "$HOME/.config/gtk-3.0/settings.ini" | awk -F "=" '{ print $NF }')
-
-if [ -z $check_icon ] ; then
-
-   echo "gtk-icon-theme-name=Dracula" >> "$HOME/.config/gtk-3.0/settings.ini"
-
-else
-   
-   sed  -i "s|$check_icon|$theme_icon|g" "$HOME/.config/gtk-3.0/settings.ini"
-
-fi
-
-if [ -z $check_gtk ] ; then
-
-   echo "gtk-theme-name=Dracula" >> "$HOME/.config/gtk-3.0/settings.ini"
-
-else
-   
-   sed  -i "s|$check_gtk|$theme_gtk|g" "$HOME/.config/gtk-3.0/settings.ini"
-
-fi
+     sudo  cp -r $HOME/rose-pine/themes/* /usr/share/themes/
+     sudo  cp -r $HOME/rose-pine/icons/* /usr/share/icons/
 
 
 }
@@ -57,43 +13,19 @@ fi
 
 sddm_theme() { \
 
-choosentheme="sugar-candy"
-url="https://framagit.org/MarianArlt/sddm-sugar-candy/-/archive/master/sddm-sugar-candy-master.tar.gz"
-theme_name=$(echo $url | awk -F "/" '{print $NF}' | sed -e 's/.tar//g' -e 's/.gz//g')
+     CURRENT="[Theme]"
+     THEME="Current=multicolor-sddm-theme"
 
-text=$(printf "[Theme]\nCurrent=$choosentheme")
-
-[ -e /etc/sddm.conf ] || sudo touch /etc/sddm.conf
-
-check=$(cat /etc/sddm.conf)
-[ -z "$check" ] && printf '%s\n' "${text[@]}" | sudo tee /etc/sddm.conf
-
-theme=$(grep "Current" /etc/sddm.conf | grep -v "^#" | awk -F = '{print $2}')
-
-[ -z $theme ] && sudo sed -i 's/#Current/Current/g' /etc/sddm.conf && theme=$(grep "Current" /etc/sddm.conf | grep -v "^#" | awk -F = '{print $2}')
-
-sudo sed -i "s|$theme|$choosentheme|g" /etc/sddm.conf
-
-displaymanager=$(ls -la /etc/systemd/system/display-manager.service | awk '{print $NF}' | awk -F / '{print $NF}')
-
-sudo systemctl disable $displaymanager
-sudo systemctl enable sddm
-
-
-wget $url
-tar -zxf $theme_name.tar.gz
-sudo cp -r $theme_name /usr/share/sddm/themes/$choosentheme
-rm -rf $theme_name.tar.gz
-rm -rf $theme_name
-
+     echo $CURRENT | sudo tee /etc/sddm.conf
+     echo $THEME | sudo tee -a /etc/sddm.conf
 
 }
 
 home_folders() {
 
-[ -d $HOME/Documents ] || mkdir $HOME/Documents
-[ -d $HOME/Downloads ] || mkdir $HOME/Pictures
-[ -d $HOME/Pictures ] || mkdir $HOME/Videos
-[ -d $HOME/Videos ] || mkdir $HOME/Videos
+    [ -d $HOME/Documents ] || mkdir $HOME/Documents
+    [ -d $HOME/Downloads ] || mkdir $HOME/Pictures
+    [ -d $HOME/Pictures ] || mkdir $HOME/Videos
+    [ -d $HOME/Videos ] || mkdir $HOME/Videos
 
 }

@@ -83,9 +83,6 @@ while getopts ":w:s:cfd" opt; do
 done
 
 
-
-
-
 # Source Variables and all functions
 # So we can get all my functions
 # I wrote them in seperate files to try and stay organized
@@ -169,7 +166,6 @@ clear
 echo "################################"
 echo "## Making common user folders ##"
 echo "################################" 
-
 home_folders || error "Failed to create home folders"
 
 clear
@@ -179,7 +175,6 @@ clear
 echo "############################"
 echo "## Installing oh my tmux ##"
 echo "###########################"
-
 install_oh_my_tmux || error "failed to install oh my tmux"
 
 clear
@@ -193,6 +188,7 @@ echo "## installing pfetch from source ##"
 echo "###################################"
 command_exist pacman && sudo pacman -S --needed --noconfirm base-devel
 
+# only installs if pfetch is not installed
 command_exist pfetch || install_pfetch
 
 clear
@@ -206,6 +202,7 @@ sleep 2
 
 clear
 
+# only installs if paru is not installed
 command_exist paru || install_paru && echo "Paru is installed"
 
 if [ "$INSTALL_TYPE" = "basic" ] ; then
@@ -244,14 +241,9 @@ clear
 echo "######################"
 echo "## installing fonts ##"
 echo "######################"
+install_fonts
 
-until [ -d $HOME/.local/share/fonts ] ; do
 
-    git clone https://github.com/phoenix988/fonts.git $HOME/.local/share/fonts
-
-    sleep 4
-
-done
 
 clear
 
@@ -289,14 +281,11 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
          echo "## installing slock from source ##"
          echo "##################################"
 
-         until command_exist slock ; do
-
-              install_slock
-
-         done
-
+         install_slock
 
    fi
+
+
 
 elif [ $WINDOW_MANAGER = "hyprland" ] ; then
 
@@ -322,5 +311,32 @@ elif [ $WINDOW_MANAGER = "hyprland" ] ; then
    clear
 
 
-
 fi
+
+echo "#############################"
+echo "## installing aur packages ##"
+echo "#############################"
+sleep 1;clear
+
+command_exist paru && paru_install_base
+
+clear
+
+echo "###########################"
+echo "## installing sddm theme ##"
+echo "###########################"
+clear;sddm_theme;clear
+
+
+echo "##########################"
+echo "## installing gtk theme ##"
+echo "##########################"
+
+clear;GTK_theme
+
+sleep 2;clear
+
+
+echo "#########################"
+echo "## Everything is done! ##"
+echo "#########################"
