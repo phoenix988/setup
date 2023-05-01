@@ -73,15 +73,13 @@ do_shell() { \
 
 do_browser() { \
 
-declare -a browser=(
+     declare -a browser=(
 
-"librewolf"
-"brave"
-"qutebrowser"
-"firefox"
-"chromium"
-
-)
+     "librewolf"
+     "brave"
+     "qutebrowser"
+     "firefox"
+     "chromium")
 
 for installed_browser in $(printf '%s\n' "${browser[@]}") ; do
 

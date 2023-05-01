@@ -34,9 +34,7 @@ while getopts ":w:s:cfdn" opt; do
      NO_CONFIG="y"
      ;;
     \?)
-      echo "Invalid option: -$OPTARG. Please select hyperland, qtile, or xmonad" 1>&2
-      echo "-w (hyprland, qtile, xmonad)"
-      echo "-s (zsh, bash, fish)"
+      case_text
       exit 1
       ;;
     w)
@@ -71,15 +69,11 @@ while getopts ":w:s:cfdn" opt; do
       esac
       ;;
     \?)
-         echo "Invalid option: -$OPTARG. Please select hyperland, qtile, or xmonad" 1>&2
-         echo "-w (hyprland, qtile, xmonad)"
-         echo "-s (zsh, bash, fish)"
+         case_text
          exit 1
       ;;
     :)
-         echo "Invalid option: -$OPTARG requires an argument." 1>&2
-         echo "-w (hyprland, qtile, xmonad)"
-         echo "-s (zsh, bash, fish)"
+         case_text
          exit 1
       ;;
   esac
@@ -125,17 +119,17 @@ if [ "$DOTFILES_ONLY" = "y" ] ; then
     install_config
     exit
 
-
 else
 
-    # Runs the dotfiles script which clones my dotfiles repo
-    # and moves all my configuration files to home
-    echo "#########################################################"
-    echo "## Getting all my config files and moving them to home ##"
-    echo "#########################################################"
-    sleep 2
+     # Runs the dotfiles script which clones my dotfiles repo
+     # and moves all my configuration files to home
+     [ NO_CONFIG = "y" ] && echo "#########################################################"
+     [ NO_CONFIG = "y" ] && echo "## Getting all my config files and moving them to home ##"
+     [ NO_CONFIG = "y" ] && echo "#########################################################"
 
-    [ NO_CONFIG = "y" ] || install_config
+     sleep 2
+
+     [ NO_CONFIG = "y" ] || install_config
 
 fi
 
@@ -279,7 +273,7 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
    if command_exist slock ; then
 
          echo "Slock is already installed"
-
+         sleep 1;clear
    else
          echo "##################################"
          echo "## installing slock from source ##"
@@ -290,12 +284,12 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
    fi
 
 
-
 elif [ $WINDOW_MANAGER = "hyprland" ] ; then
 
 
     paru -S --needed --noconfirm waybar-hyprland-git swaylock swaybg grim wofi awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono xdg-desktop-portal-hyprland-git wlogout
 
+    sleep 1;clear
 
    # Only installs qtile if needed
    if command_exist Hyprland ; then
@@ -336,10 +330,11 @@ echo "##########################"
 echo "## installing gtk theme ##"
 echo "##########################"
 
-clear;GTK_theme
+clear; [ -d $HOME/rose-pine ] || GTK_theme
 
 sleep 2;clear
 
+# Installs doom emacs
 install_doom
 
 sleep 2;clear

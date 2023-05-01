@@ -7,7 +7,7 @@ GTK_theme() { \
      sudo  cp -r $HOME/rose-pine/themes/* /usr/share/themes/
      sudo  cp -r $HOME/rose-pine/icons/* /usr/share/icons/
 
-
+     rm -rf $HOME/rose-pine
 }
 
 
