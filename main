@@ -19,6 +19,19 @@
 # -s for shell
 # -d for just my dotfiles,zsh,tmux and starship prompt
 # -n for no config files (useful if you already have config files you want to use and dont want to overwrite)
+
+# Source Variables and all functions
+# So we can get all my functions
+# I wrote them in seperate files to try and stay organized
+for source in $(ls functions | xargs -n1) ; do
+      source functions/$source
+done
+
+for source in $(ls variables | xargs -n1) ; do
+      source variables/$source
+done
+
+
 while getopts ":w:s:cfdn" opt; do
   case ${opt} in
     c)
@@ -80,17 +93,6 @@ while getopts ":w:s:cfdn" opt; do
 
 done
 
-
-# Source Variables and all functions
-# So we can get all my functions
-# I wrote them in seperate files to try and stay organized
-for source in $(ls functions | xargs -n1) ; do
-      source functions/$source
-done
-
-for source in $(ls variables | xargs -n1) ; do
-      source variables/$source
-done
 
 # Install fzf and dialog if its needed cause it will be used in the script
 # So we need to install them
