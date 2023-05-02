@@ -313,13 +313,6 @@ elif [ $WINDOW_MANAGER = "hyprland" ] ; then
 
 fi
 
-echo "#############################"
-echo "## installing aur packages ##"
-echo "#############################"
-sleep 1;clear
-
-command_exist paru && install_paru_base
-
 clear
 
 echo "###########################"

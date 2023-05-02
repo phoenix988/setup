@@ -13,6 +13,11 @@ GTK_theme() { \
 
 sddm_theme() { \
 
+
+     git clone https://gitlab.com/dwt1/multicolor-sddm-theme
+
+     sudo mv multicolor-sddm-theme /usr/share/sddm/themes
+
      CURRENT="[Theme]"
      THEME="Current=multicolor-sddm-theme"
 
