@@ -20,8 +20,8 @@ command_exist() {
 
 function case_text() {
 
-      echo "######################################################################"
-      echo "${RED}Invalid option: -$OPTARG." 1>&2
+      echo "${RED}######################################################################"
+      echo "Invalid option: -$OPTARG." 1>&2
       echo "-f for a full install"
       echo "-c for only my config files and a few of my terminal applications"
       echo "-w (hyprland, qtile, xmonad)"
