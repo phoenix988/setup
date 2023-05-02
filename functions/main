@@ -22,7 +22,6 @@ function case_text() {
 
       echo "######################################################################"
       echo "${RED}Invalid option: -$OPTARG." 1>&2
-      tput reset
       echo "-f for a full install"
       echo "-c for only my config files and a few of my terminal applications"
       echo "-w (hyprland, qtile, xmonad)"
