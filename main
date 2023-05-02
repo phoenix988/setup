@@ -43,6 +43,8 @@ while getopts ":w:s:cfdn" opt; do
     d)
      DOTFILES_ONLY="y"
      echo "${BLUE}You choose to only get my dotfiles"
+     sleep 2
+     tput reset
      ;;
     n)
      NO_CONFIG="y"
@@ -55,14 +57,21 @@ while getopts ":w:s:cfdn" opt; do
       case ${OPTARG} in
         "hyprland" )
          WINDOW_MANAGER="$OPTARG"
+         echo "${BLUE}You choose to install hyprland"
+         sleep 2
+         tput reset
           ;;
         "qtile" )
          WINDOW_MANAGER="$OPTARG"
+         echo "${BLUE}You choose to qtile hyprland"
+         sleep 2
+         tput reset
           ;;
         *)
            echo "${RED}:Invalid value. Please select hyperland, qtile, or xmonad."
+           sleep 2
            tput reset
-          exit 1
+           exit 1
           ;;
       esac
       ;;
