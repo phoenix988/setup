@@ -1,151 +1,63 @@
 #!/bin/bash
 
-# Declare function for apt
-install_apt() {
-
-declare -a packages=(
-    "cifs-utils"
-    "nfs-common"
-    "nfs-server"
-    "fish"
-    "conky"
-    "build-essential"
-    "zsh"
-    "gpg"
-    "nfs-common"
-    "git"
-    "neovim"
-    "autofs"
-    "tmux"
-    "openssh-server"
-    "rsync"
-    "kitty"
-    "wget"
-    "neomutt"
-    "neofetch"
-    "sddm"
-    "vifm"
-    "feh"
-    "rofi"
-    "apt-transport-https"
-    "curl"
-    "lxappearance"
-    "locate"
-    "xsltproc"
-    "docbook-xsl"
-    "docker.io"
-    "gettext"
-    "libncursesw5-dev"
-    "libidn11-dev"
-    "w3m"
-    "libssl-dev"
-    "libtokyocabinet-dev"
-    "libsasl2-dev"
-    "libkyotocabinet-dev"
-    "liblua5.3-dev"
-    "libnotmuch-dev"
-    "liblmdb-dev"
-    "liblz4-dev"
-    "libgpgme-dev"
-    "libqdbm-dev"
-    "libtdb-dev"
-    "libzstd-dev"
-    "libsqlite3-dev"
-    "libgdbm-dev"
-    "libgnutls28-dev"
-    "libkrb5-dev"
-    "libgpgme-dev"
-    "libncursesw5-dev"
-    "isync"
-    "msmtp"
-    "pass"
-    "cargo"
-    "picom"
-    "libgtk-3-dev"
-    "libxml2-utils"
-    "libxml2"
-    "xinit"
-    "sxiv"
-    "pcmanfm"
-    "qt5ct"
-    "imagemagick"
-    "libimlib2"
-    "libimlib2-dev"
-    "poppler-utils"
-    "djvulibre-bin"
-    "ninja-build"
-    "gettext"
-    "libtool"
-    "libtool-bin"
-    "autoconf"
-    "automake"
-    "cmake"
-    "g++"
-    "pkg-config"
-    "unzip"
-    "swaylock"
-    "waybar")
-
-
-
-sudo apt install -y $(printf '%s\n' "${packages[@]}")
-
-}
-
+# here I add all the packages to install.
+# Only pacman is supprted
 
 # Declare function for pacman
 install_pacman_full(){
 
 declare -a packages=(
-    "vifm"
     "base-devel"
-    "lxappearance"
+    "bat"
+    "btop"
+    "conky"
+    "cronie"
+    "curl"
+    "dunst"
+    "emacs"
+    "feh"
+    "fish"
+    "flameshot"
     "git"
+    "htop"
+    "kitty"
+    "lsd"
+    "lxappearance"
+    "lxsession"
+    "ncspot"
+    "neofetch"
+    "neomutt"
+    "neovim"
+    "net-tools"
+    "network-manager-applet"
     "nfs-utils"
     "openssh"
-    "tmux"
-    "kitty"
-    "zsh"
-    "curl"
-    "wget"
-    "fish"
-    "neovim"
-    "sddm"
-    "lsd"
-    "rsync"
-    "htop"
-    "neomutt"
-    "cronie"
-    "qtile"
-    "bat"
-    "net-tools"
-    "rofi"
-    "lxsession"
-    "conky"
-    "feh"
-    "network-manager-applet"
-    "ttf-jetbrains-mono"
-    "volumeicon"
-    "xfce4-settings"
-    "python-psutil"
-    "psmisc"
+    "pavucontrol"
+    "pcmanfm"
     "pipewire"
     "pipewire-pulse"
-    "pavucontrol"
-    "neofetch"
-    "btop"
-    "emacs"
-    "flameshot"
-    "ripgrep"
-    "yad"
-    "unzip"
-    "zip"
-    "pcmanfm"
-    "qt5ct"
-    "qt6ct"
-    "sxiv"
+    "psmisc"
+    "python-psutil"
     "qt5"
-    "qt5-quickcontrols2")
+    "qt5ct"
+    "qt5-quickcontrols2"
+    "qt6ct"
+    "qtile"
+    "ripgrep"
+    "rofi"
+    "rsync"
+    "sddm"
+    "sxiv"
+    "tmux"
+    "ttf-jetbrains-mono"
+    "unzip"
+    "vifm"
+    "volumeicon"
+    "wget"
+    "xfce4-settings"
+    "yad"
+    "zip"
+    "zsh")
 
 sudo pacman -S --noconfirm --needed $(printf '%s\n' "${packages[@]}")
 
@@ -179,15 +91,5 @@ declare -a packages=(
       "zsh")
 
 sudo pacman -S --noconfirm --needed $(printf '%s\n' "${packages[@]}")
-
-}
-
-install_paru_base() {
-
-declare -a packages=(
-    "oreo-nord-cursors-git"
-    "multicolor-sddm-theme")
-
-paru -S --noconfirm --needed $(printf '%s\n' "${packages[@]}")
 
 }

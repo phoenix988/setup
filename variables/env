@@ -1,6 +1,7 @@
 #!/bin/bash
 
-export RED
-export BLUE
-export GREEN
-export PURPLE
+export RED=$(tput setaf 1)
+export GREEN=$(tput setaf 2)
+export YELLOW=$(tput setaf 3)
+export BLUE=$(tput setaf 4)
+export PURPLE=$(tput setaf 5)

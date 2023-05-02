@@ -149,3 +149,34 @@ do_windowmanager() { \
 
 }
 
+do_restart() { \
+
+     # Define the options
+     options=("yes" "No")
+
+
+      echo "###############################################"
+      echo "## Everything is done do you want to Reboot? ##"
+      echo "###############################################"
+
+     # Print the menu prompt and allow the user to select an option
+     select restart_option in "${options[@]}"
+     do
+         case $restart_option in
+             "yes")
+                 sudo reboot
+                 break
+                 ;;
+             "no")
+                 echo "###########################"
+                 echo "## We are not restarting ##"
+                 echo "###########################"
+                 break
+                 ;;
+             *)
+                 echo "Invalid option. Please select yes or no"
+                 ;;
+         esac
+     done
+
+}

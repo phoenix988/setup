@@ -34,8 +34,6 @@ clear
 declare -A files
 
 
-files[$HOME/.config/qtile]="$DOTFILES_REPO_PATH/.config/qtile"
-files[$HOME/.config/nvim]="$DOTFILES_REPO_PATH/.config/nvim"
 files[$HOME/.config/kitty]="$DOTFILES_REPO_PATH/.config/kitty"
 files[$HOME/.config/ncspot]="$DOTFILES_REPO_PATH/.config/ncspot"
 files[$HOME/.config/fish]="$DOTFILES_REPO_PATH/.config/fish"
@@ -108,6 +106,12 @@ command_exist starship || sh ./scripts/starship.sh
 clear
 
 [ -d $HOME/.config ] || mkdir $HOME/.config
+
+# Makes backup if you already have a neovim config
+[ -d $HOME/.config/nvim ] && mv $HOME/.config/nvim $HOME/.config/nvim.bak
+
+# clones my neovim branch
+git clone -b neovim https://github.com/phoenix988/dotfiles.git $HOME/.config/nvim
 
 for FILES in $(printf '%s\n' "${!files[@]}") ; do
 

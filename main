@@ -17,7 +17,7 @@
 # -f for full install (Here you get to choose an Window Manager too and gets some other things)
 # -w for window manager
 # -s for shell
-# -d for just my dotfiles,zsh,tmux and starship prompt
+# -d for just my dotfiles,zsh,tmux and starship prompt (good for a server)
 # -n for no config files (useful if you already have config files you want to use and dont want to overwrite)
 
 # Source Variables and all functions
@@ -42,6 +42,7 @@ while getopts ":w:s:cfdn" opt; do
      ;;
     d)
      DOTFILES_ONLY="y"
+     echo "${BLUE}You choose to only get my dotfiles"
      ;;
     n)
      NO_CONFIG="y"
@@ -59,7 +60,8 @@ while getopts ":w:s:cfdn" opt; do
          WINDOW_MANAGER="$OPTARG"
           ;;
         *)
-          echo "Invalid value. Please select hyperland, qtile, or xmonad."
+           echo "${RED}:Invalid value. Please select hyperland, qtile, or xmonad."
+           tput reset
           exit 1
           ;;
       esac
@@ -76,7 +78,8 @@ while getopts ":w:s:cfdn" opt; do
         SHELL_CHOICE="$OPTARG"
           ;;
         *)
-          echo "Invalid value. Please select zsh, bash, or fish."
+          echo "${RED}:Invalid value. Please select zsh, bash, or fish."
+          tput reset
           exit 1
           ;;
       esac
@@ -96,9 +99,10 @@ done
 
 # Install fzf and dialog if its needed cause it will be used in the script
 # So we need to install them
-echo "#####################################################"
+echo "${GREEN}#####################################################"
 echo "## Installing 'dialog' and 'fzf' if not installed ##"
 echo "#####################################################"
+tput reset
 
 sleep 1;clear
 
@@ -114,9 +118,10 @@ if [ "$DOTFILES_ONLY" = "y" ] ; then
 
     # Runs the dotfiles script which clones my dotfiles repo
     # and moves all my configuration files to home
-    echo "#########################################################"
+    echo "${GREEN}#########################################################"
     echo "## Getting all my config files and moving them to home ##"
     echo "#########################################################"
+    tput reset
     sleep 2
     install_config
     exit
@@ -125,9 +130,11 @@ else
 
      # Runs the dotfiles script which clones my dotfiles repo
      # and moves all my configuration files to home
-     [ NO_CONFIG = "y" ] && echo "#########################################################"
+     [ NO_CONFIG = "y" ] && echo "${GREEN}#########################################################"
      [ NO_CONFIG = "y" ] && echo "## Getting all my config files and moving them to home ##"
      [ NO_CONFIG = "y" ] && echo "#########################################################"
+
+     tput reset
 
      sleep 2
 
@@ -163,19 +170,21 @@ clear
 # Just making some home folders cause why notepad
 # Making Documents,Downloads,Pictures and Videos
 # If they dont already exist
-echo "################################"
+echo "${GREEN}################################"
 echo "## Making common user folders ##"
-echo "################################" 
-home_folders || error "Failed to create home folders"
+echo "################################"
+tput reset
+home_folders
 
 clear
 
 # Installs oh-my-tmux which is a plugin manager for tmux
 # Which I really enjoy to use
-echo "############################"
+echo "${GREEN}############################"
 echo "## Installing oh my tmux ##"
 echo "###########################"
-install_oh_my_tmux || error "failed to install oh my tmux"
+tput reset
+install_oh_my_tmux
 
 clear
 
@@ -183,9 +192,12 @@ clear
 # Installs pfetch from source cloning the repo
 # and runs make install. You can find the function under
 # function directory called install
-echo "###################################"
+echo "${GREEN}###################################"
 echo "## installing pfetch from source ##"
 echo "###################################"
+
+tput reset
+
 command_exist pacman && sudo pacman -S --needed --noconfirm base-devel
 
 # only installs if pfetch is not installed
@@ -194,9 +206,10 @@ command_exist pfetch || install_pfetch
 clear
 
 # Installs paru aur helper if its not installed
-echo "#####################"
+echo "${GREEN}#####################"
 echo "## installing paru ##"
 echo "#####################"
+tput reset
 
 sleep 2
 
@@ -238,9 +251,10 @@ clear
 [ -d $HOME/.local/share ] || mkdir -p $HOME/.local/share
 
 
-echo "######################"
+echo "${GREEN}######################"
 echo "## installing fonts ##"
 echo "######################"
+tput reset
 install_fonts
 
 
@@ -252,19 +266,26 @@ clear
 # so the dependencies will be diffrent
 if [ $WINDOW_MANAGER = "qtile" ] ; then
 
+    # Making a backup if you already have aqtile config
+   [ -d $HOME/.config/qtile ] && mv $HOME/.config/qtile $HOME/.config/qtile.bak
+
+   # clones my qtile branch
+   git clone -b qtile https://github.com/phoenix988/dotfiles.git $HOME/.config/qtile
 
     paru -S --needed --noconfirm  qtile-extras xorg-xrandr
 
    # Only installs qtile if needed
    if command_exist qtile ; then
 
-         echo "Qtile is already installed"
+         echo "${YELLOW}Qtile is already installed"
+         tput reset
 
    else
 
-         echo "######################"
+         echo "${GREEN}######################"
          echo "## installing qtile ##"
          echo "######################"
+         tput reset
          paru -S --needed --noconfirm qtile
 
    fi
@@ -274,12 +295,14 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
    # If slock is installed it wont install it
    if command_exist slock ; then
 
-         echo "Slock is already installed"
+         echo "${YELLOW}Slock is already installed"
+         tput reset
          sleep 1;clear
    else
-         echo "##################################"
+         echo "${GREEN}##################################"
          echo "## installing slock from source ##"
          echo "##################################"
+         tput reset
 
          install_slock
          sleep 1;clear
@@ -296,13 +319,15 @@ elif [ $WINDOW_MANAGER = "hyprland" ] ; then
    # Only installs qtile if needed
    if command_exist Hyprland ; then
 
-         echo "Hyprland is already installed"
+         echo "${YELLOW}Hyprland is already installed"
+         tput reset
 
    else
          # Installs hyprland
-         echo "#########################"
+         echo "${GREEN}#########################"
          echo "## installing hyprland ##"
          echo "#########################"
+         tput reset
 
          paru -S --needed --noconfirm hyprland || error "failed to install hyprland" ; clear
 
@@ -315,15 +340,17 @@ fi
 
 clear
 
-echo "###########################"
+echo "{$GREEN}###########################"
 echo "## installing sddm theme ##"
 echo "###########################"
+tput reset
 clear;sddm_theme;clear
 
 
-echo "##########################"
+echo "${GREEN}##########################"
 echo "## installing gtk theme ##"
 echo "##########################"
+tput reset
 
 clear; [ -d $HOME/rose-pine ] || GTK_theme
 
@@ -334,7 +361,9 @@ install_doom
 
 sudo systemctl enable sddm
 
+do_restart
+
 sleep 2;clear
-echo "#########################"
+echo "${GREEN}#########################"
 echo "## Everything is done! ##"
 echo "#########################"
