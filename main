@@ -167,6 +167,7 @@ clear
 # If you didnt choose shell then it will ask you
 [ -z "$SHELL_CHOICE" ] && do_shell
 
+sleep 1;clear
 
 # Asks you which default browser you want
 #[ "$INSTALL_TYPE" = "full" ] && do_browser

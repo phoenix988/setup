@@ -168,7 +168,7 @@ install_docker_portainer() {
 # Install paru function
 install_paru() {
 
-     git clone https://aur.archlinux.org/paru.git $HOME/paru
+     git clone https://aur.archlinux.org/paru-bin.git $HOME/paru
 
      cd $HOME/paru
 
