@@ -90,6 +90,8 @@ command_exist zsh || error "ZSH: Failed to Install"
 # Installs oh-my-zsh framework
 bash ./scripts/ohmyzsh.sh
 
+clear
+
 # Installs the plugins I use
 bash ./scripts/zsh-plugins.sh
 
