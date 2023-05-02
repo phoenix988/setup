@@ -332,6 +332,8 @@ sleep 2;clear
 # Installs doom emacs
 install_doom
 
+sudo systemctl enable sddm
+
 sleep 2;clear
 echo "#########################"
 echo "## Everything is done! ##"
