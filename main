@@ -221,15 +221,13 @@ tput reset
 clear
 
 # only installs if paru is not installed
-command_exist paru || install_paru && echo "Paru is installed"
+command_exist paru || install_paru && echo "${RED}Paru is installed"
 
 if [ "$INSTALL_TYPE" = "basic" ] ; then
 
    command_exist pacman && install_pacman_base
 
    clear
-
-
 
 elif [ "$INSTALL_TYPE" = "full" ] ; then
 
@@ -252,6 +250,11 @@ clear
 
 clear
 
+
+# Clone my wallpapers
+[ "$INSTALL_TYPE" = "full" ] && wallpaper
+
+clear
 
 [ -d $HOME/.local/share ] || mkdir -p $HOME/.local/share
 

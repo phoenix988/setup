@@ -25,11 +25,6 @@ clear
 
 clear
 
-# Clone my wallpapers
-wallpaper
-
-clear
-
 # Declare the array with all my dotfiles
 declare -A files
 
