@@ -69,8 +69,6 @@ while getopts ":w:s:cfdn" opt; do
           ;;
         *)
            echo "${RED}:Invalid value. Please select hyperland, qtile, or xmonad."
-           sleep 2
-           tput reset
            exit 1
           ;;
       esac
@@ -88,7 +86,6 @@ while getopts ":w:s:cfdn" opt; do
           ;;
         *)
           echo "${RED}:Invalid value. Please select zsh, bash, or fish."
-          tput reset
           exit 1
           ;;
       esac
@@ -111,9 +108,8 @@ done
 echo "${GREEN}#####################################################"
 echo "## Installing 'dialog' and 'fzf' if not installed ##"
 echo "#####################################################"
-tput reset
-
 sleep 1;clear
+tput reset
 
 command_exist pacman && sudo pacman -Syy --needed --noconfirm dialog fzf zsh || error "failed to install fzf"
 
@@ -130,8 +126,8 @@ if [ "$DOTFILES_ONLY" = "y" ] ; then
     echo "${GREEN}#########################################################"
     echo "## Getting all my config files and moving them to home ##"
     echo "#########################################################"
-    tput reset
     sleep 2
+    tput reset
     install_config
     exit
 
@@ -143,9 +139,9 @@ else
      [ NO_CONFIG = "y" ] && echo "## Getting all my config files and moving them to home ##"
      [ NO_CONFIG = "y" ] && echo "#########################################################"
 
-     tput reset
-
      sleep 2
+
+     tput reset
 
      [ NO_CONFIG = "y" ] || install_config
 
@@ -182,11 +178,11 @@ clear
 echo "${GREEN}################################"
 echo "## Making common user folders ##"
 echo "################################"
-tput reset
 home_folders
 
-clear
+sleep 1;clear
 
+tput reset
 # Installs oh-my-tmux which is a plugin manager for tmux
 # Which I really enjoy to use
 echo "${GREEN}############################"
@@ -204,7 +200,7 @@ clear
 echo "${GREEN}###################################"
 echo "## installing pfetch from source ##"
 echo "###################################"
-
+sleep 1
 tput reset
 
 command_exist pacman && sudo pacman -S --needed --noconfirm base-devel
@@ -218,9 +214,8 @@ clear
 echo "${GREEN}#####################"
 echo "## installing paru ##"
 echo "#####################"
-tput reset
-
 sleep 2
+tput reset
 
 clear
 
@@ -263,9 +258,9 @@ clear
 echo "${GREEN}######################"
 echo "## installing fonts ##"
 echo "######################"
-tput reset
 install_fonts
 
+tput reset
 
 
 clear
@@ -287,6 +282,7 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
    if command_exist qtile ; then
 
          echo "${YELLOW}Qtile is already installed"
+         sleep 1
          tput reset
 
    else
@@ -294,9 +290,9 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
          echo "${GREEN}######################"
          echo "## installing qtile ##"
          echo "######################"
-         tput reset
          paru -S --needed --noconfirm qtile
 
+         tput reset
    fi
 
    clear
@@ -305,18 +301,19 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
    if command_exist slock ; then
 
          echo "${YELLOW}Slock is already installed"
-         tput reset
          sleep 1;clear
+         tput reset
    else
          echo "${GREEN}##################################"
          echo "## installing slock from source ##"
          echo "##################################"
+         sleep 1;clear
          tput reset
 
          install_slock
-         sleep 1;clear
    fi
 
+   clear
 
 elif [ $WINDOW_MANAGER = "hyprland" ] ; then
 
@@ -329,6 +326,7 @@ elif [ $WINDOW_MANAGER = "hyprland" ] ; then
    if command_exist Hyprland ; then
 
          echo "${YELLOW}Hyprland is already installed"
+         sleep 1
          tput reset
 
    else
@@ -336,10 +334,12 @@ elif [ $WINDOW_MANAGER = "hyprland" ] ; then
          echo "${GREEN}#########################"
          echo "## installing hyprland ##"
          echo "#########################"
-         tput reset
+
+         sleep 1
 
          paru -S --needed --noconfirm hyprland || error "failed to install hyprland" ; clear
 
+         tput reset
    fi
 
    clear
@@ -352,18 +352,20 @@ clear
 echo "{$GREEN}###########################"
 echo "## installing sddm theme ##"
 echo "###########################"
-tput reset
-clear;sddm_theme;clear
 
+clear;sddm_theme;clear
+sleep 1
+tput reset
 
 echo "${GREEN}##########################"
 echo "## installing gtk theme ##"
 echo "##########################"
-tput reset
 
 clear; [ -d $HOME/rose-pine ] || GTK_theme
 
 sleep 2;clear
+
+tput reset
 
 # Installs doom emacs
 install_doom
