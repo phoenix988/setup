@@ -6,13 +6,13 @@
 #|_|   |_| |_|\___/ \___|_| |_|_/_/\_\
 #                                     
 # -*- coding: utf-8 -*-
-# First I create some switches you can use
+# NOTE: Firstly I create some switches available
 # when you run the script to avoid being asked
-# but no worries if you just run the script
-# it will ask you for input. Like you can choose
-# window manager shell etc. And yes I wond addftinfo
-# the option to install a Desktop Environment using this script
+# but no worries if you just run the script with no arguments
+# it will ask you for input. For example you can choose
+# window manager shell etc.
 
+# NOTE: Some switches that are available
 # -c for basic install (Basically just terminal applications and my config files)
 # -f for full install (Here you get to choose an Window Manager too and gets some other things)
 # -w for window manager
@@ -20,7 +20,8 @@
 # -d for just my dotfiles,zsh,tmux and starship prompt (good for a server)
 # -n for no config files (useful if you already have config files you want to use and dont want to overwrite)
 
-# Source Variables and all functions
+
+# NOTE: Source Variables and all functions
 # So we can get all my functions
 # I wrote them in seperate files to try and stay organized
 for source in $(ls functions | xargs -n1) ; do
@@ -103,8 +104,7 @@ while getopts ":w:s:cfdn" opt; do
 done
 
 
-# Install fzf and dialog if its needed cause it will be used in the script
-# So we need to install them
+# NOTE: Install fzf and dialog if not installed
 echo "${GREEN}#####################################################"
 echo "## Installing 'dialog' and 'fzf' if not installed ##"
 echo "#####################################################"
@@ -119,6 +119,7 @@ welcome ; clear
 # Asks you one last time if you really wanna continue
 Lastchance ; clear
 
+# NOTE: When using -d we will exit here
 if [ "$DOTFILES_ONLY" = "y" ] ; then
 
     # Runs the dotfiles script which clones my dotfiles repo
@@ -129,6 +130,8 @@ if [ "$DOTFILES_ONLY" = "y" ] ; then
     sleep 2
     tput reset
     install_config
+
+    # Everything is done leaving the script
     exit
 
 else
@@ -143,6 +146,7 @@ else
 
      tput reset
 
+     # NOTE: Install my dotfiles unless you used -n
      [ NO_CONFIG = "y" ] || install_config
 
 fi
@@ -373,6 +377,8 @@ tput reset
 
 # Installs doom emacs
 install_doom
+
+clear
 
 sudo systemctl enable sddm
 
