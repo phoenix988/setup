@@ -2,7 +2,7 @@
 #+author: Karl Fredin
 #+DESCRIPTION: Utility to configure my desktop for arch
 
-* IMPORTANT NOTICE
+* IMPORTANT NOTICE!
 Don't just blindly run this script. Make sure you read it and know
 what it does first. Because it can overwrite some of your current config files.
 I don't recommend running this at all. This is mainly for me personally so I can quickly
@@ -20,6 +20,7 @@ But please do in a virtual machine.
 
 
 * ABOUT
+[[file:./.images/hyprland-desktop.png]]
 This is a project I am working on that will grab my config files and install my prefered
 software on a new system to make reinstall easier. Right now only Arch is supported wont work
 on debian base.
