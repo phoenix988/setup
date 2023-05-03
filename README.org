@@ -26,9 +26,19 @@ software on a new system to make reinstall easier. Right now only Arch is suppor
 on debian base.
 
 ** FEATURES
+- My window manager configuration
+  - Qtile and Hyprland
+- Text Editor
+  - Neovim and Doom emacs
+- Wofi and rofi
+- Kitty
+- Dunst
+- Ncspot
+- SDDM
 
 ** INSTALL
 *** MAIN
+[[file:./.images/neovim-small.png]]
 To do a quick install you can just run main. The script will ask you the questions needed.
 and you get to choose, window manager etc
 #+begin_src sh
