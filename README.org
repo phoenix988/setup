@@ -2,65 +2,50 @@
 #+author: Karl Fredin
 #+DESCRIPTION: Utility to configure my desktop for arch
 
+* IMPORTANT NOTICE
+Don't just blindly run this script. Make sure you read it and know
+what it does first. Because it can overwrite some of your current config files.
+I don't recommend running this at all. This is mainly for me personally so I can quickly
+configure a new install of arch linux. But if you are living on the edge feel free to try it.
+But please do in a virtual machine.
+
 * TABLE OF CONTENTS
-- [[ABOUT SETUP]]
+- [[ABOUT]]
 - [[FEATURES]]
-- [[CONFIGS]]
-  - [[WINDOW MANAGERS]]
-    - [[HYPRLAND]]
-    - [[QTILE]]
-  - [[TEXT EDITORS]]
-    - [[NEOVIM]]
-    - [[DOOM Emacs]]
-  - [[RUN LAUNCHERS]]
-    - [[WOFI]]
-    - [[ROFI]]
-  - [[TERMINAL]]
-    - [[KITTY]]
-    - [[TMUX]]
-  - [[DISPLAYMANAGER]]
-    - [[SDDM]]
-  - [[LOCKSCREEN]]
-    - [[SWAYLOCK]]
-    - [[SLOCK]]
+- [[INSTALL]]
+  - [[MAIN]]
+  - [[EXAMPLES]]
+- [[EXAMPLES.org][SAMPLES]]
 
 
 
-** ABOUT SETUP
+* ABOUT
 This is a project I am working on that will grab my config files and install my prefered
 software on a new system to make reinstall easier. Right now only Arch is supported wont work
 on debian base.
 
-* FEATURES
+** FEATURES
+
+** INSTALL
+*** MAIN
+To do a quick install you can just run main. The script will ask you the questions needed.
+and you get to choose, window manager etc
+#+begin_src sh
+./main
+#+end_src
+
+*** EXAMPLES
+Do a full installation, with zsh as default shell and qtile as window manager
+#+begin_src sh
+./main -w qtile -s zsh -f
+#+end_src
+
+Do a basic installation installing a few terminal applications and moves my custom configs to HOME
+#+begin_src sh
+./main -s zsh -c
+#+end_src
 
 
-*** CONFIGS
-This script will download various software plus configurations for them.
-Here I'm listing some software this script can install
-**** WINDOW MANAGERS
-***** QTILE
-***** HYPRLAND
-[[file:./.images/hyprland-desktop.png]]
-**** TEXT EDITORS
-***** NEOVIM
-***** DOOM EMACS
-[[file:./.images/doom.jpeg]]
-
-**** RUN LAUNCHERS
-***** WOFI
-****** WOFI-NORD
-[[file:./.images/wofi-nord.png]]
-****** WOFI-ROSE-PINE
-[[file:./.images/wofi-rose-pine.png]]
-***** ROFI
-[[file:./.images/rofi-dracula.png]]
-**** TERMINAL
-***** KITTY
-[[file:./.images/kitty.png]]
-***** TMUX
-**** DISPLAYMANAGER
-***** SDDM
-**** LOCKSCREEN
-***** SWAYLOCK
-***** SLOCK
-[[file:./.images/slock.png]]
+** SAMPLES
+Here you can look at screenshots of my configs
+[[EXAMPLES.org][- SAMPLES]]

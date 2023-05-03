@@ -1,0 +1,58 @@
+#+title: EXAMPLES
+#+author: Karl Fredin
+#+DESCRIPTION: Example pictures of my configs
+
+
+- [[CONFIGS]]
+  - [[WINDOW MANAGERS]]
+    - [[HYPRLAND]]
+    - [[QTILE]]
+  - [[TEXT EDITORS]]
+    - [[NEOVIM]]
+    - [[DOOM Emacs]]
+  - [[RUN LAUNCHERS]]
+    - [[WOFI]]
+    - [[ROFI]]
+  - [[TERMINAL]]
+    - [[KITTY]]
+    - [[TMUX]]
+  - [[DISPLAYMANAGER]]
+    - [[SDDM]]
+  - [[LOCKSCREEN]]
+    - [[SWAYLOCK]]
+    - [[SLOCK]]
+
+
+
+
+
+* CONFIGS
+This script will download various software plus configurations for them.
+Here I'm listing some software this script can install
+** WINDOW MANAGERS
+*** QTILE
+*** HYPRLAND
+[[file:./.images/hyprland-desktop.png]]
+** TEXT EDITORS
+*** NEOVIM
+*** DOOM EMACS
+[[file:./.images/doom.jpeg]]
+
+** RUN LAUNCHERS
+*** WOFI
+****** WOFI-NORD
+[[file:./.images/wofi-nord.png]]
+****** WOFI-ROSE-PINE
+[[file:./.images/wofi-rose-pine.png]]
+*** ROFI
+[[file:./.images/rofi-dracula.png]]
+** TERMINAL
+*** KITTY
+[[file:./.images/kitty.png]]
+*** TMUX
+** DISPLAYMANAGER
+*** SDDM
+** LOCKSCREEN
+*** SWAYLOCK
+*** SLOCK
+[[file:./.images/slock.png]]
