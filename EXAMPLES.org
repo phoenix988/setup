@@ -27,10 +27,10 @@
 
 
 * CONFIGS
-This script will download various software plus configurations for them.
 Here I'm listing some software this script can install
 ** WINDOW MANAGERS
 *** QTILE
+[[file:./.images/qtile.png]]
 *** HYPRLAND
 [[file:./.images/hyprland-desktop.png]]
 ** TEXT EDITORS

@@ -48,4 +48,4 @@ Do a basic installation installing a few terminal applications and moves my cust
 
 ** SAMPLES
 Here you can look at screenshots of my configs
-[[EXAMPLES.org][- SAMPLES]]
+****** * [[EXAMPLES.org][SAMPLES]]
