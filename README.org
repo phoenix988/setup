@@ -22,8 +22,7 @@ But please do in a virtual machine.
 * ABOUT
 [[file:./.images/hyprland-desktop.png]]
 This is a project I am working on that will grab my config files and install my prefered
-software on a new system to make reinstall easier. Right now only Arch is supported wont work
-on debian base.
+software on a new system to make reinstall easier. Only Arch based distros is supported.
 
 ** FEATURES
 - My window manager configuration

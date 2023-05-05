@@ -35,6 +35,7 @@ Here I'm listing some software this script can install
 [[file:./.images/hyprland-desktop.png]]
 ** TEXT EDITORS
 *** NEOVIM
+[[file:./.images/neovim-small.png]]
 *** DOOM EMACS
 [[file:./.images/doom.jpeg]]
 
@@ -44,12 +45,15 @@ Here I'm listing some software this script can install
 [[file:./.images/wofi-nord.png]]
 ****** WOFI-ROSE-PINE
 [[file:./.images/wofi-rose-pine.png]]
+****** WOFI-ICEBERG
+[[file:./.images/wofi-iceberg.png]]
 *** ROFI
 [[file:./.images/rofi-dracula.png]]
 ** TERMINAL
 *** KITTY
 [[file:./.images/kitty.png]]
 *** TMUX
+[[file:./.images/tmux.png]]
 ** DISPLAYMANAGER
 *** SDDM
 ** LOCKSCREEN
