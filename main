@@ -284,7 +284,7 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
    # clones my qtile branch
    git clone -b qtile https://github.com/phoenix988/dotfiles.git $HOME/.config/qtile
 
-    paru -S --needed --noconfirm  qtile-extras xorg-xrandr
+    paru -S --needed --noconfirm  qtile-extras xorg-xrandr picom
 
    # Only installs qtile if needed
    if command_exist qtile ; then
@@ -348,6 +348,36 @@ elif [ $WINDOW_MANAGER = "hyprland" ] ; then
          paru -S --needed --noconfirm hyprland || error "failed to install hyprland" ; clear
 
          tput reset
+   fi
+
+   clear
+
+elif [ $WINDOW_MANAGER = "awesome" ] ; then
+
+
+
+   echo "${GREEN}########################"
+   echo "## installing awesome ##"
+   echo "########################"
+
+
+
+   paru -S --needed --noconfirm awesome rofi xorg-xrandr picom awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono
+
+   # If slock is installed it wont install it
+   if command_exist slock ; then
+
+         echo "${YELLOW}Slock is already installed"
+         sleep 1;clear
+         tput reset
+   else
+         echo "${GREEN}##################################"
+         echo "## installing slock from source ##"
+         echo "##################################"
+         sleep 1;clear
+         tput reset
+
+         install_slock
    fi
 
    clear

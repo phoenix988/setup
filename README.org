@@ -29,11 +29,16 @@ software on a new system to make reinstall easier. Only Arch based distros is su
   - Qtile and Hyprland
 - Text Editor
   - Neovim and Doom emacs
-- Wofi and rofi
-- Kitty
-- Dunst
-- Ncspot
-- SDDM
+- Run Launchers
+  - Wofi and rofi
+- Terminal
+  - Kitty
+- Notification Daemon
+  - Dunst
+- Music player
+  - Ncspot
+- DisplayManager
+  - SDDM
 
 ** INSTALL
 *** MAIN
