@@ -50,7 +50,6 @@ declare -a packages=(
     "tmux"
     "ttf-jetbrains-mono"
     "ttf-iosevka-nerd"
-    "qtile"
     "unzip"
     "vifm"
     "volumeicon"

@@ -7,8 +7,8 @@ GTK_theme() { \
      git clone https://github.com/phoenix988/Nord.git $HOME/nord
 
      wget https://github.com/dracula/gtk/archive/master.zip
-     unzip master.zip ; sudo cp -r master-gtk /usr/share/themes/dracula 
-     rm master.zip ; rm -rf master-gtk 
+     unzip master.zip ; sudo cp -r gtk-master /usr/share/themes/dracula 
+     rm master.zip ; rm -rf gtk-master 
      
      wget https://github.com/dracula/gtk/files/5214870/Dracula.zip
      unzip Dracula.zip ; sudo cp -r Dracula /usr/share/icons/
@@ -17,7 +17,7 @@ GTK_theme() { \
      sudo  cp -r $HOME/rose-pine/themes/* /usr/share/themes/
      sudo  cp -r $HOME/rose-pine/icons/* /usr/share/icons/
      sudo  cp -r $HOME/nord /usr/share/themes/
-     sudo  cp -r $HOME/nord-icons/NordArc-Theme /usr/share/icons/
+     sudo  cp -r $HOME/nord-icons/NordArc-Icons /usr/share/icons/
 
      rm -rf $HOME/rose-pine
      rm -rf $HOME/nord
