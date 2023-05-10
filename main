@@ -12,14 +12,6 @@
 # it will ask you for input. For example you can choose
 # window manager shell etc.
 
-# NOTE: Some switches that are available
-# -c for basic install (Basically just terminal applications and my config files)
-# -f for full install (Here you get to choose an Window Manager too and gets some other things)
-# -w for window manager
-# -s for shell
-# -d for just my dotfiles,zsh,tmux and starship prompt (good for a server)
-# -n for no config files (useful if you already have config files you want to use and dont want to overwrite)
-
 
 # NOTE: Source Variables and all functions
 # So we can get all my functions
@@ -32,7 +24,15 @@ for source in $(ls variables | xargs -n1) ; do
       source variables/$source
 done
 
+# NOTE: Some switches that are available
+# -c for basic install (Basically just terminal applications and my config files)
+# -f for full install (Here you get to choose an Window Manager too and gets some other things)
+# -w for window manager
+# -s for shell
+# -d for just my dotfiles,zsh,tmux and starship prompt (good for a server)
+# -n for no config files (useful if you already have config files you want to use and dont want to overwrite)
 
+# case statement that enables all available choices
 while getopts ":w:s:cfdnhe" opt; do
   case ${opt} in
     c)
@@ -98,12 +98,18 @@ while getopts ":w:s:cfdnhe" opt; do
       case ${OPTARG} in
         "zsh" )
          SHELL_CHOICE="$OPTARG"
+         echo "${BLUE}You choose zsh"
+         sleep 2
           ;;
         "bash" )
          SHELL_CHOICE="$OPTARG"
+         echo "${BLUE}You choose bash"
+         sleep 2
           ;;
         "fish" )
         SHELL_CHOICE="$OPTARG"
+         echo "${BLUE}You choose fish"
+         sleep 2
           ;;
         *)
           echo "${RED}:Invalid value. Please select zsh, bash, or fish."
@@ -131,6 +137,7 @@ echo "#####################################################"
 sleep 1;clear
 tput reset
 
+# detects which package manager you are using
 command_exist pacman && sudo pacman -Syy --needed --noconfirm dialog fzf zsh || error "failed to install fzf"
 command_exist apt && sudo apt install -y dialog fzf zsh || error "failed to install fzf"
 command_exist dnf && sudo dnf install -y  dialog fzf zsh || error "failed to install fzf"
@@ -140,6 +147,17 @@ welcome ; clear
 
 # Asks you one last time if you really wanna continue
 Lastchance ; clear
+
+# Asks what kind of install you want if you
+# Didn't use -c or -f
+[ -z "$INSTALL_TYPE" ] && do_settings ; clear
+
+if [ "$INSTALL_TYPE" = "full" ] ; then
+
+# asks if you want to install emacs
+[ -z "$INSTALL_EMACS" ] && do_doom ; clear
+
+fi
 
 # NOTE: When using -d we will exit here
 if [ "$DOTFILES_ONLY" = "y" ] ; then
@@ -175,14 +193,6 @@ fi
 
 sleep 1;clear
 
-# Asks what kind of install you want if you
-# Didn't use -c or -f
-[ -z "$INSTALL_TYPE" ] && do_settings ; clear
-
-# asks if you want to install emacs
-[ -z "$INSTALL_EMACS" ] && do_doom ; clear
-
-
 # If you didn't choose window manager and choose full install
 # Then it will ask you which one you want to install
 if [ "$INSTALL_TYPE" = "full" ] ; then
@@ -199,7 +209,8 @@ clear
 clear
 
 # Asks you which default browser you want
-#[ "$INSTALL_TYPE" = "full" ] && do_browser
+# NOTE: currently disabled feature cause its kinda buggy
+# [ "$INSTALL_TYPE" = "full" ] && do_browser
 
 
 # Just making some home folders cause why notepad
@@ -280,21 +291,23 @@ clear
 clear
 
 
-# Clone my wallpapers
+# Clone my wallpaper repository
 [ "$INSTALL_TYPE" = "full" ] && wallpaper
 
 clear
 
+# makes $HOME/.local/share if it doesnt exist already
 [ -d $HOME/.local/share ] || mkdir -p $HOME/.local/share
 
 
+# installs my font that I need for for my configs
+# I store them in one github repo so it is very easy to grab them
 echo "${GREEN}######################"
 echo "## installing fonts ##"
 echo "######################"
 install_fonts
 
 tput reset
-
 
 clear
 
@@ -348,9 +361,10 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
 
    clear
 
+# installs hyprland and dependencies if you choose it
 elif [ $WINDOW_MANAGER = "hyprland" ] ; then
 
-
+    # Installs some packages needed for my hyprland config
     paru -S --needed --noconfirm waybar-hyprland-git swaylock swaybg grim wofi awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono xdg-desktop-portal-hyprland-git wlogout
 
     sleep 1;clear
@@ -369,7 +383,7 @@ elif [ $WINDOW_MANAGER = "hyprland" ] ; then
          echo "#########################"
 
          sleep 1
-
+         # will exit if hyprlands fails to install
          paru -S --needed --noconfirm hyprland || error "failed to install hyprland" ; clear
 
          tput reset
@@ -377,6 +391,7 @@ elif [ $WINDOW_MANAGER = "hyprland" ] ; then
 
    clear
 
+# installs awesome if you choose it
 elif [ $WINDOW_MANAGER = "awesome" ] ; then
 
 
@@ -385,8 +400,7 @@ elif [ $WINDOW_MANAGER = "awesome" ] ; then
    echo "## installing awesome ##"
    echo "########################"
 
-
-
+   # installs some dependencies
    paru -S --needed --noconfirm awesome lain rofi xorg-xrandr picom awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono
 
    # If slock is installed it wont install it
@@ -412,6 +426,7 @@ fi
 
 clear
 
+# installs my sddm theme
 echo "{$GREEN}###########################"
 echo "## installing sddm theme ##"
 echo "###########################"
@@ -420,6 +435,7 @@ clear;sddm_theme;clear
 sleep 1
 tput reset
 
+# installs some gtk themes I like to use
 echo "${GREEN}##########################"
 echo "## installing gtk theme ##"
 echo "##########################"
@@ -427,7 +443,8 @@ sleep 1
 
 tput reset
 
-clear; [ -d $HOME/rose-pine ] || GTK_theme
+# runs the gtk function
+GTK_theme
 
 sleep 2;clear
 
@@ -436,10 +453,12 @@ tput reset
 # Installs doom emacs
 [ "$INSTALL_EMACS" = "yes" ] && install_doom ; clear
 
+# enables sddm on boot
 sudo systemctl enable sddm
 
 sleep 1;clear
 
+# asks if you want to restart
 do_restart
 
 sleep 2;clear

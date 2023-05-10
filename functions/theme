@@ -1,4 +1,5 @@
 #!/bin/bash
+# Functions that install some themes
 
 GTK_theme() { \
 
@@ -43,8 +44,8 @@ sddm_theme() { \
 home_folders() {
 
     [ -d $HOME/Documents ] || mkdir $HOME/Documents
-    [ -d $HOME/Downloads ] || mkdir $HOME/Pictures
-    [ -d $HOME/Pictures ] || mkdir $HOME/Videos
+    [ -d $HOME/Downloads ] || mkdir $HOME/Downloads
+    [ -d $HOME/Pictures ] || mkdir $HOME/Pictures
     [ -d $HOME/Videos ] || mkdir $HOME/Videos
 
 }
