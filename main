@@ -429,9 +429,7 @@ sleep 2;clear
 tput reset
 
 # Installs doom emacs
-install_doom
-
-clear
+[ "$INSTALL_EMACS" = "yes" ] && install_doom ; clear
 
 sudo systemctl enable sddm
 
