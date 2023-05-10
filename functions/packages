@@ -7,6 +7,7 @@
 install_pacman_full(){
 
 declare -a packages=(
+    "alsa-utils"
     "base-devel"
     "bat"
     "btop"
@@ -31,6 +32,7 @@ declare -a packages=(
     "net-tools"
     "network-manager-applet"
     "nfs-utils"
+    "noto-fonts"
     "openssh"
     "pavucontrol"
     "pcmanfm"
