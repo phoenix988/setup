@@ -107,14 +107,19 @@ clear
 # Makes backup if you already have a neovim config
 [ -d $HOME/.config/nvim ] && mv $HOME/.config/nvim $HOME/.config/nvim.bak
 
+
 # Makes backup if you already have a awesome config
 [ -d $HOME/.config/awesome ] && mv $HOME/.config/awesome $HOME/.config/awesome.bak
 
 # clones my neovim branch
 git clone -b neovim https://github.com/phoenix988/dotfiles.git $HOME/.config/nvim
 
+clear
+
 # clones my awesome repo
 git clone https://github.com/phoenix988/awesome.git $HOME/.config/awesome
+
+clear
 
 for FILES in $(printf '%s\n' "${!files[@]}") ; do
 

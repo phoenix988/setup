@@ -132,6 +132,8 @@ sleep 1;clear
 tput reset
 
 command_exist pacman && sudo pacman -Syy --needed --noconfirm dialog fzf zsh || error "failed to install fzf"
+command_exist apt && sudo apt install -y dialog fzf zsh || error "failed to install fzf"
+command_exist dnf && sudo dnf install -y  dialog fzf zsh || error "failed to install fzf"
 
 # Welcome Message
 welcome ; clear
@@ -421,6 +423,9 @@ tput reset
 echo "${GREEN}##########################"
 echo "## installing gtk theme ##"
 echo "##########################"
+sleep 1
+
+tput reset
 
 clear; [ -d $HOME/rose-pine ] || GTK_theme
 

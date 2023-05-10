@@ -1,3 +1,42 @@
 #!/bin/bash
 
 # Function that will act as a help file
+
+function case_help() {
+
+      echo "${GREEN}"
+      echo "-f for a full install"
+      echo "works with -w -s"
+      printf " "
+      
+      echo "${BLUE}"
+      echo "-c for only my config files and a few of my terminal applications"
+      echo "works with -s" 
+      printf " "
+      
+      echo "${YELLOW}"
+      echo "-d for just my dotfiles,zsh,tmux and starship prompt"
+      echo "if using -d no other options is supported"
+      printf " "
+       
+      echo "${PURPLE}"
+      echo "-n for no config files (so you wont overwrite your current configs"
+      echo "works with -s -w -f -c"
+      printf " "
+
+      echo "${BLUE}"
+      echo "-e use this if you want to install doom emacs"
+      echo "works with -n -f" 
+      printf " "
+
+      echo "${GREEN}"
+      echo "-w (hyprland, qtile, awesome)"
+      printf " "
+      
+      echo "${GREEN}"
+      echo "-s (zsh, bash, fish)"
+      printf " "
+      tput sgr0
+
+}
+

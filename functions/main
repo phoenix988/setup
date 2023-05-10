@@ -39,16 +39,4 @@ function case_text() {
 }
 
 
-function case_help() {
-
-      echo "${GREEN}"
-      echo "-f for a full install"
-      echo "-c for only my config files and a few of my terminal applications"
-      echo "-w (hyprland, qtile, awesome)"
-      echo "-s (zsh, bash, fish)"
-      echo "-d for just my dotfiles,zsh,tmux and starship prompt"
-      echo "-n for no config files (so you wont overwrite your current configs"
-      tput sgr0
-
-}
 
