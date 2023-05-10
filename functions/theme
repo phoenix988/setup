@@ -32,6 +32,7 @@ sddm_theme() { \
      git clone https://gitlab.com/dwt1/multicolor-sddm-theme
 
      sudo mv multicolor-sddm-theme /usr/share/sddm/themes
+     rm -rf multicolor-sddm-theme 2> /dev/null
 
      CURRENT="[Theme]"
      THEME="Current=multicolor-sddm-theme"
