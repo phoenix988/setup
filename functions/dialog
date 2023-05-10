@@ -201,7 +201,7 @@ do_doom() { \
      # Print the menu prompt and allow the user to select an option
      select emacs_options in "${options[@]}"
      do
-         case $emacs_option in
+         case $emacs_options in
              "yes")
                  INSTALL_EMACS=yes
                  break
