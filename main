@@ -64,12 +64,19 @@ while getopts ":w:s:cfdn" opt; do
           ;;
         "qtile" )
          WINDOW_MANAGER="$OPTARG"
-         echo "${BLUE}You choose to qtile hyprland"
+         echo "${BLUE}You choose to install qtile"
          sleep 2
          tput reset
           ;;
+         "awesome" )
+         WINDOW_MANAGER="$OPTARG"
+         echo "${BLUE}You choose to install awesome"
+         sleep 2
+         tput reset
+          ;;
+
         *)
-           echo "${RED}:Invalid value. Please select hyperland, qtile, or xmonad."
+           echo "${RED}:Invalid value. Please select hyperland, qtile, or awesome."
            exit 1
           ;;
       esac
@@ -158,7 +165,7 @@ sleep 1;clear
 [ -z "$INSTALL_TYPE" ] && do_settings ; clear
 
 
-# If you didn't choocse window manager and choose full install
+# If you didn't choose window manager and choose full install
 # Then it will ask you which one you want to install
 if [ "$INSTALL_TYPE" = "full" ] ; then
 
@@ -362,7 +369,7 @@ elif [ $WINDOW_MANAGER = "awesome" ] ; then
 
 
 
-   paru -S --needed --noconfirm awesome rofi xorg-xrandr picom awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono
+   paru -S --needed --noconfirm awesome lain rofi xorg-xrandr picom awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono
 
    # If slock is installed it wont install it
    if command_exist slock ; then
@@ -411,6 +418,8 @@ install_doom
 clear
 
 sudo systemctl enable sddm
+
+sleep 1;clear
 
 do_restart
 

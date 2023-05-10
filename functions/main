@@ -5,8 +5,14 @@ error() { \
 }
 
 
+welcome_text="This script will install basics programs plus config files 
+that I use on a daily basic so you can quickly be up and running with a new system
+it depends on your choices what you will install. But you can choose shell, window manager etc.
+You can also choose to only get my config files which is useful if you run this on a server"
+
+
 welcome() { \
-    dialog --colors --title "\Z7\ZbConfigure your Desktop!" --msgbox "\Z4This is a script that will install everythinging I personally use on a daily basis, This script will run using your Normal User account but sometimes it will need root privleges so then its gonna prompt you for a password to make sure to be near your computer. Me personally tho deactivate sudo password prompts but that comes with a security risk hehe. And also if you run this script when you are installing arch linux then it will install everything you need to get started with a base install. But you will need to run this script again when you have installed the base installation of arch \\n\\n-Karl" 16 60
+    dialog --colors --title "\Z7\ZbConfigure your Desktop!" --msgbox "\Z4$welcome_text\\n\\n-Karl" 16 60
     }
 
 Lastchance() { \
@@ -24,10 +30,25 @@ function case_text() {
       echo "Invalid option: -$OPTARG." 1>&2
       echo "-f for a full install"
       echo "-c for only my config files and a few of my terminal applications"
-      echo "-w (hyprland, qtile, xmonad)"
+      echo "-w (hyprland, qtile, awesome)"
       echo "-s (zsh, bash, fish)"
       echo "-d for just my dotfiles,zsh,tmux and starship prompt"
       echo "-n for no config files (so you wont overwrite your current configs"
       echo "######################################################################"
 
 }
+
+
+function case_help() {
+
+      echo "${GREEN}"
+      echo "-f for a full install"
+      echo "-c for only my config files and a few of my terminal applications"
+      echo "-w (hyprland, qtile, awesome)"
+      echo "-s (zsh, bash, fish)"
+      echo "-d for just my dotfiles,zsh,tmux and starship prompt"
+      echo "-n for no config files (so you wont overwrite your current configs"
+      tput sgr0
+
+}
+

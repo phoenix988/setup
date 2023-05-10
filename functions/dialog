@@ -156,7 +156,7 @@ do_windowmanager() { \
 do_restart() { \
 
      # Define the options
-     options=("yes" "No")
+     options=("yes" "no")
 
 
       echo "###############################################"
