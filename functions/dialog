@@ -48,14 +48,17 @@ do_shell() { \
          case $shell_option in
              "bash")
                  SHELL_CHOICE="bash"
+                 tput setaf 2 && echo "You did choose $SHELL_CHOICE"
                  break
                  ;;
              "zsh")
                  SHELL_CHOICE="zsh"
+                 tput setaf 2 && echo "You did choose $SHELL_CHOICE"
                  break
                  ;;
              "fish")
                  SHELL_CHOICE="fish"
+                 tput setaf 2 && echo "You did choose $SHELL_CHOICE"
                  break
                  ;;
              "quit")

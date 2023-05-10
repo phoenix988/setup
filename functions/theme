@@ -3,15 +3,15 @@
 GTK_theme() { \
 
      git clone https://github.com/Fausto-Korpsvart/Rose-Pine-GTK-Theme.git $HOME/rose-pine
-     git clone https://github.com/phoneix988/Nord-icons.git $HOME/nord-icons
-     git clone https://github.com/phoneix988/Nord.git $HOME/nord
+     git clone https://github.com/phoenix988/Nord-icons.git $HOME/nord-icons
+     git clone https://github.com/phoenix988/Nord.git $HOME/nord
 
      wget https://github.com/dracula/gtk/archive/master.zip
-     unzip master.zip ; cp -r master-gtk /usr/share/themes/dracula 
+     unzip master.zip ; sudo cp -r master-gtk /usr/share/themes/dracula 
      rm master.zip ; rm -rf master-gtk 
      
      wget https://github.com/dracula/gtk/files/5214870/Dracula.zip
-     unzip Dracula.zip ; cp -r Dracula /usr/share/icons/
+     unzip Dracula.zip ; sudo cp -r Dracula /usr/share/icons/
      rm Dracula.zip ; rm -rf Dracula
 
      sudo  cp -r $HOME/rose-pine/themes/* /usr/share/themes/

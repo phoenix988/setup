@@ -42,7 +42,6 @@ declare -a packages=(
     "qt5ct"
     "qt5-quickcontrols2"
     "qt6ct"
-    "qtile"
     "ripgrep"
     "rofi"
     "rsync"
