@@ -120,7 +120,7 @@ fi
 do_windowmanager() { \
 
      # Define an array of windowmanager options
-     options=("Hyprland" "Qtile" "Quit")
+     options=("Hyprland" "Qtile" "Awesome" "Quit")
 
       echo "Please Choose your Window Manager"
 
@@ -134,6 +134,10 @@ do_windowmanager() { \
                  ;;
              "Qtile")
                  WINDOW_MANAGER=qtile
+                 break
+                 ;;
+             "Awesome")
+                 WINDOW_MANAGER=awesome
                  break
                  ;;
              "Quit")
