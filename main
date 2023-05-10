@@ -33,7 +33,7 @@ for source in $(ls variables | xargs -n1) ; do
 done
 
 
-while getopts ":w:s:cfdn" opt; do
+while getopts ":w:s:cfdnh" opt; do
   case ${opt} in
     c)
      INSTALL_TYPE=basic
