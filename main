@@ -50,6 +50,10 @@ while getopts ":w:s:cfdn" opt; do
     n)
      NO_CONFIG="y"
      ;;
+    h) 
+      case_help
+      exit 1
+     ;;
     \?)
       case_text
       exit 1
