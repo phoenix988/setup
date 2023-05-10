@@ -33,13 +33,17 @@ for source in $(ls variables | xargs -n1) ; do
 done
 
 
-while getopts ":w:s:cfdnh" opt; do
+while getopts ":w:s:cfdnhe" opt; do
   case ${opt} in
     c)
      INSTALL_TYPE=basic
+     echo "${BLUE}You choose basic install"
+     sleep 1
      ;;
     f)
      INSTALL_TYPE=full
+     echo "${BLUE}You choose full install"
+     sleep 1
      ;;
     d)
      DOTFILES_ONLY="y"
@@ -49,6 +53,11 @@ while getopts ":w:s:cfdnh" opt; do
      ;;
     n)
      NO_CONFIG="y"
+     ;;
+    e)
+     echo "${BLUE}You choose to install emacs"
+     INSTALL_EMACS="yes"
+     sleep 1
      ;;
     h) 
       case_help
@@ -167,6 +176,9 @@ sleep 1;clear
 # Asks what kind of install you want if you
 # Didn't use -c or -f
 [ -z "$INSTALL_TYPE" ] && do_settings ; clear
+
+# asks if you want to install emacs
+[ -z "$INSTALL_EMACS" ] && do_doom ; clear
 
 
 # If you didn't choose window manager and choose full install

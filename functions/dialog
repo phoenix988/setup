@@ -187,3 +187,34 @@ do_restart() { \
      done
 
 }
+
+do_doom() { \
+
+     # Define the options
+     options=("yes" "no")
+
+
+      echo "#################################################################"
+      echo "## Do you want to install doom emacs? this will take some time ##"
+      echo "#################################################################"
+
+     # Print the menu prompt and allow the user to select an option
+     select emacs_options in "${options[@]}"
+     do
+         case $emacs_option in
+             "yes")
+                 INSTALL_EMACS=yes
+                 break
+                 ;;
+             "no")
+                 INSTALL_EMACS=no
+                 break
+                 ;;
+             *)
+                 echo "Invalid option. Please select yes or no"
+                 ;;
+         esac
+     done
+
+}
+
