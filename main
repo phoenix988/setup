@@ -178,16 +178,16 @@ else
 
      # Runs the dotfiles script which clones my dotfiles repo
      # and moves all my configuration files to home
-     [ NO_CONFIG = "y" ] && echo "${GREEN}#########################################################"
-     [ NO_CONFIG = "y" ] && echo "## Getting all my config files and moving them to home ##"
-     [ NO_CONFIG = "y" ] && echo "#########################################################"
+     [ "$NO_CONFIG" = "y" ] && echo "${GREEN}#########################################################"
+     [ "$NO_CONFIG" = "y" ] && echo "## Getting all my config files and moving them to home ##"
+     [ "$NO_CONFIG" = "y" ] && echo "#########################################################"
 
      sleep 2
 
      tput reset
 
      # NOTE: Install my dotfiles unless you used -n
-     [ NO_CONFIG = "y" ] || install_config
+     [ "$NO_CONFIG" = "y" ] || install_config
 
 fi
 
@@ -282,7 +282,7 @@ sleep 2
 clear
 
 # Change default shell
-sudo usermod -s "/usr/bin/$SHELL_CHOICE" $USER
+sudo usermod -s "/usr/bin/$SHELL_CHOICE" "$USER"
 clear
 
 # If you did choose basic install then the script will exit herre
@@ -297,7 +297,7 @@ clear
 clear
 
 # makes $HOME/.local/share if it doesnt exist already
-[ -d $HOME/.local/share ] || mkdir -p $HOME/.local/share
+[ -d "$HOME/.local/share" ] || mkdir -p "$HOME/.local/share"
 
 
 # installs my font that I need for for my configs
@@ -314,13 +314,13 @@ clear
 # If you choose qtile then it will go and do things thats specific for
 # qtile and xorg this is important because hyprland is based on wayland
 # so the dependencies will be diffrent
-if [ $WINDOW_MANAGER = "qtile" ] ; then
+if [ "$WINDOW_MANAGER" = "qtile" ] ; then
 
     # Making a backup if you already have aqtile config
-   [ -d $HOME/.config/qtile ] && mv $HOME/.config/qtile $HOME/.config/qtile.bak
+   [ -d "$HOME/.config/qtile" ] && mv "$HOME/.config/qtile" "$HOME/.config/qtile.bak"
 
    # clones my qtile branch
-   git clone -b qtile https://github.com/phoenix988/dotfiles.git $HOME/.config/qtile
+   git clone -b qtile https://github.com/phoenix988/dotfiles.git "$HOME/.config/qtile"
 
     paru -S --needed --noconfirm  qtile-extras xorg-xrandr picom
 
@@ -362,7 +362,7 @@ if [ $WINDOW_MANAGER = "qtile" ] ; then
    clear
 
 # installs hyprland and dependencies if you choose it
-elif [ $WINDOW_MANAGER = "hyprland" ] ; then
+elif [ "$WINDOW_MANAGER" = "hyprland" ] ; then
 
     # Installs some packages needed for my hyprland config
     paru -S --needed --noconfirm waybar-hyprland-git swaylock swaybg grim wofi awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono xdg-desktop-portal-hyprland-git wlogout
@@ -392,7 +392,7 @@ elif [ $WINDOW_MANAGER = "hyprland" ] ; then
    clear
 
 # installs awesome if you choose it
-elif [ $WINDOW_MANAGER = "awesome" ] ; then
+elif [ "$WINDOW_MANAGER" = "awesome" ] ; then
 
 
 
