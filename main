@@ -138,9 +138,9 @@ sleep 1;clear
 tput reset
 
 # detects which package manager you are using
-command_exist pacman && sudo pacman -Syy --needed --noconfirm dialog fzf zsh || error "failed to install fzf"
-command_exist apt && sudo apt install -y dialog fzf zsh || error "failed to install fzf"
-command_exist dnf && sudo dnf install -y  dialog fzf zsh || error "failed to install fzf"
+command_exist pacman && sudo pacman -Syy --needed --noconfirm dialog fzf zsh 
+command_exist apt && sudo apt install -y dialog fzf zsh 
+command_exist dnf && sudo dnf install -y  dialog fzf zsh 
 
 # Welcome Message
 welcome ; clear
