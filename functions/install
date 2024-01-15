@@ -196,3 +196,22 @@ git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
 
 
 }
+
+
+install_nvim() {
+
+sudo apt-get install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
+
+git clone https://github.com/neovim/neovim.git
+
+cd neovim
+
+make CMAKE_BUILD_TYPE=Release
+
+sudo make install
+
+cd -
+
+rm -rf neovim
+
+}
