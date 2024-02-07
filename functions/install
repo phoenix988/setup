@@ -87,7 +87,7 @@ install_slock() { \
 install_oh_my_tmux() { \
 
      # Clones oh my tmux
-     [ -d $HOME/.tmux ] && cp -r $HOME/.tmux $HOME/.tmux.bak
+     [ -d $HOME/.tmux ] && cp -r $HOME/.tmux $HOME/.tmux.bak 2> /dev/null
       
      rm -rf $HOME/.tmux
          

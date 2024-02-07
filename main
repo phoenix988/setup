@@ -11,7 +11,9 @@
 # but no worries if you just run the script with no arguments
 # it will ask you for input. For example you can choose
 # window manager shell etc.
-
+# Full install only work for arch based systems
+# But basic Install should work for any systemctl
+# Convinient way to quickly get my config files on a new system
 
 # NOTE: Source Variables and all functions
 # So we can get all my functions
@@ -197,7 +199,7 @@ sleep 1;clear
 # Then it will ask you which one you want to install
 if [ "$INSTALL_TYPE" = "full" ] ; then
 
-      [ -z "$WINDOW_MANAGER" ] && do_windowmanager
+     [ -z "$WINDOW_MANAGER" ] && do_windowmanager
 
 fi
 
@@ -219,18 +221,22 @@ clear
 echo "${GREEN}################################"
 echo "## Making common user folders ##"
 echo "################################"
+tput reset
+
 home_folders
 
 sleep 1;clear
 
-tput reset
 # Installs oh-my-tmux which is a plugin manager for tmux
 # Which I really enjoy to use
 echo "${GREEN}############################"
 echo "## Installing oh my tmux ##"
 echo "###########################"
 tput reset
+
 install_oh_my_tmux
+
+sleep 1;clear
 
 clear
 
@@ -241,13 +247,16 @@ clear
 echo "${GREEN}###################################"
 echo "## installing pfetch from source ##"
 echo "###################################"
-sleep 1
 tput reset
-
-command_exist pacman && sudo pacman -S --needed --noconfirm base-devel
 
 # only installs if pfetch is not installed
 command_exist pfetch || install_pfetch
+
+sleep 1; clear
+
+
+# Install base-devel if not installed on arch based systems
+command_exist pacman && sudo pacman -S --needed --noconfirm base-devel
 
 clear
 
@@ -291,11 +300,20 @@ clear
 sudo usermod -s "/usr/bin/$SHELL_CHOICE" "$USER"
 clear
 
+# Install neovim from source on debian based system
+if command_exist apt ; then
+    echo "${GREEN}###################################"
+    echo "## installing neovim from source ##"
+    echo "###################################"
+    tput reset
+    install_nvim
+    sleep 1;clear
+fi
+
 # If you did choose basic install then the script will exit herre
 [ "$INSTALL_TYPE" = "basic" ] && exit
 
 clear
-
 
 # Clone my wallpaper repository
 [ "$INSTALL_TYPE" = "full" ] && wallpaper
@@ -370,10 +388,14 @@ if [ "$WINDOW_MANAGER" = "qtile" ] ; then
 # installs hyprland and dependencies if you choose it
 elif [ "$WINDOW_MANAGER" = "hyprland" ] ; then
 
-    # Installs some packages needed for my hyprland config
-    paru -S --needed --noconfirm waybar-hyprland-git swaylock swaybg grim wofi awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono xdg-desktop-portal-hyprland-git wlogout
+   # Installs some packages needed for my hyprland config
+   paru -S --needed --noconfirm waybar-hyprland-git swaylock swaybg grim wofi awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono xdg-desktop-portal-hyprland-git wlogout
 
-    sleep 1;clear
+   sleep 1;clear
+
+   git clone https://github.com/phoenix988/hyprland.git $HOME/.config/hypr
+
+   sleep 1;clear
 
    # Only installs qtile if needed
    if command_exist Hyprland ; then
@@ -400,14 +422,14 @@ elif [ "$WINDOW_MANAGER" = "hyprland" ] ; then
 # installs awesome if you choose it
 elif [ "$WINDOW_MANAGER" = "awesome" ] ; then
 
-
-
    echo "${GREEN}########################"
    echo "## installing awesome ##"
    echo "########################"
 
    # installs some dependencies
    paru -S --needed --noconfirm awesome lain rofi xorg-xrandr picom awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono
+
+   git clone https://github.com/phoenix988/awesome.git $HOME/.config/awesome
 
    # If slock is installed it wont install it
    if command_exist slock ; then

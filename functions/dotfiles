@@ -34,7 +34,6 @@ files[$HOME/.config/ncspot]="$DOTFILES_REPO_PATH/.config/ncspot"
 files[$HOME/.config/fish]="$DOTFILES_REPO_PATH/.config/fish"
 files[$HOME/.config/dunst]="$DOTFILES_REPO_PATH/.config/dunst"
 files[$HOME/.config/rofi]="$DOTFILES_REPO_PATH/.config/rofi"
-files[$HOME/.config/hypr]="$DOTFILES_REPO_PATH/.config/hypr"
 files[$HOME/.config/waybar]="$DOTFILES_REPO_PATH/.config/waybar"
 files[$HOME/.config/wofi]="$DOTFILES_REPO_PATH/.config/wofi"
 files[$HOME/.config/wlogout]="$DOTFILES_REPO_PATH/.config/wlogout"
@@ -117,7 +116,7 @@ git clone -b neovim https://github.com/phoenix988/dotfiles.git $HOME/.config/nvi
 clear
 
 # clones my awesome repo
-git clone https://github.com/phoenix988/awesome.git $HOME/.config/awesome
+# git clone https://github.com/phoenix988/awesome.git $HOME/.config/awesome
 
 clear
 
