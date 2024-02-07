@@ -52,7 +52,7 @@ and you get to choose, window manager etc
 *** EXAMPLES
 Do a full installation, with zsh as default shell and qtile as window manager
 #+begin_src sh
-./main -w qtile -s zsh -f
+./main -f -w qtile -s zsh
 #+end_src
 
 Do a basic installation installing a few terminal applications and moves my custom configs to HOME

@@ -41,11 +41,13 @@ while getopts ":w:s:cfdnhe" opt; do
      INSTALL_TYPE=basic
      echo "${BLUE}You choose basic install"
      sleep 1
+     tput reset
      ;;
     f)
      INSTALL_TYPE=full
      echo "${BLUE}You choose full install"
      sleep 1
+     tput reset
      ;;
     d)
      DOTFILES_ONLY="y"
