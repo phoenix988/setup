@@ -73,18 +73,21 @@ while getopts ":w:s:cfdnhe" opt; do
       case ${OPTARG} in
         "hyprland" )
          WINDOW_MANAGER="$OPTARG"
+         [ "$INSTALL_TYPE" = "basic" ] && error "Need to be used with the -f switch"
          echo "${BLUE}You choose to install hyprland"
          sleep 2
          tput reset
           ;;
         "qtile" )
          WINDOW_MANAGER="$OPTARG"
+         [ "$INSTALL_TYPE" = "basic" ] && error "Need to be used with the -f switch"
          echo "${BLUE}You choose to install qtile"
          sleep 2
          tput reset
           ;;
          "awesome" )
          WINDOW_MANAGER="$OPTARG"
+         [ "$INSTALL_TYPE" = "basic" ] && error "Need to be used with the -f switch"
          echo "${BLUE}You choose to install awesome"
          sleep 2
          tput reset
