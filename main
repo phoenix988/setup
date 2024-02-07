@@ -156,8 +156,10 @@ Lastchance ; clear
 
 if [ "$INSTALL_TYPE" = "full" ] ; then
 
-# asks if you want to install emacs
-[ -z "$INSTALL_EMACS" ] && do_doom ; clear
+    # Leaves if you dont have arch system
+    command_exist pacman || error "${RED}You dont Run arch..."
+    # asks if you want to install emacs
+    [ -z "$INSTALL_EMACS" ] && do_doom ; clear
 
 fi
 
