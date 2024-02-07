@@ -286,9 +286,9 @@ if [ "$INSTALL_TYPE" = "basic" ] ; then
 
 elif [ "$INSTALL_TYPE" = "full" ] ; then
 
-   command_exist pacman &&  install_pacman_full
+    command_exist pacman &&  install_pacman_full
 
-   clear
+    clear
 
 fi
 
@@ -302,11 +302,13 @@ clear
 
 # Install neovim from source on debian based system
 if command_exist apt ; then
-    echo "${GREEN}###################################"
-    echo "## installing neovim from source ##"
-    echo "###################################"
+
+    command_exist nvim || echo "${GREEN}###################################"
+    command_exist nvim || echo "## installing neovim from source ##"
+    command_exist nvim || echo "###################################"
     tput reset
-    install_nvim
+
+    command_exist nvim || install_nvim
     sleep 1;clear
 fi
 
