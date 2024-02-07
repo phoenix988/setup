@@ -252,13 +252,18 @@ command_exist pfetch || install_pfetch
 clear
 
 # Installs paru aur helper if its not installed
-echo "${GREEN}#####################"
-echo "## installing paru ##"
-echo "#####################"
-sleep 2
-tput reset
+if command_exist pacman ; then
+    if command_exist paru ; then
 
-clear
+       echo "${GREEN}#####################"
+       echo "## installing paru ##"
+       echo "#####################"
+       sleep 2
+       tput reset
+
+       clear
+    fi
+fi
 
 # only installs if paru is not installed
 command_exist paru || install_paru && echo "Paru is installed"
