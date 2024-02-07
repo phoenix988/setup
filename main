@@ -178,9 +178,9 @@ else
 
      # Runs the dotfiles script which clones my dotfiles repo
      # and moves all my configuration files to home
-     [ "$NO_CONFIG" = "y" ] && echo "${GREEN}#########################################################"
-     [ "$NO_CONFIG" = "y" ] && echo "## Getting all my config files and moving them to home ##"
-     [ "$NO_CONFIG" = "y" ] && echo "#########################################################"
+     [ "$NO_CONFIG" = "y" ] || echo "${GREEN}#########################################################"
+     [ "$NO_CONFIG" = "y" ] || echo "## Getting all my config files and moving them to home ##"
+     [ "$NO_CONFIG" = "y" ] || echo "#########################################################"
 
      sleep 2
 
@@ -253,7 +253,7 @@ clear
 
 # Installs paru aur helper if its not installed
 if command_exist pacman ; then
-    if command_exist paru ; then
+    if not command_exist paru ; then
 
        echo "${GREEN}#####################"
        echo "## installing paru ##"
@@ -263,10 +263,11 @@ if command_exist pacman ; then
 
        clear
     fi
+
+    # only installs if paru is not installed
+    command_exist paru || install_paru && echo "Paru is installed"
 fi
 
-# only installs if paru is not installed
-command_exist paru || install_paru && echo "Paru is installed"
 
 if [ "$INSTALL_TYPE" = "basic" ] ; then
 
