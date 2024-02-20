@@ -355,7 +355,7 @@ if [ "$WINDOW_MANAGER" = "qtile" ] ; then
    # clones my qtile branch
    git clone -b qtile https://github.com/phoenix988/dotfiles.git "$HOME/.config/qtile"
 
-    paru -S --needed --noconfirm  qtile-extras xorg-xrandr picom
+   paru -S --needed --noconfirm  qtile-extras xorg-xrandr picom
 
    # Only installs qtile if needed
    if command_exist qtile ; then
@@ -398,7 +398,8 @@ if [ "$WINDOW_MANAGER" = "qtile" ] ; then
 elif [ "$WINDOW_MANAGER" = "hyprland" ] ; then
 
    # Installs some packages needed for my hyprland config
-   paru -S --needed --noconfirm waybar-hyprland-git swaylock swaybg grim wofi awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono xdg-desktop-portal-hyprland-git wlogout
+   paru -S --needed --noconfirm waybar-hyprland-git swaylock swaybg grim wofi awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono xdg-desktop-portal-hyprland-git wlogout \
+       pyprland
 
    sleep 1;clear
 

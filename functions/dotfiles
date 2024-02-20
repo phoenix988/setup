@@ -9,135 +9,145 @@
 # Script to quickly configure a new system with my configs
 # Configure variables that I use in this script
 
+# Updates a git repo and then cd back to current dir
+pull_git() {
+  cd $1
 
+  git pull
+
+  cd -
+
+}
+
+# install all my config files
 install_config() {
 
-DOTFILES_REPO_PATH="$HOME/dotfiles"
-DMSCRIPTS_REPO_PATH="$HOME/dmscripts"
+  DOTFILES_REPO_PATH="$HOME/dotfiles"
+  DMSCRIPTS_REPO_PATH="$HOME/dmscripts"
 
-# Clones my dotfiles repo
-[ -d $DOTFILES_REPO_PATH ] || git clone https://github.com/phoenix988/dotfiles.git $DOTFILES_REPO_PATH
+  # Clones my dotfiles repo
+  [ -d $DOTFILES_REPO_PATH ] || git clone https://github.com/phoenix988/dotfiles.git $DOTFILES_REPO_PATH && pull_git $DOTFILES_REPO_PATH
 
-clear
+  clear
 
-# Clones my dmscripts repo
-[ -d $DMSCRIPTS_REPO_PATH ] || git clone https://github.com/phoenix988/dmscripts.git $DMSCRIPTS_REPO_PATH
+  # Clones my dmscripts repo
+  [ -d $DMSCRIPTS_REPO_PATH ] || git clone https://github.com/phoenix988/dmscripts.git $DMSCRIPTS_REPO_PATH && pull_git $DMSCRIPTS_REPO_PATH
 
-clear
+  clear
 
-# Declare the array with all my dotfiles
-declare -A files
-
-
-files[$HOME/.config/kitty]="$DOTFILES_REPO_PATH/.config/kitty"
-files[$HOME/.config/ncspot]="$DOTFILES_REPO_PATH/.config/ncspot"
-files[$HOME/.config/fish]="$DOTFILES_REPO_PATH/.config/fish"
-files[$HOME/.config/dunst]="$DOTFILES_REPO_PATH/.config/dunst"
-files[$HOME/.config/rofi]="$DOTFILES_REPO_PATH/.config/rofi"
-files[$HOME/.config/waybar]="$DOTFILES_REPO_PATH/.config/waybar"
-files[$HOME/.config/wofi]="$DOTFILES_REPO_PATH/.config/wofi"
-files[$HOME/.config/wlogout]="$DOTFILES_REPO_PATH/.config/wlogout"
-files[$HOME/.config/vifm]="$DOTFILES_REPO_PATH/.config/vifm"
-files[$HOME/.config/doom]="$DOTFILES_REPO_PATH/.config/doom"
-files[$HOME/.config/starship.toml]="$DOTFILES_REPO_PATH/.config/starship.toml"
-files[$HOME/.config/starship-themes]="$DOTFILES_REPO_PATH/.config/starship-themes"
-files[$HOME/.config/picom]="$DOTFILES_REPO_PATH/.config/picom"
-files[$HOME/.config/conky]="$DOTFILES_REPO_PATH/.config/conky"
-files[$HOME/.config/qutebrowser]="$DOTFILES_REPO_PATH/.config/qutebrowser"
-files[$HOME/.config/sxiv]="$DOTFILES_REPO_PATH/.config/sxiv"
-files[$HOME/.config/urxvt]="$DOTFILES_REPO_PATH/.config/urxvt"
-files[$HOME/.config/alacritty]="$DOTFILES_REPO_PATH/.config/alacritty"
-files[$HOME/.config/fzf]="$DOTFILES_REPO_PATH/.config/fzf"
-files[$HOME/.config/btop]="$DOTFILES_REPO_PATH/.config/btop"
-files[$HOME/.config/oh-my-zsh/themes/nord.zsh-theme]="$DOTFILES_REPO_PATH/.config/oh-my-zsh/themes"
-files[$HOME/.zshrc]="$DOTFILES_REPO_PATH/.zshrc"
-files[$HOME/.bashrc]="$DOTFILES_REPO_PATH/.bashrc"
-files[$HOME/.fehbg]="$DOTFILES_REPO_PATH/.fehbg"
-files[$HOME/.tmux.conf.local]="$DOTFILES_REPO_PATH/.tmux.conf.local"
-files[$HOME/.scripts]="$DOTFILES_REPO_PATH/.scripts"
-files[$HOME/.dmenu]="$DMSCRIPTS_REPO_PATH/.dmenu"
-files[$HOME/.config/swayshot.sh]="$DMSCRIPTS_REPO_PATH/.config/swayshot.sh"
-files[$HOME/.config/dm-script.conf]="$DMSCRIPTS_REPO_PATH/.config/dm-script.conf"
-files[$HOME/.config/alias-zsh-bash]="$DOTFILES_REPO_PATH/.config/alias-zsh-bash"
+  # Declare the array with all my dotfiles
+  declare -A files
 
 
-# Installs zsh if its needed
-if command_exist apt ; then
-
-command_exist zsh || printf '%s\n' "ZSH Not Installed: Installing"
-command_exist zsh || sudo apt install -y zsh &> /dev/null
-
-
-elif command_exist pacman ; then
-
-command_exist zsh || printf '%s\n' "ZSH Not Installed: Installing"
-command_exist zsh || sudo pacman -S --noconfirm zsh &> /dev/null
-
-
-elif command_exist dnf ; then
-
-command_exist zsh || printf '%s\n' "ZSH Not Installed: Installing"
-command_exist zsh || sudo dnf install -y zsh &> /dev/null
-
-
-fi
-
-# If it failed to install zsh script will exit here
-# Because otherwise oh my zsh will not be able to be installed
-command_exist zsh || error "ZSH: Failed to Install"
-
-# Installs oh-my-zsh framework
-bash ./scripts/ohmyzsh.sh
-
-clear
-
-# Installs the plugins I use
-bash ./scripts/zsh-plugins.sh
-
-clear
-
-# Install starship prompt
-command_exist starship || sh ./scripts/starship.sh
-
-clear
-
-[ -d $HOME/.config ] || mkdir $HOME/.config
-
-# Makes backup if you already have a neovim config
-[ -d $HOME/.config/nvim ] && mv $HOME/.config/nvim $HOME/.config/nvim.bak
+  files[$HOME/.config/kitty]="$DOTFILES_REPO_PATH/.config/kitty"
+  files[$HOME/.config/ncspot]="$DOTFILES_REPO_PATH/.config/ncspot"
+  files[$HOME/.config/fish]="$DOTFILES_REPO_PATH/.config/fish"
+  files[$HOME/.config/dunst]="$DOTFILES_REPO_PATH/.config/dunst"
+  files[$HOME/.config/rofi]="$DOTFILES_REPO_PATH/.config/rofi"
+  files[$HOME/.config/waybar]="$DOTFILES_REPO_PATH/.config/waybar"
+  files[$HOME/.config/wofi]="$DOTFILES_REPO_PATH/.config/wofi"
+  files[$HOME/.config/wlogout]="$DOTFILES_REPO_PATH/.config/wlogout"
+  files[$HOME/.config/vifm]="$DOTFILES_REPO_PATH/.config/vifm"
+  files[$HOME/.config/doom]="$DOTFILES_REPO_PATH/.config/doom"
+  files[$HOME/.config/starship.toml]="$DOTFILES_REPO_PATH/.config/starship.toml"
+  files[$HOME/.config/starship-themes]="$DOTFILES_REPO_PATH/.config/starship-themes"
+  files[$HOME/.config/picom]="$DOTFILES_REPO_PATH/.config/picom"
+  files[$HOME/.config/conky]="$DOTFILES_REPO_PATH/.config/conky"
+  files[$HOME/.config/qutebrowser]="$DOTFILES_REPO_PATH/.config/qutebrowser"
+  files[$HOME/.config/sxiv]="$DOTFILES_REPO_PATH/.config/sxiv"
+  files[$HOME/.config/urxvt]="$DOTFILES_REPO_PATH/.config/urxvt"
+  files[$HOME/.config/alacritty]="$DOTFILES_REPO_PATH/.config/alacritty"
+  files[$HOME/.config/fzf]="$DOTFILES_REPO_PATH/.config/fzf"
+  files[$HOME/.config/btop]="$DOTFILES_REPO_PATH/.config/btop"
+  files[$HOME/.config/oh-my-zsh/themes/nord.zsh-theme]="$DOTFILES_REPO_PATH/.config/oh-my-zsh/themes"
+  files[$HOME/.zshrc]="$DOTFILES_REPO_PATH/.zshrc"
+  files[$HOME/.bashrc]="$DOTFILES_REPO_PATH/.bashrc"
+  files[$HOME/.fehbg]="$DOTFILES_REPO_PATH/.fehbg"
+  files[$HOME/.tmux.conf.local]="$DOTFILES_REPO_PATH/.tmux.conf.local"
+  files[$HOME/.scripts]="$DOTFILES_REPO_PATH/.scripts"
+  files[$HOME/.dmenu]="$DMSCRIPTS_REPO_PATH/.dmenu"
+  files[$HOME/.config/swayshot.sh]="$DMSCRIPTS_REPO_PATH/.config/swayshot.sh"
+  files[$HOME/.config/dm-script.conf]="$DMSCRIPTS_REPO_PATH/.config/dm-script.conf"
+  files[$HOME/.config/alias-zsh-bash]="$DOTFILES_REPO_PATH/.config/alias-zsh-bash"
 
 
-# Makes backup if you already have a awesome config
-[ -d $HOME/.config/awesome ] && mv $HOME/.config/awesome $HOME/.config/awesome.bak
+  # Installs zsh if its needed
+  if command_exist apt ; then
 
-# clones my neovim branch
-git clone -b neovim https://github.com/phoenix988/dotfiles.git $HOME/.config/nvim
-
-clear
-
-# clones my awesome repo
-# git clone https://github.com/phoenix988/awesome.git $HOME/.config/awesome
-
-clear
-
-for FILES in $(printf '%s\n' "${!files[@]}") ; do
+  command_exist zsh || printf '%s\n' "ZSH Not Installed: Installing"
+  command_exist zsh || sudo apt install -y zsh &> /dev/null
 
 
-SOURCE_FILE=$(printf '%s\n' "${files["${FILES}"]}")
+  elif command_exist pacman ; then
 
-if [ -d $SOURCE_FILE ] ; then
-
-[ -d $FILES ] || mkdir -p $FILES
-
-cp -r $SOURCE_FILE/* $FILES 2> /dev/null
-
-elif [ -f $SOURCE_FILE ] ; then
-
-cp -r $SOURCE_FILE $FILES 2> /dev/null
-
-fi
+  command_exist zsh || printf '%s\n' "ZSH Not Installed: Installing"
+  command_exist zsh || sudo pacman -S --noconfirm zsh &> /dev/null
 
 
-done
+  elif command_exist dnf ; then
+
+  command_exist zsh || printf '%s\n' "ZSH Not Installed: Installing"
+  command_exist zsh || sudo dnf install -y zsh &> /dev/null
+
+
+  fi
+
+  # If it failed to install zsh script will exit here
+  # Because otherwise oh my zsh will not be able to be installed
+  command_exist zsh || error "ZSH: Failed to Install"
+
+  # Installs oh-my-zsh framework
+  bash ./scripts/ohmyzsh.sh
+
+  clear
+
+  # Installs the plugins I use
+  bash ./scripts/zsh-plugins.sh
+
+  clear
+
+  # Install starship prompt
+  command_exist starship || sh ./scripts/starship.sh
+
+  clear
+
+  [ -d $HOME/.config ] || mkdir $HOME/.config
+
+  # Makes backup if you already have a neovim config
+  [ -d $HOME/.config/nvim ] && mv $HOME/.config/nvim $HOME/.config/nvim.bak
+
+
+  # Makes backup if you already have a awesome config
+  [ -d $HOME/.config/awesome ] && mv $HOME/.config/awesome $HOME/.config/awesome.bak
+
+  # clones my neovim branch
+  git clone -b neovim https://github.com/phoenix988/dotfiles.git $HOME/.config/nvim
+
+  clear
+
+  # clones my awesome repo
+  # git clone https://github.com/phoenix988/awesome.git $HOME/.config/awesome
+
+  clear
+
+  for FILES in $(printf '%s\n' "${!files[@]}") ; do
+
+
+  SOURCE_FILE=$(printf '%s\n' "${files["${FILES}"]}")
+
+  if [ -d $SOURCE_FILE ] ; then
+
+  [ -d $FILES ] || mkdir -p $FILES
+
+  cp -r $SOURCE_FILE/* $FILES 2> /dev/null
+
+  elif [ -f $SOURCE_FILE ] ; then
+
+  cp -r $SOURCE_FILE $FILES 2> /dev/null
+
+  fi
+
+
+  done
 
 }
