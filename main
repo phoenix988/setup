@@ -203,12 +203,12 @@ else
 
 fi
 
-sleep 1;clear
+clear
 
 # If you didn't choose window manager and choose full install
 # Then it will ask you which one you want to install
 if [ "$INSTALL_TYPE" = "full" ] ; then
-
+     
      [ -z "$WINDOW_MANAGER" ] && do_windowmanager
 
 fi
@@ -231,11 +231,10 @@ clear
 echo "${GREEN}################################"
 echo "## Making common user folders ##"
 echo "################################"
-tput reset
-
 home_folders
 
 sleep 2;clear
+tput reset
 
 # Installs tmux 
 echo "${GREEN}######################"
@@ -303,14 +302,21 @@ fi
 
 clear
 
-echo "${GREEN}###########################"
-echo "## Setting default shell ##"
-echo "###########################"
-# Change default shell
-sudo usermod -s "/usr/bin/$SHELL_CHOICE" "$USER"
-sleep 2
-tput reset
-clear
+CURRENT_SHELL=$(echo "$SHELL" | awk -F / '{print $NF}')
+
+if [ "$CURRENT_SHELL" != "$SHELL_CHOICE" ] ; then
+    echo "${GREEN}###########################"
+    echo "## Setting default shell ##"
+    echo "###########################"
+    # Change default shell
+    sleep 1 
+    tput reset
+    sudo usermod -s "/usr/bin/$SHELL_CHOICE" "$USER"
+    sleep 2
+    clear
+
+fi
+
 # Install neovim from source on debian based system
 if command_exist apt ; then
 
@@ -324,6 +330,7 @@ if command_exist apt ; then
 fi
 
 # If you did choose basic install then the script will exit herre
+[ "$INSTALL_TYPE" = "basic" ] && echo "Basic install is done ... Leaving"
 [ "$INSTALL_TYPE" = "basic" ] && exit
 
 clear
