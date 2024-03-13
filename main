@@ -233,7 +233,7 @@ tput reset
 
 home_folders
 
-sleep 1;clear
+sleep 2;clear
 
 # Installs oh-my-tmux which is a plugin manager for tmux
 # Which I really enjoy to use
@@ -244,7 +244,7 @@ tput reset
 
 install_tmux
 
-sleep 1;clear
+sleep 3;clear
 
 clear
 
@@ -260,8 +260,7 @@ tput reset
 # only installs if pfetch is not installed
 command_exist pfetch || install_pfetch
 
-sleep 1; clear
-
+sleep 3; clear
 
 # Install base-devel if not installed on arch based systems
 command_exist pacman && sudo pacman -S --needed --noconfirm base-devel
