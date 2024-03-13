@@ -236,9 +236,9 @@ sleep 1;clear
 
 # Installs oh-my-tmux which is a plugin manager for tmux
 # Which I really enjoy to use
-echo "${GREEN}############################"
-echo "## Installing oh my tmux ##"
-echo "###########################"
+echo "${GREEN}######################"
+echo "## Installing tmux ##"
+echo "#####################"
 tput reset
 
 install_tmux

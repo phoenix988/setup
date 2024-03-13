@@ -59,6 +59,7 @@ install_config() {
   files[$HOME/.config/alacritty]="$DOTFILES_REPO_PATH/.config/alacritty"
   files[$HOME/.config/fzf]="$DOTFILES_REPO_PATH/.config/fzf"
   files[$HOME/.config/btop]="$DOTFILES_REPO_PATH/.config/btop"
+  files[$HOME/.config/tmux]="$DOTFILES_REPO_PATH/.config/tmux"
   files[$HOME/.config/oh-my-zsh/themes/nord.zsh-theme]="$DOTFILES_REPO_PATH/.config/oh-my-zsh/themes"
   files[$HOME/.zshrc]="$DOTFILES_REPO_PATH/.zshrc"
   files[$HOME/.bashrc]="$DOTFILES_REPO_PATH/.bashrc"
