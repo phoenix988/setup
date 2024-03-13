@@ -258,9 +258,9 @@ command_exist pfetch || echo "###################################"
 tput reset
 
 # only installs if pfetch is not installed
+command_exist pfetch || sleep 3; clear
 command_exist pfetch || install_pfetch
 
-sleep 3; clear
 
 # Install base-devel if not installed on arch based systems
 command_exist pacman && sudo pacman -S --needed --noconfirm base-devel
