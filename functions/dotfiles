@@ -64,7 +64,7 @@ install_config() {
   files[$HOME/.zshrc]="$DOTFILES_REPO_PATH/.zshrc"
   files[$HOME/.bashrc]="$DOTFILES_REPO_PATH/.bashrc"
   files[$HOME/.fehbg]="$DOTFILES_REPO_PATH/.fehbg"
-  files[$HOME/.tmux.conf.local]="$DOTFILES_REPO_PATH/.tmux.conf.local"
+  # files[$HOME/.tmux.conf.local]="$DOTFILES_REPO_PATH/.tmux.conf.local"
   files[$HOME/.scripts]="$DOTFILES_REPO_PATH/.scripts"
   files[$HOME/.dmenu]="$DMSCRIPTS_REPO_PATH/.dmenu"
   files[$HOME/.config/swayshot.sh]="$DMSCRIPTS_REPO_PATH/.config/swayshot.sh"
