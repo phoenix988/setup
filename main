@@ -198,6 +198,8 @@ else
 
      # NOTE: Install my dotfiles unless you used -n
      [ "$NO_CONFIG" = "y" ] || install_config
+      
+     sleep 2
 
 fi
 
@@ -235,11 +237,11 @@ home_folders
 
 sleep 2;clear
 
-# Installs oh-my-tmux which is a plugin manager for tmux
-# Which I really enjoy to use
+# Installs tmux 
 echo "${GREEN}######################"
 echo "## Installing tmux ##"
 echo "#####################"
+sleep 2
 tput reset
 
 install_tmux
@@ -248,13 +250,12 @@ sleep 3;clear
 
 clear
 
-
 # Installs pfetch from source cloning the repo
 # and runs make install. You can find the function under
 # function directory called install
-echo "${GREEN}###################################"
-echo "## installing pfetch from source ##"
-echo "###################################"
+command_exist pfetch || echo "${GREEN}###################################"
+command_exist pfetch || echo "## installing pfetch from source ##"
+command_exist pfetch || echo "###################################"
 tput reset
 
 # only installs if pfetch is not installed
