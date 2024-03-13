@@ -300,14 +300,17 @@ elif [ "$INSTALL_TYPE" = "full" ] ; then
 
 fi
 
-sleep 2
 
 clear
 
+echo "${GREEN}###########################"
+echo "## Setting default shell ##"
+echo "###########################"
 # Change default shell
 sudo usermod -s "/usr/bin/$SHELL_CHOICE" "$USER"
+sleep 2
+tput reset
 clear
-
 # Install neovim from source on debian based system
 if command_exist apt ; then
 
