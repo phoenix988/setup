@@ -1,5 +1,5 @@
 #!/bin/bash              
-
+# script that runs in chroot when installing arch linux
 error() { \
     clear; printf "ERROR:\\n%s\\n" "$1" >&2; exit 1;
 }
@@ -69,8 +69,7 @@ clear
 if [ "$bios_version" = "U" -o "$bios_version" = "u" ] ; then
 
         [ -d /boot/EFI ] || mkdir /boot/EFI
-        
-    
+
         mount $efidrive /boot/EFI &> /dev/null
       
         echo "#####################"

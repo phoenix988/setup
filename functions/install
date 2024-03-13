@@ -84,22 +84,20 @@ install_slock() { \
 
 
 # Install oh-my-tmux
-install_oh_my_tmux() { \
+install_tmux() { \
 
      # Clones oh my tmux
      [ -d $HOME/.tmux ] && cp -r $HOME/.tmux $HOME/.tmux.bak 2> /dev/null
       
      rm -rf $HOME/.tmux
-         
-     git clone https://github.com/gpakosz/.tmux.git  $HOME/.tmux
+
+     git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
      clear
 
-     [ -e $HOME/.tmux.conf ] && cp $HOME/.tmux.conf.bak
-     
-     rm $HOME/.tmux.conf
-  
-     ln -s $HOME/.tmux/.tmux.conf $HOME/.tmux.conf
+     [ -d $HOME/.config/tmux ] && cp $HOME/.config/tmux $HOME/.config/tmux.conf.bak 2> /dev/null
+      
+     rm -rf $HOME/.config/tmux
 
      clear
 }

@@ -241,7 +241,7 @@ echo "## Installing oh my tmux ##"
 echo "###########################"
 tput reset
 
-install_oh_my_tmux
+install_tmux
 
 sleep 1;clear
 
@@ -399,7 +399,7 @@ elif [ "$WINDOW_MANAGER" = "hyprland" ] ; then
 
    # Installs some packages needed for my hyprland config
    paru -S --needed --noconfirm waybar-hyprland-git swaylock swaybg grim wofi awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono xdg-desktop-portal-hyprland-git wlogout \
-       pyprland
+       pyprland hyprlock
 
    sleep 1;clear
 
