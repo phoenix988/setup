@@ -309,10 +309,9 @@ if [ "$CURRENT_SHELL" != "$SHELL_CHOICE" ] ; then
     echo "## Setting default shell ##"
     echo "###########################"
     # Change default shell
-    sleep 1 
+    sleep 2 
     tput reset
     sudo usermod -s "/usr/bin/$SHELL_CHOICE" "$USER"
-    sleep 2
     clear
 
 fi
@@ -330,7 +329,9 @@ if command_exist apt ; then
 fi
 
 # If you did choose basic install then the script will exit herre
-[ "$INSTALL_TYPE" = "basic" ] && echo "Basic install is done ... Leaving"
+[ "$INSTALL_TYPE" = "basic" ] && echo "${GREEN}#########################"
+[ "$INSTALL_TYPE" = "basic" ] && echo "## Everything is done! ##"
+[ "$INSTALL_TYPE" = "basic" ] && echo "#########################"
 [ "$INSTALL_TYPE" = "basic" ] && exit
 
 clear

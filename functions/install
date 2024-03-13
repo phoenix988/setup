@@ -86,20 +86,18 @@ install_slock() { \
 # Install oh-my-tmux
 install_tmux() { \
 
-     # Clones oh my tmux
      [ -d $HOME/.tmux ] && cp -r $HOME/.tmux $HOME/.tmux.bak 2> /dev/null
       
-     rm -rf $HOME/.tmux
+     rm -rf $HOME/.tmux 2> /dev/null
 
+     # Clones tpm plugin manager
      git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-
-     clear
 
      [ -d $HOME/.config/tmux ] && cp $HOME/.config/tmux $HOME/.config/tmux.conf.bak 2> /dev/null
       
-     rm -rf $HOME/.config/tmux
+     rm -rf $HOME/.config/tmux 2> /dev/null
 
-     clear
+     sleep 2; clear
 }
 
 # Install picom jonaburg fork
@@ -107,7 +105,7 @@ install_picom() { \
 
     git clone https://github.com/jonaburg/picom $HOME/picom
 
-    cd $HOME/pciom
+    cd $HOME/picom
 
     meson --buildtype=release . build
 
