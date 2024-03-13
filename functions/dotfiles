@@ -133,20 +133,19 @@ install_config() {
 
   for FILES in $(printf '%s\n' "${!files[@]}") ; do
 
+      SOURCE_FILE=$(printf '%s\n' "${files["${FILES}"]}")
 
-  SOURCE_FILE=$(printf '%s\n' "${files["${FILES}"]}")
+      if [ -d $SOURCE_FILE ] ; then
 
-  if [ -d $SOURCE_FILE ] ; then
+          [ -d $FILES ] || mkdir -p $FILES
 
-  [ -d $FILES ] || mkdir -p $FILES
+          cp -r $SOURCE_FILE/* $FILES 2> /dev/null
 
-  cp -r $SOURCE_FILE/* $FILES 2> /dev/null
+      elif [ -f $SOURCE_FILE ] ; then
 
-  elif [ -f $SOURCE_FILE ] ; then
+          cp -r $SOURCE_FILE $FILES 2> /dev/null
 
-  cp -r $SOURCE_FILE $FILES 2> /dev/null
-
-  fi
+      fi
 
 
   done

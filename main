@@ -51,6 +51,7 @@ while getopts ":w:s:cfdnhe" opt; do
      ;;
     d)
      DOTFILES_ONLY="y"
+     INSTALL_TYPE=basic
      echo "${BLUE}You choose to only get my dotfiles"
      sleep 2
      tput reset
